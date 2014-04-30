@@ -12,6 +12,17 @@ public abstract class SpaceObject {
 	protected float yPos;
 	protected Sprite sprite;
 
+	protected float HEIGHT;
+	protected float WIDTH;
+
+	protected float sWidth;
+	protected float sHeight;
+
+	protected float xCenter;
+	protected float yCenter;
+
+	protected float SCALEFACTOR;
+
 
 	public SpaceObject(float xPos, float yPos) {
 		this.xPos = xPos;
@@ -26,4 +37,6 @@ public abstract class SpaceObject {
 	public abstract void draw(SpriteBatch batch);
 
 	public abstract void setScale(float scaleFactor);
+
+	public abstract boolean checkHealthy();
 }

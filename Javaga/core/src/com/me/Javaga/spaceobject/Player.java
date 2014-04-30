@@ -17,16 +17,7 @@ public class Player extends SpaceObject {
 	//private float rotation;
 	//private float scale;
 
-	private float HEIGHT;
-	private float WIDTH;
 
-	private float sWidth;
-	private float sHeight;
-
-	private float xCenter;
-	private float yCenter;
-
-	float SCALEFACTOR;
 	//Call the super-class's constructor
 	public Player(float xPos, float yPos) {
 		super(xPos, yPos);
@@ -91,6 +82,11 @@ public class Player extends SpaceObject {
 	public void setScale(float scaleFactor) {
 		SCALEFACTOR = scaleFactor;
 		sprite.setScale(SCALEFACTOR);
+	}
+
+	@Override
+	public boolean checkHealthy() {
+		return false;
 	}
 
 	/**
