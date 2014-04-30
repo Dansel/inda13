@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.gamestate.*;
 
 /**
+ * Keeps track of the gamestate (play, pause etc) as well as updates subclasses.
  * Created by Dansel on 2014-04-30.
  */
 public class GameStateManager {
@@ -29,6 +30,10 @@ public class GameStateManager {
         setState(PLAY);
     }
 
+	/**
+	 * Sets the gamestate.
+	 * @param state int number correlating a specific state. 0 = menu, 1= play, 2=pause, 3 = welcome screen
+	 */
     public void setState(int state){
         if (state == MENU) {
             currentGameState = menu;
@@ -45,11 +50,18 @@ public class GameStateManager {
 
     }
 
-
+	/**
+	 * Updates the game.
+	 */
     public void update() {
         currentGameState.update();
     }
 
+
+	/**
+	 * Draws the entire canvas.
+	 * @param batch SpriteBatch containing a collection of sprites.
+	 */
     public void draw(SpriteBatch batch) {
         currentGameState.draw(batch);
     }
