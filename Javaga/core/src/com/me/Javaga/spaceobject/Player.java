@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.managers.GameKeys;
 
+import java.util.ArrayList;
+
 /**
  * Class for the Players unit. Contains parameters for position as well as the sprite used to draw to canvas.
  *
@@ -16,13 +18,15 @@ public class Player extends SpaceObject {
 	private static final String FILENAME = "snilsson.png";
 	//private float rotation;
 	//private float scale;
+	private ArrayList<Bullet> bullets;
 
 
 	//Call the super-class's constructor
-	public Player(float xPos, float yPos) {
+	public Player(float xPos, float yPos, ArrayList<Bullet> bullets) {
 		super(xPos, yPos);
 		HEIGHT = Gdx.graphics.getHeight();
 		WIDTH = Gdx.graphics.getWidth();
+		this.bullets = bullets;
 		init();
 	}
 
@@ -61,6 +65,10 @@ public class Player extends SpaceObject {
 			xPos += 10;
 		}
 
+		if(GameKeys.isPressed(GameKeys.SPACE)) {
+			fire();
+		}
+
 		xCenter = xPos + sprite.getWidth()/2;
 		yCenter = yPos + sprite.getHeight()/2;
 		//Update position
@@ -96,31 +104,27 @@ public class Player extends SpaceObject {
 		if(xCenter - sWidth / 2 < 0) {
 			xCenter = 0 + sWidth/2;
 			xPos = xCenter - sprite.getWidth()/2;
-			System.out.println("x: " + xPos);
-			System.out.println("y: " + yPos);
 		}
 
 		if(xCenter + sWidth/2> WIDTH) {
 			xCenter = WIDTH - sWidth/2;
 			xPos = xCenter - sprite.getWidth() / 2;
-			System.out.println("x: " + xPos);
-			System.out.println("y: " + yPos);
 		}
 
 		if(yCenter - sHeight / 2 < 0) {
 			yCenter = 0 + sHeight/2;
 			yPos = yCenter - sprite.getHeight()/2;
-			System.out.println("x: " + xPos);
-			System.out.println("y: " + yPos);
 		}
 
 		if(yCenter + sHeight/2 > HEIGHT) {
 			yCenter = HEIGHT - sHeight/2;
 			yPos = yCenter - sprite.getHeight()/2;
-			System.out.println("x: " + xPos);
-			System.out.println("y: " + yPos);
 		}
 		//Okay, so, since the scaling of the sprite doesn't change the boundingbox of it we must
 		//manually find the center of the sprite and from that number derive the new edges (the visible edges).
+	}
+
+	private void fire() {
+		bullets.add(new Bullet(xCenter, yCenter + sHeight / 2, 90));
 	}
 }

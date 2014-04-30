@@ -20,6 +20,7 @@ public class Bullet extends SpaceObject {
 
 	public Bullet(float xPos,float yPos, float degree) {
 		super(xPos, yPos);
+		init();
 		this.degree = degree;
 		dX = (float) Math.sin(degree) * SPEED;
 		dY = (float) Math.sin(degree) * SPEED;
@@ -39,13 +40,13 @@ public class Bullet extends SpaceObject {
 
 	@Override
 	public void update() {
-		yPos += dX;
+		yPos += dY;
 		xPos += dX;
 		xCenter = xPos + sprite.getWidth()/2;
 		yCenter = yPos + sprite.getHeight()/2;
 		sprite.rotate(ROTATION);
-		sprite.setX(xCenter);
-		sprite.setY(yCenter);
+		sprite.setX(xPos);
+		sprite.setY(yPos);
 	}
 
 	@Override
@@ -56,6 +57,7 @@ public class Bullet extends SpaceObject {
 	@Override
 	public void setScale(float scaleFactor) {
 		SCALEFACTOR = scaleFactor;
+		sprite.scale(SCALEFACTOR);
 	}
 
 	@Override
