@@ -1,7 +1,5 @@
 package com.me.Javaga.spaceobject;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -26,4 +24,6 @@ public abstract class SpaceObject {
 	public abstract void update();
 
 	public abstract void draw(SpriteBatch batch);
+
+	public abstract void setScale(float scaleFactor);
 }

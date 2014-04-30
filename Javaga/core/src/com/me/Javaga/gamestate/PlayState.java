@@ -17,7 +17,7 @@ public class PlayState extends GameState {
 
     @Override
     public void init() {
-	    player = new Player(20, Gdx.graphics.getWidth() / 2);
+	    player = new Player(Gdx.graphics.getWidth() / 2, 30);
     }
 
 	@Override

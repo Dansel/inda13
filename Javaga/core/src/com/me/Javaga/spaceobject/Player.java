@@ -14,20 +14,42 @@ import com.me.Javaga.managers.GameKeys;
 public class Player extends SpaceObject {
 
 	private static final String FILENAME = "snilsson.png";
+	private float rotation;
+	private float scale;
 
+	private float HEIGHT;
+	private float WIDTH;
+
+	private float sWidth;
+	private float sHeight;
+
+	private float xCenter;
+	private float yCenter;
+
+	float SCALEFACTOR;
 	//Call the super-class's constructor
 	public Player(float xPos, float yPos) {
 		super(xPos, yPos);
+		HEIGHT = Gdx.graphics.getHeight();
+		WIDTH = Gdx.graphics.getWidth();
 		init();
 	}
 
 	@Override
 	public void init() {
+
 		//Create the sprite with some texture
 		sprite = new Sprite(new Texture(Gdx.files.internal(FILENAME)));
 
 		//Set scalefactor
-		sprite.setScale(0.4f);
+		setScale(0.4f);
+
+		//Find the sprites dimensions.
+		sWidth = sprite.getWidth()*SCALEFACTOR;
+		sHeight = sprite.getHeight()*SCALEFACTOR;
+
+		xCenter = xPos + sprite.getWidth()/2;
+		yCenter = yPos + sprite.getHeight()/2;
 	}
 
 	/**
@@ -48,7 +70,10 @@ public class Player extends SpaceObject {
 			xPos += 10;
 		}
 
+		xCenter = xPos + sprite.getWidth()/2;
+		yCenter = yPos + sprite.getHeight()/2;
 		//Update position
+		wrap();
 		sprite.setX(xPos);
 		sprite.setY(yPos);
 	}
@@ -60,5 +85,41 @@ public class Player extends SpaceObject {
 	@Override
 	public void draw(SpriteBatch batch) {
 		sprite.draw(batch);
+	}
+
+	@Override
+	public void setScale(float scaleFactor) {
+		SCALEFACTOR = scaleFactor;
+		sprite.setScale(SCALEFACTOR);
+	}
+
+	public void wrap() {
+		if(xCenter - sWidth / 2 < 0) {
+			xCenter = 0 + sWidth/2;
+			xPos = xCenter - sprite.getWidth()/2;
+			System.out.println("x: " + xPos);
+			System.out.println("y: " + yPos);
+		}
+
+		if(xCenter + sWidth/2> WIDTH) {
+			xCenter = WIDTH - sWidth/2;
+			xPos = xCenter - sprite.getWidth() / 2;
+			System.out.println("x: " + xPos);
+			System.out.println("y: " + yPos);
+		}
+
+		if(yCenter - sHeight / 2 < 0) {
+			yCenter = 0 + sHeight/2;
+			yPos = yCenter - sprite.getHeight()/2;
+			System.out.println("x: " + xPos);
+			System.out.println("y: " + yPos);
+		}
+
+		if(yCenter + sHeight/2 > HEIGHT) {
+			yCenter = HEIGHT - sHeight/2;
+			yPos = yCenter - sprite.getHeight()/2;
+			System.out.println("x: " + xPos);
+			System.out.println("y: " + yPos);
+		}
 	}
 }
