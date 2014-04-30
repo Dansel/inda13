@@ -14,8 +14,8 @@ import com.me.Javaga.managers.GameKeys;
 public class Player extends SpaceObject {
 
 	private static final String FILENAME = "snilsson.png";
-	private float rotation;
-	private float scale;
+	//private float rotation;
+	//private float scale;
 
 	private float HEIGHT;
 	private float WIDTH;
