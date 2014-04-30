@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public abstract class GameState {
 
     public GameState() {
-
     }
 
     public abstract void init();

@@ -1,16 +1,29 @@
 package com.me.Javaga.spaceobject;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 /**
  * Created by Dansel on 2014-04-30.
  */
-public class SpaceObject {
+public abstract class SpaceObject {
 
-	private float xPos;
-	private float yPos;
+	protected float xPos;
+	protected float yPos;
+	protected Sprite sprite;
+
 
 	public SpaceObject(float xPos, float yPos) {
 		this.xPos = xPos;
 		this.yPos = yPos;
 	}
 
+
+	public abstract void init();
+
+	public abstract void update();
+
+	public abstract void draw(SpriteBatch batch);
 }

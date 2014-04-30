@@ -26,7 +26,7 @@ public class GameStateManager {
         pause = new PauseState();
         welcome = new WelcomeState();
 
-        setState(WELCOME);
+        setState(PLAY);
     }
 
     public void setState(int state){

@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.gamestate.GameState;
 import com.me.Javaga.managers.GameInputProcessor;
+import com.me.Javaga.managers.GameKeys;
 import com.me.Javaga.managers.GameStateManager;
 
 import java.util.Random;
@@ -52,24 +53,12 @@ public class JavagaMain extends ApplicationAdapter {
 
         //Update the game state
         manager.update();
+		GameKeys.update();
         camera.update();
 
-
-
-
+		//Tell the game manager to initiate drawing of sprites and other elements
         batch.begin();
-
-        batch.draw(img, 0 , 0);
-
-
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-            Gdx.gl.glClearColor(rand.nextFloat(),rand.nextFloat(),rand.nextFloat(), 1);
-            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-            //camera.update();
-            batch.draw(img, 250, 250);
-
-        }
+		manager.draw(batch);
         batch.end();
 
 	}
