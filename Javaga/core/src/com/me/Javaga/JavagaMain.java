@@ -33,14 +33,30 @@ public class JavagaMain extends ApplicationAdapter {
 
 	@Override
 	public void render () {
+        Gdx.gl.glFlush();
+        GameState.update();
+        camera.update();
+
+
+
+
+        batch.begin();
+
+        batch.draw(img, 0 , 0);
+
+
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)){
             Gdx.gl.glClearColor(rand.nextFloat(),rand.nextFloat(),rand.nextFloat(), 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-            camera.update();
+
+            //camera.update();
+            batch.draw(img, 250, 250);
+
         }
+        batch.end();
 
 	}
 }
