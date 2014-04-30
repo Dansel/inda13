@@ -27,5 +27,6 @@ public class JavagaMain extends ApplicationAdapter {
 		System.out.println("Herro");
 
         //Testing very much!
+        System.out.println("Wee");
 	}
 }
