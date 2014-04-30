@@ -93,6 +93,9 @@ public class Player extends SpaceObject {
 		sprite.setScale(SCALEFACTOR);
 	}
 
+	/**
+	 * Makes sure the players sprite may not move outside the window.
+	 */
 	public void wrap() {
 		if(xCenter - sWidth / 2 < 0) {
 			xCenter = 0 + sWidth/2;
@@ -121,5 +124,7 @@ public class Player extends SpaceObject {
 			System.out.println("x: " + xPos);
 			System.out.println("y: " + yPos);
 		}
+		//Okay, so, since the scaling of the sprite doesn't change the boundingbox of it we must
+		//manually find the center of the sprite and from that number derive the new edges (the visible edges).
 	}
 }
