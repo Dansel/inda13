@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.me.Javaga.managers.GameKeys;
 
 import java.util.ArrayList;
@@ -49,6 +50,9 @@ public class Player extends SpaceObject {
 
 		xCenter = xPos + sprite.getWidth()/2;
 		yCenter = yPos + sprite.getHeight()/2;
+
+		hitbox = new Rectangle();
+		hitbox.setHeight(sHeight).setWidth(sWidth).setCenter(xCenter,yCenter);
 	}
 
 	/**
@@ -99,6 +103,16 @@ public class Player extends SpaceObject {
 	@Override
 	public boolean checkHealthy() {
 		return isHealthy;
+	}
+
+	@Override
+	public boolean overlap(SpaceObject obj) {
+		return hitbox.overlaps(obj.getHitbox());
+	}
+
+	@Override
+	public Rectangle getHitbox() {
+		return hitbox;
 	}
 
 	/**

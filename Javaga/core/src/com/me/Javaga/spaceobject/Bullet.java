@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 
 /**
  * For projectiles
@@ -45,6 +46,9 @@ public class Bullet extends SpaceObject {
 		xCenter = xPos + sprite.getWidth()/2;
 		yCenter = yPos + sprite.getHeight()/2;
 
+		hitbox = new Rectangle();
+		hitbox.setHeight(sHeight).setWidth(sWidth).setCenter(xCenter,yCenter);
+
 	}
 
 	@Override
@@ -81,5 +85,15 @@ public class Bullet extends SpaceObject {
 	@Override
 	public boolean checkHealthy() {
 		return isHealthy;
+	}
+
+	@Override
+	public boolean overlap(SpaceObject obj) {
+		return false;
+	}
+
+	@Override
+	public Rectangle getHitbox() {
+		return hitbox;
 	}
 }

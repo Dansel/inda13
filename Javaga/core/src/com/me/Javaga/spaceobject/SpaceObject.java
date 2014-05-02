@@ -2,6 +2,7 @@ package com.me.Javaga.spaceobject;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 
 /**
  * Created by Dansel on 2014-04-30.
@@ -24,6 +25,8 @@ public abstract class SpaceObject {
 
 	protected float SCALEFACTOR;
 
+	protected Rectangle hitbox;
+
 
 	public SpaceObject(float xPos, float yPos) {
 		this.xPos = xPos;
@@ -43,4 +46,8 @@ public abstract class SpaceObject {
 	public abstract void wrap();
 
 	public abstract boolean checkHealthy();
+
+	public abstract  boolean overlap(SpaceObject obj);
+
+	public abstract Rectangle getHitbox();
 }
