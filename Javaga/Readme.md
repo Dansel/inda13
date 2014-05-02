@@ -13,5 +13,3 @@ This is the game created for the final project of inda13 - KTH CompSci bachelor-
 * More sprites
 * Gameplay in general
 
-
-(TEST)
