@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
+ * For projectiles
  * Created by Dansel on 2014-04-30.
  */
 public class Bullet extends SpaceObject {
@@ -15,7 +16,7 @@ public class Bullet extends SpaceObject {
 	private float degree;
 	private float dX;
 	private float dY;
-	private final static float SPEED = 50;
+	private final static float SPEED = 20;
 	private final static float ROTATION = 30;
 
 	public Bullet(float xPos,float yPos, float degree) {
@@ -23,6 +24,8 @@ public class Bullet extends SpaceObject {
 		this.degree = degree;
 		dX = (float) Math.cos(Math.toRadians(degree)) * SPEED;
 		dY = (float) Math.sin(Math.toRadians(degree)) * SPEED;
+		HEIGHT = Gdx.graphics.getHeight();
+		WIDTH = Gdx.graphics.getWidth();
 		init();
 	}
 
@@ -35,8 +38,13 @@ public class Bullet extends SpaceObject {
 		sWidth = sprite.getWidth()*SCALEFACTOR;
 		sHeight = sprite.getHeight()*SCALEFACTOR;
 
+		//shift position down and to the left so we draw the sprite centered.
+		xPos -= sprite.getWidth()/2;
+		yPos -= sprite.getHeight()/2;
+
 		xCenter = xPos + sprite.getWidth()/2;
 		yCenter = yPos + sprite.getHeight()/2;
+
 	}
 
 	@Override
@@ -48,6 +56,7 @@ public class Bullet extends SpaceObject {
 		sprite.rotate(ROTATION);
 		sprite.setX(xPos);
 		sprite.setY(yPos);
+		wrap();
 	}
 
 	@Override
@@ -62,7 +71,15 @@ public class Bullet extends SpaceObject {
 	}
 
 	@Override
+	public void wrap() {
+		if ((xCenter - sWidth / 2 < 0 )|| (xCenter + sWidth/2> WIDTH)
+		|| (yCenter - sHeight / 2 < 0 )|| (yCenter + sHeight/2 > HEIGHT)) {
+			isHealthy = false;
+		}
+	}
+
+	@Override
 	public boolean checkHealthy() {
-		return true;
+		return isHealthy;
 	}
 }

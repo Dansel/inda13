@@ -11,6 +11,7 @@ public abstract class SpaceObject {
 	protected float xPos;
 	protected float yPos;
 	protected Sprite sprite;
+	protected boolean isHealthy;
 
 	protected float HEIGHT;
 	protected float WIDTH;
@@ -27,6 +28,7 @@ public abstract class SpaceObject {
 	public SpaceObject(float xPos, float yPos) {
 		this.xPos = xPos;
 		this.yPos = yPos;
+		this.isHealthy = true;
 	}
 
 
@@ -37,6 +39,8 @@ public abstract class SpaceObject {
 	public abstract void draw(SpriteBatch batch);
 
 	public abstract void setScale(float scaleFactor);
+
+	public abstract void wrap();
 
 	public abstract boolean checkHealthy();
 }

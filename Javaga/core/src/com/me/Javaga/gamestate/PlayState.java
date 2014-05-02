@@ -6,6 +6,7 @@ import com.me.Javaga.spaceobject.Bullet;
 import com.me.Javaga.spaceobject.Player;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Dansel on 2014-04-30.
@@ -27,9 +28,23 @@ public class PlayState extends GameState {
 
 	@Override
 	public void update() {
+		chechHealth();
 		player.update();
 		for(Bullet bullet: bullets) {
 			bullet.update();
+		}
+	}
+
+	private void chechHealth() {
+		if(!player.checkHealthy()) {
+
+		}
+		Iterator<Bullet> iterator = bullets.iterator();
+		while(iterator.hasNext()) {
+			Bullet bullet = iterator.next();
+			if(!bullet.checkHealthy()) {
+				iterator.remove();
+			}
 		}
 	}
 

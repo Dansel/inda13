@@ -43,6 +43,10 @@ public class Player extends SpaceObject {
 		sWidth = sprite.getWidth()*SCALEFACTOR;
 		sHeight = sprite.getHeight()*SCALEFACTOR;
 
+		//shift position down and to the left so we draw the sprite centered.
+		xPos -= sprite.getWidth()/2;
+		yPos -= sprite.getHeight()/2;
+
 		xCenter = xPos + sprite.getWidth()/2;
 		yCenter = yPos + sprite.getHeight()/2;
 	}
@@ -94,7 +98,7 @@ public class Player extends SpaceObject {
 
 	@Override
 	public boolean checkHealthy() {
-		return false;
+		return isHealthy;
 	}
 
 	/**
@@ -125,6 +129,6 @@ public class Player extends SpaceObject {
 	}
 
 	private void fire() {
-		bullets.add(new Bullet(xCenter, yCenter + sHeight / 2, 90));
+		bullets.add(new Bullet(xCenter, yCenter, 90));
 	}
 }
