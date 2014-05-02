@@ -20,16 +20,17 @@ public class Bullet extends SpaceObject {
 
 	public Bullet(float xPos,float yPos, float degree) {
 		super(xPos, yPos);
-		init();
 		this.degree = degree;
-		dX = (float) Math.sin(degree) * SPEED;
-		dY = (float) Math.sin(degree) * SPEED;
+		dX = (float) Math.cos(Math.toRadians(degree)) * SPEED;
+		dY = (float) Math.sin(Math.toRadians(degree)) * SPEED;
+		init();
 	}
 
 	@Override
 	public void init() {
 		sprite = new Sprite(new Texture(Gdx.files.internal(FILENAME)));
 		setScale(0.1f);
+
 		//Find the sprites dimensions.
 		sWidth = sprite.getWidth()*SCALEFACTOR;
 		sHeight = sprite.getHeight()*SCALEFACTOR;
@@ -57,7 +58,7 @@ public class Bullet extends SpaceObject {
 	@Override
 	public void setScale(float scaleFactor) {
 		SCALEFACTOR = scaleFactor;
-		sprite.scale(SCALEFACTOR);
+		sprite.setScale(SCALEFACTOR);
 	}
 
 	@Override
