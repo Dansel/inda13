@@ -3,13 +3,18 @@ package com.me.Javaga.spaceobject;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
+import java.util.ArrayList;
+
 /**
+ *
  * Created by Dansel on 2014-05-02.
  */
 public class Enemy extends SpaceObject {
+	private int ID;
 
-	public Enemy(float xPos, float yPos, int ID){
+	public Enemy(float xPos, float yPos, ArrayList<Enemy> list){
 		super(xPos,yPos);
+
 
 	}
 
