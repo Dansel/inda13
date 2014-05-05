@@ -33,6 +33,7 @@ public class PlayState extends GameState {
 	public void update() {
 		chechHealth();
 		player.update();
+
 		for(Bullet bullet: bullets) {
 			bullet.update();
 		}
@@ -68,4 +69,8 @@ public class PlayState extends GameState {
     public void dispose() {
 
     }
+
+	public void spawnEnemies(){
+
+	}
 }
