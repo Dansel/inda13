@@ -75,6 +75,6 @@ public class PlayState extends GameState {
     }
 
 	public void spawnEnemies(){
-		//this is some test code
+
 	}
 }
