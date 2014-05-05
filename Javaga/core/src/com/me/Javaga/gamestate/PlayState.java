@@ -29,6 +29,7 @@ public class PlayState extends GameState {
     public void init() {
 	    bullets = new ArrayList<Bullet>();
 	    enemies = new ArrayList<Enemy>();
+	    levels = new Level();
 	    player = new Player(Gdx.graphics.getWidth() / 2, 30, bullets);
     }
 
@@ -74,6 +75,6 @@ public class PlayState extends GameState {
     }
 
 	public void spawnEnemies(){
-
+		//this is some test code
 	}
 }
