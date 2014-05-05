@@ -1,9 +1,12 @@
 package com.me.Javaga.gamestate;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.*;
 import com.me.Javaga.managers.GameKeys;
 import com.me.Javaga.managers.GameStateManager;
 import com.me.Javaga.spaceobject.Bullet;
@@ -22,6 +25,7 @@ public class PauseState extends GameState {
     private long time; // Keep track of the star animation time
     private static final String FILENAME = "pause.png";
     private Sprite pause;
+    private Rectangle pauseRec;
 
     public PauseState(GameStateManager gameStateManager) {
         super(gameStateManager);
@@ -32,7 +36,12 @@ public class PauseState extends GameState {
         stars = new ArrayList<Star>();
         time = System.currentTimeMillis();
         pause = new Sprite(new Texture(Gdx.files.internal(FILENAME)));
-        pause.setPosition(Gdx.graphics.getWidth()/2 - pause.getWidth()/2, Gdx.graphics.getHeight()/2);
+        pause.setPosition(Gdx.graphics.getWidth()/2 - pause.getWidth()/2,
+                Gdx.graphics.getHeight()/2);
+        // Making a quick Botton for test, will probably be changed
+        pauseRec = new Rectangle(Gdx.graphics.getWidth()/2 - pause.getWidth()/2,
+                Gdx.graphics.getHeight()/2,
+                pause.getWidth(), pause.getHeight());
 	}
 
 	@Override
@@ -75,6 +84,14 @@ public class PauseState extends GameState {
         if(GameKeys.isPressed(GameKeys.ESCAPE)) {
             gameStateManager.setState(GameStateManager.PLAY);
         }
+
+        if(pauseRec.contains((float) GameKeys.xMouse(), (float) GameKeys.yMouse())) {
+            System.out.print("jkljökjkll");
+            pause.setColor(Color.BLUE);
+        } else {
+            pause.setColor(Color.WHITE);
+        }
+
 	}
 
 	@Override

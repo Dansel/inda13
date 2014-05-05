@@ -103,7 +103,7 @@ public class PlayState extends GameState {
      * Update the background logic
      */
     private void updateBackGround() {
-        if(System.currentTimeMillis() - time > 200) {
+        if(System.currentTimeMillis() - time > 200) { // Spawn a new star ever 1/5 second
             time = System.currentTimeMillis();
             stars.add(new Star());
         }

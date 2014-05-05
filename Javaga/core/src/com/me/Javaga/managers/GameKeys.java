@@ -1,5 +1,7 @@
 package com.me.Javaga.managers;
 
+import com.badlogic.gdx.Gdx;
+
 /**
  * Contains the state of keys which are pressed (or not pressed)
  * Created by Dansel on 2014-04-30.
@@ -18,6 +20,10 @@ public class GameKeys {
 	public static final int ESCAPE = 5;
 	public static final int SPACE = 6;
 	public static final int SHIFT = 7;
+
+    public static int xMouse;
+    public static int yMouse;
+    public static boolean mousePressed;
 	
 	static {
 		keys = new boolean[NUM_KEYS];
@@ -59,5 +65,22 @@ public class GameKeys {
 	public static boolean isPressed(int k) {
 		return keys[k] && !pkeys[k];
 	}
+
+    /**
+     * Return the x position of the mouse
+     * @return the x-value of the mouse
+     */
+    public static int xMouse() {
+        return xMouse;
+    }
+
+    /**
+     * Return the y position of the mouse
+     * @return the y-value of the mouse
+     */
+    public static int yMouse() {
+        return Gdx.graphics.getHeight() - yMouse; // Sense we have origo in the bottom left corner
+        // we have to convert the y-position like this
+    }
 	
 }

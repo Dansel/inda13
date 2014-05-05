@@ -63,5 +63,19 @@ public class GameInputProcessor extends InputAdapter {
 		}
 		return true;
 	}
-	
+
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        GameKeys.xMouse = screenX;
+        GameKeys.yMouse = screenY;
+        return true;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        GameKeys.mousePressed = true;
+        //TODO
+        return true;
+    }
 }

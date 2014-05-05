@@ -32,7 +32,7 @@ public class Star extends SpaceObject {
         sprite.setX(xPos);
         sprite.setY(yPos);
         //Set scalefactor
-        setScale(0.4f);
+        setScale(0.2f);
 
         //Find the sprites dimensions.
         sWidth = sprite.getWidth()*SCALEFACTOR;
