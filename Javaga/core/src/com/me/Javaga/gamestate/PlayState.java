@@ -3,6 +3,7 @@ package com.me.Javaga.gamestate;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.gamestate.levels.Level;
+import com.me.Javaga.managers.GameStateManager;
 import com.me.Javaga.spaceobject.Bullet;
 import com.me.Javaga.spaceobject.Enemy;
 import com.me.Javaga.spaceobject.Player;
@@ -19,8 +20,8 @@ public class PlayState extends GameState {
 	private ArrayList<Enemy> enemies;
 	private Level levels;
 
-	public PlayState() {
-		super();
+	public PlayState(GameStateManager gameStateManager) {
+		super(gameStateManager);
 		init();
 	}
 
@@ -28,7 +29,6 @@ public class PlayState extends GameState {
     public void init() {
 	    bullets = new ArrayList<Bullet>();
 	    enemies = new ArrayList<Enemy>();
-	    levels = new Level();
 	    player = new Player(Gdx.graphics.getWidth() / 2, 30, bullets);
     }
 
@@ -36,7 +36,7 @@ public class PlayState extends GameState {
 	public void update() {
 		chechHealth();
 		player.update();
-		spawnEnemies();
+
 		for(Bullet bullet: bullets) {
 			bullet.update();
 		}
