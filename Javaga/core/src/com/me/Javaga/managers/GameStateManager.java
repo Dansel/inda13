@@ -22,10 +22,10 @@ public class GameStateManager {
 
     public GameStateManager() {
 
-        menu = new MenuState();
-        play = new PlayState();
-        pause = new PauseState();
-        welcome = new WelcomeState();
+        menu = new MenuState(this);
+        play = new PlayState(this);
+        pause = new PauseState(this);
+        welcome = new WelcomeState(this);
 
         setState(PLAY);
     }

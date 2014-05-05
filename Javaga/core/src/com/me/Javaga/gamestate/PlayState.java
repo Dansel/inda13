@@ -3,6 +3,7 @@ package com.me.Javaga.gamestate;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.gamestate.levels.Level;
+import com.me.Javaga.managers.GameKeys;
 import com.me.Javaga.managers.GameStateManager;
 import com.me.Javaga.spaceobject.Bullet;
 import com.me.Javaga.spaceobject.Enemy;
@@ -35,6 +36,7 @@ public class PlayState extends GameState {
 
 	@Override
 	public void update() {
+        handleInput();
 		chechHealth();
 		player.update();
 
@@ -66,7 +68,9 @@ public class PlayState extends GameState {
 
     @Override
     public void handleInput() {
-        //LOL didnt do shiet
+        if(GameKeys.isPressed(GameKeys.ESCAPE)) {
+           gameStateManager.setState(GameStateManager.PAUSE);
+        }
     }
 
     @Override
