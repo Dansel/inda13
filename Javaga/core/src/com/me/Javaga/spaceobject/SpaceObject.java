@@ -35,10 +35,23 @@ public abstract class SpaceObject {
 	}
 
 
+    /**
+     * Properly initialize the SpaceObject with sprites and logic, should be called
+     * in the subclasses constructor and no other method should be called before
+     * this method
+     */
 	public abstract void init();
 
+    /**
+     * Update the logic of the object
+     */
 	public abstract void update();
 
+    /**
+     * Draw the SpaceObject ont the canvas
+     * @param batch A Sprite batch which draws the sprite onto
+     *              the canvas
+     */
 	public abstract void draw(SpriteBatch batch);
 
     public void setScale(float scaleFactor) {
@@ -46,14 +59,30 @@ public abstract class SpaceObject {
         sprite.setScale(SCALEFACTOR);
     }
 
+    /**
+     *
+     */
 	public abstract void wrap();
 
+    /**
+     * Check if the object is healthy
+     * @return True if it is healthy, false if it should be discarded
+     */
 	public abstract boolean checkHealthy();
 
+    /**
+     * See if to spaceobjects overlap each other, which means they have colided
+     * @param obj A spaceObject
+     * @return true if they overlap, false if they don't
+     */
     public boolean overlap(SpaceObject obj) {
         return hitbox.overlaps(obj.getHitbox());
     }
 
+    /**
+     * Return a rectangle stating the area of the sprite
+     * @return A rectangle
+     */
     public Rectangle getHitbox() {
         return hitbox;
     }

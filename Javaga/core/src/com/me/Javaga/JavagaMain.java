@@ -15,13 +15,13 @@ import com.me.Javaga.managers.GameStateManager;
 import java.util.Random;
 
 public class JavagaMain extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-    OrthographicCamera camera;
-    float WIDTH;
-    float HEIGHT;
-    Random rand;
-    GameStateManager manager;
+	private SpriteBatch batch;
+	private Texture img;
+    private OrthographicCamera camera;
+    private float WIDTH;
+    private float HEIGHT;
+    private Random rand;
+    private GameStateManager manager;
 	
 	@Override
 	public void create () {
@@ -47,6 +47,7 @@ public class JavagaMain extends ApplicationAdapter {
 
 	@Override
 	public void render () {
+
         //Draw a black screen.
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -60,6 +61,5 @@ public class JavagaMain extends ApplicationAdapter {
         batch.begin();
 		manager.draw(batch);
         batch.end();
-
 	}
 }

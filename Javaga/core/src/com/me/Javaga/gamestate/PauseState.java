@@ -20,7 +20,6 @@ public class PauseState extends GameState {
 
     private ArrayList<Star> stars;
     private long time; // Keep track of the star animation time
-    private Random random;
     private static final String FILENAME = "pause.png";
     private Sprite pause;
 
@@ -31,7 +30,6 @@ public class PauseState extends GameState {
 	@Override
 	public void init() {
         stars = new ArrayList<Star>();
-        random = new Random();
         time = System.currentTimeMillis();
         pause = new Sprite(new Texture(Gdx.files.internal(FILENAME)));
         pause.setPosition(Gdx.graphics.getWidth()/2 - pause.getWidth()/2, Gdx.graphics.getHeight()/2);

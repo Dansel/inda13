@@ -9,6 +9,7 @@ import com.me.Javaga.managers.GameStateManager;
 import com.me.Javaga.spaceobject.Bullet;
 import com.me.Javaga.spaceobject.Enemy;
 import com.me.Javaga.spaceobject.Player;
+import com.me.Javaga.spaceobject.Star;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,8 +21,10 @@ public class PlayState extends GameState {
 	private Player player;
 	private ArrayList<Bullet> bullets;
 	private ArrayList<Enemy> enemies;
+    private ArrayList<Star> stars;
 	private Level levels;
     private Music musicPlayer;
+    private long time;
 
 	public PlayState(GameStateManager gameStateManager) {
 		super(gameStateManager);
@@ -34,6 +37,8 @@ public class PlayState extends GameState {
 	    enemies = new ArrayList<Enemy>();
 	    levels = new Level();
 	    player = new Player(Gdx.graphics.getWidth() / 2, 30, bullets);
+        stars = new ArrayList<Star>();
+        time = System.currentTimeMillis();
         musicPlayer = Gdx.audio.newMusic(Gdx.files.internal("Test.mp3"));
         musicPlayer.play();
         musicPlayer.setLooping(true);
@@ -46,6 +51,7 @@ public class PlayState extends GameState {
         }
         handleInput();
 		chechHealth();
+        updateBackGround();
 		player.update();
 
 		for(Bullet bullet: bullets) {
@@ -68,6 +74,7 @@ public class PlayState extends GameState {
 
     @Override
     public void draw(SpriteBatch batch) {
+        drawBackGround(batch);
 	    player.draw(batch);
 	    for(Bullet bullet: bullets) {
 		    bullet.draw(batch);
@@ -86,6 +93,44 @@ public class PlayState extends GameState {
     public void dispose() {
     }
 
+    /**
+     * Spawn enemies onto the level
+     */
 	public void spawnEnemies(){
 	}
+
+    /**
+     * Update the background logic
+     */
+    private void updateBackGround() {
+        if(System.currentTimeMillis() - time > 200) {
+            time = System.currentTimeMillis();
+            stars.add(new Star());
+        }
+
+        Iterator<Star> iterator = stars.iterator();
+        while(iterator.hasNext()) {
+            Star star = iterator.next();
+            if(!star.checkHealthy()) {
+                iterator.remove();
+            }
+        }
+
+        iterator = stars.iterator();
+        while(iterator.hasNext()) {
+            Star star = iterator.next();
+            star.update();
+        }
+    }
+
+    /**
+     * Draw the background, should be used first in the rendering method
+     */
+    private void drawBackGround(SpriteBatch batch) {
+        Iterator<Star> iterator = stars.iterator();
+        while(iterator.hasNext()) {
+            Star star = iterator.next();
+            star.draw(batch);
+        }
+    }
 }
