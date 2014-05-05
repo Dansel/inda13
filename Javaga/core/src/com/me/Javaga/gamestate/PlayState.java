@@ -2,6 +2,7 @@ package com.me.Javaga.gamestate;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.me.Javaga.managers.GameStateManager;
 import com.me.Javaga.spaceobject.Bullet;
 import com.me.Javaga.spaceobject.Enemy;
 import com.me.Javaga.spaceobject.Player;
@@ -17,8 +18,8 @@ public class PlayState extends GameState {
 	private ArrayList<Bullet> bullets;
 	private ArrayList<Enemy> enemies;
 
-	public PlayState() {
-		super();
+	public PlayState(GameStateManager gameStateManager) {
+		super(gameStateManager);
 		init();
 	}
 
