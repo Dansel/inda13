@@ -11,11 +11,11 @@ import java.util.ArrayList;
  */
 public class Enemy extends SpaceObject {
 	private int ID;
+    protected ArrayList<Enemy> enemies;
 
 	public Enemy(float xPos, float yPos, ArrayList<Enemy> list){
 		super(xPos,yPos);
-
-
+        this.enemies = list;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.me.Javaga.gamestate;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.gamestate.levels.Level;
 import com.me.Javaga.managers.GameKeys;
@@ -20,6 +21,7 @@ public class PlayState extends GameState {
 	private ArrayList<Bullet> bullets;
 	private ArrayList<Enemy> enemies;
 	private Level levels;
+    private Music musicPlayer;
 
 	public PlayState(GameStateManager gameStateManager) {
 		super(gameStateManager);
@@ -32,6 +34,8 @@ public class PlayState extends GameState {
 	    enemies = new ArrayList<Enemy>();
 	    levels = new Level();
 	    player = new Player(Gdx.graphics.getWidth() / 2, 30, bullets);
+        musicPlayer = Gdx.audio.newMusic(Gdx.files.internal("Test.mp3"));
+        musicPlayer.play();
     }
 
 	@Override
@@ -69,6 +73,7 @@ public class PlayState extends GameState {
     @Override
     public void handleInput() {
         if(GameKeys.isPressed(GameKeys.ESCAPE)) {
+            musicPlayer.pause();
            gameStateManager.setState(GameStateManager.PAUSE);
         }
     }

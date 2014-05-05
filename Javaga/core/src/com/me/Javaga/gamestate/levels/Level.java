@@ -35,7 +35,7 @@ public class Level {
 			currentLevel++;
 		}
 		if (currentLevel>=numOfLevels){
-			GameStateManager.WON; //TODO
+			//GameStateManager.WON; //TODO
 
 			return new int[] {0};
 		}
