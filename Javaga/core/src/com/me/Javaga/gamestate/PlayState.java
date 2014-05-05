@@ -84,10 +84,8 @@ public class PlayState extends GameState {
 
     @Override
     public void dispose() {
-
     }
 
 	public void spawnEnemies(){
-
 	}
 }
