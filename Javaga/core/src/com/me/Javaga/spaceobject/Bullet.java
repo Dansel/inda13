@@ -69,12 +69,6 @@ public class Bullet extends SpaceObject {
 	}
 
 	@Override
-	public void setScale(float scaleFactor) {
-		SCALEFACTOR = scaleFactor;
-		sprite.setScale(SCALEFACTOR);
-	}
-
-	@Override
 	public void wrap() {
 		if ((xCenter - sWidth / 2 < 0 )|| (xCenter + sWidth/2> WIDTH)
 		|| (yCenter - sHeight / 2 < 0 )|| (yCenter + sHeight/2 > HEIGHT)) {
@@ -85,15 +79,5 @@ public class Bullet extends SpaceObject {
 	@Override
 	public boolean checkHealthy() {
 		return isHealthy;
-	}
-
-	@Override
-	public boolean overlap(SpaceObject obj) {
-		return false;
-	}
-
-	@Override
-	public Rectangle getHitbox() {
-		return hitbox;
 	}
 }

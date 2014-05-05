@@ -41,13 +41,20 @@ public abstract class SpaceObject {
 
 	public abstract void draw(SpriteBatch batch);
 
-	public abstract void setScale(float scaleFactor);
+    public void setScale(float scaleFactor) {
+        SCALEFACTOR = scaleFactor;
+        sprite.setScale(SCALEFACTOR);
+    }
 
 	public abstract void wrap();
 
 	public abstract boolean checkHealthy();
 
-	public abstract  boolean overlap(SpaceObject obj);
+    public boolean overlap(SpaceObject obj) {
+        return hitbox.overlaps(obj.getHitbox());
+    }
 
-	public abstract Rectangle getHitbox();
+    public Rectangle getHitbox() {
+        return hitbox;
+    }
 }

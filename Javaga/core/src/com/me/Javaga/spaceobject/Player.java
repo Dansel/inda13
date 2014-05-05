@@ -95,24 +95,8 @@ public class Player extends SpaceObject {
 	}
 
 	@Override
-	public void setScale(float scaleFactor) {
-		SCALEFACTOR = scaleFactor;
-		sprite.setScale(SCALEFACTOR);
-	}
-
-	@Override
 	public boolean checkHealthy() {
 		return isHealthy;
-	}
-
-	@Override
-	public boolean overlap(SpaceObject obj) {
-		return hitbox.overlaps(obj.getHitbox());
-	}
-
-	@Override
-	public Rectangle getHitbox() {
-		return hitbox;
 	}
 
 	/**

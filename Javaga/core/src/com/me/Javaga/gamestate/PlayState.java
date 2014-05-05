@@ -36,10 +36,14 @@ public class PlayState extends GameState {
 	    player = new Player(Gdx.graphics.getWidth() / 2, 30, bullets);
         musicPlayer = Gdx.audio.newMusic(Gdx.files.internal("Test.mp3"));
         musicPlayer.play();
+        musicPlayer.setLooping(true);
     }
 
 	@Override
 	public void update() {
+        if(!musicPlayer.isPlaying()) {
+            musicPlayer.play();
+        }
         handleInput();
 		chechHealth();
 		player.update();

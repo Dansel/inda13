@@ -10,7 +10,7 @@ public abstract class GameState {
 
     protected GameStateManager gameStateManager;
 
-    public GameState(GameStateManager gameStateManeger) {
+    public GameState(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
     }
 

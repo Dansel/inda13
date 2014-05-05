@@ -34,11 +34,6 @@ public class Enemy extends SpaceObject {
 	}
 
 	@Override
-	public void setScale(float scaleFactor) {
-
-	}
-
-	@Override
 	public void wrap() {
 
 	}
@@ -46,15 +41,5 @@ public class Enemy extends SpaceObject {
 	@Override
 	public boolean checkHealthy() {
 		return false;
-	}
-
-	@Override
-	public boolean overlap(SpaceObject obj) {
-		return false;
-	}
-
-	@Override
-	public Rectangle getHitbox() {
-		return hitbox;
 	}
 }
