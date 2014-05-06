@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.*;
+import com.me.Javaga.managers.Button;
 import com.me.Javaga.managers.GameKeys;
 import com.me.Javaga.managers.GameStateManager;
 import com.me.Javaga.spaceobject.Bullet;
@@ -23,9 +24,12 @@ public class PauseState extends GameState {
 
     private ArrayList<Star> stars;
     private long time; // Keep track of the star animation time
-    private static final String FILENAME = "pause.png";
-    private Sprite pause;
-    private Rectangle pauseRec;
+    private static final String PAUSE = "pause.png";
+    private static final String QUIT = "quit.png";
+    private Button pauseButton;
+    private Button quitButton;
+    //private Sprite pause;
+    //private Rectangle pauseRec;
 
     public PauseState(GameStateManager gameStateManager) {
         super(gameStateManager);
@@ -35,13 +39,27 @@ public class PauseState extends GameState {
 	public void init() {
         stars = new ArrayList<Star>();
         time = System.currentTimeMillis();
-        pause = new Sprite(new Texture(Gdx.files.internal(FILENAME)));
-        pause.setPosition(Gdx.graphics.getWidth()/2 - pause.getWidth()/2,
-                Gdx.graphics.getHeight()/2);
-        // Making a quick Botton for test, will probably be changed
-        pauseRec = new Rectangle(Gdx.graphics.getWidth()/2 - pause.getWidth()/2,
-                Gdx.graphics.getHeight()/2,
-                pause.getWidth(), pause.getHeight());
+
+
+        //Create a new button and override the necisary methods
+        pauseButton = new Button(Gdx.graphics.getWidth()/2,
+                Gdx.graphics.getHeight()/2, gameStateManager) {
+            @Override
+            public void preformAction() {
+                gameStateManager.setState(GameStateManager.PLAY);
+            }
+        };
+
+        quitButton = new Button(Gdx.graphics.getWidth()/2,
+                Gdx.graphics.getHeight()/2 - 200, gameStateManager) {
+
+            @Override
+            public void preformAction() {
+                gameStateManager.setState(GameStateManager.MENU);
+            }
+        };
+        pauseButton.setSprite(PAUSE);
+        quitButton.setSprite(QUIT);
 	}
 
 	@Override
@@ -76,22 +94,18 @@ public class PauseState extends GameState {
             Star star = iterator.next();
             star.draw(batch);
         }
-        pause.draw(batch);
+        pauseButton.draw(batch);
+        quitButton.draw(batch);
 	}
 
 	@Override
 	public void handleInput() {
+        // Lets you exit pause with escape
         if(GameKeys.isPressed(GameKeys.ESCAPE)) {
             gameStateManager.setState(GameStateManager.PLAY);
         }
-
-        if(pauseRec.contains((float) GameKeys.xMouse(), (float) GameKeys.yMouse())) {
-            System.out.print("jkljökjkll");
-            pause.setColor(Color.BLUE);
-        } else {
-            pause.setColor(Color.WHITE);
-        }
-
+        pauseButton.hover();
+        quitButton.hover();
 	}
 
 	@Override

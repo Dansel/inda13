@@ -24,6 +24,7 @@ public class GameKeys {
     public static int xMouse;
     public static int yMouse;
     public static boolean mousePressed;
+    private static boolean prevMousePressed;
 	
 	static {
 		keys = new boolean[NUM_KEYS];
@@ -34,6 +35,7 @@ public class GameKeys {
 	 * Update list containing pressed keys.
 	 */
 	public static void update() {
+        prevMousePressed = mousePressed;
 		for (int i = 0; i < NUM_KEYS; i++) {
 			pkeys[i] = keys[i];
 		}
@@ -81,6 +83,22 @@ public class GameKeys {
     public static int yMouse() {
         return Gdx.graphics.getHeight() - yMouse; // Sense we have origo in the bottom left corner
         // we have to convert the y-position like this
+    }
+
+    /**
+     * Return if the mouse left "button" is held down
+     * @return true if the mouse is held down
+     */
+    public static boolean isMouseDown() {
+        return mousePressed;
+    }
+
+    /**
+     * Return if the the mouse left"button" was pressed"
+     * @return true if the mouse was pressed
+     */
+    public static boolean isMousePressed() {
+        return mousePressed && !prevMousePressed;
     }
 	
 }

@@ -76,6 +76,15 @@ public class GameInputProcessor extends InputAdapter {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         GameKeys.mousePressed = true;
         //TODO
+        //Probably need to make this less of a "fulhack"
+        return true;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        GameKeys.mousePressed = false;
+        //TODO
+        //Probably need to make this less of a "fulhack"
         return true;
     }
 }
