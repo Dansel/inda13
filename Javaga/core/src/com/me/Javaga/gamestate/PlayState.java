@@ -4,8 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.gamestate.levels.Level;
+import com.me.Javaga.managers.BackgroundDrawer;
 import com.me.Javaga.managers.GameKeys;
 import com.me.Javaga.managers.GameStateManager;
+import com.me.Javaga.managers.MusicManeger;
 import com.me.Javaga.spaceobject.Bullet;
 import com.me.Javaga.spaceobject.Enemy;
 import com.me.Javaga.spaceobject.Player;
@@ -23,7 +25,6 @@ public class PlayState extends GameState {
 	private ArrayList<Enemy> enemies;
     private ArrayList<Star> stars;
 	private Level levels;
-    private Music musicPlayer;
     private long time;
 
 	public PlayState(GameStateManager gameStateManager) {
@@ -39,20 +40,15 @@ public class PlayState extends GameState {
 	    player = new Player(Gdx.graphics.getWidth() / 2, 30, bullets);
         stars = new ArrayList<Star>();
         time = System.currentTimeMillis();
-        musicPlayer = Gdx.audio.newMusic(Gdx.files.internal("Test.mp3"));
-        musicPlayer.play();
-        musicPlayer.setLooping(true);
+
     }
 
 	@Override
 	public void update() {
-        if(!musicPlayer.isPlaying()) {
-            musicPlayer.play();
-        }
         handleInput();
 		chechHealth();
-        updateBackGround();
 		player.update();
+        BackgroundDrawer.update();
 
 		for(Bullet bullet: bullets) {
 			bullet.update();
@@ -74,7 +70,7 @@ public class PlayState extends GameState {
 
     @Override
     public void draw(SpriteBatch batch) {
-        drawBackGround(batch);
+        BackgroundDrawer.draw(batch);
 	    player.draw(batch);
 	    for(Bullet bullet: bullets) {
 		    bullet.draw(batch);
@@ -84,7 +80,7 @@ public class PlayState extends GameState {
     @Override
     public void handleInput() {
         if(GameKeys.isPressed(GameKeys.ESCAPE)) {
-            musicPlayer.pause();
+            MusicManeger.pause();
            gameStateManager.setState(GameStateManager.PAUSE);
         }
     }
@@ -98,39 +94,4 @@ public class PlayState extends GameState {
      */
 	public void spawnEnemies(){
 	}
-
-    /**
-     * Update the background logic
-     */
-    private void updateBackGround() {
-        if(System.currentTimeMillis() - time > 200) { // Spawn a new star ever 1/5 second
-            time = System.currentTimeMillis();
-            stars.add(new Star());
-        }
-
-        Iterator<Star> iterator = stars.iterator();
-        while(iterator.hasNext()) {
-            Star star = iterator.next();
-            if(!star.checkHealthy()) {
-                iterator.remove();
-            }
-        }
-
-        iterator = stars.iterator();
-        while(iterator.hasNext()) {
-            Star star = iterator.next();
-            star.update();
-        }
-    }
-
-    /**
-     * Draw the background, should be used first in the rendering method
-     */
-    private void drawBackGround(SpriteBatch batch) {
-        Iterator<Star> iterator = stars.iterator();
-        while(iterator.hasNext()) {
-            Star star = iterator.next();
-            star.draw(batch);
-        }
-    }
 }

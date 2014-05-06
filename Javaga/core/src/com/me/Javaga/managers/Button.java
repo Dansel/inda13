@@ -71,27 +71,21 @@ public class Button {
 
     //Override in object
     public void preformAction() {
-        // Overide this in objects
+        // Overide this in all objects
     }
-
-    //Overide
 
     /**
-     * Preform an action when the button is hovered over
-     * and do something if it is pressed
+     * Check if the mouse is hovering over the mouse
+     * @return true if the button is hovering over the button
      */
-    public void hover() {
+    public boolean isHovering() {
         if (rectangle.contains((float) GameKeys.xMouse(), (float) GameKeys.yMouse())) {
-            setSeleted(true);
-            if (GameKeys.isMousePressed()) {
-                preformAction();
-            }
-        } else {
-            setSeleted(false);
+            return true;
         }
-    }
+        return false;
+       }
 
-    public void setSeleted(boolean selected) {
+    public void setSelected(boolean selected) {
         if(selected) {
             sprite.setColor(Color.BLUE);
         } else {
