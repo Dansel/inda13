@@ -39,24 +39,23 @@ public class Enemy extends SpaceObject {
 	public void update() {
 		xPos += dX;
 		sprite.setX(xPos);
-		if (xPos > WIDTH - WIDTH*0.2 || xPos > WIDTH*0.2) {
-			dX = -dX;
-		}
 		wrap();
 	}
 
 	@Override
 	public void draw(SpriteBatch batch) {
-
+		sprite.draw(batch);
 	}
 
 	@Override
 	public void wrap() {
-
+		if (xPos > WIDTH - WIDTH*0.2 || xPos > WIDTH*0.2) {
+			dX = -dX;
+		}
 	}
 
 	@Override
 	public boolean checkHealthy() {
-		return false;
+		return true;
 	}
 }
