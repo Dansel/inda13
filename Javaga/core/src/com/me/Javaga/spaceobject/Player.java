@@ -20,6 +20,7 @@ public class Player extends SpaceObject {
 	//private float scale;
 	private ArrayList<Bullet> bullets;
 	private Sound sound;
+	private static long time;
 
 
 	//Call the super-class's constructor
@@ -60,7 +61,10 @@ public class Player extends SpaceObject {
 		}
 
 		if (GameKeys.isPressed(GameKeys.SPACE)) {
-			fire();
+			if (System.currentTimeMillis() - time > 100) {
+				time = System.currentTimeMillis();
+				fire();
+			}
 		}
 
 		xCenter = xPos + sprite.getWidth() / 2;
@@ -69,6 +73,8 @@ public class Player extends SpaceObject {
 		wrap();
 		sprite.setX(xPos);
 		sprite.setY(yPos);
+		//Update hitbox
+		hitbox.setCenter(xCenter, yCenter);
 	}
 
 	/**

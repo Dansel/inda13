@@ -42,6 +42,7 @@ public class Bullet extends SpaceObject {
 		sprite.rotate(ROTATION);
 		sprite.setX(xPos);
 		sprite.setY(yPos);
+		hitbox.setCenter(xCenter, yCenter);
 		wrap();
 	}
 

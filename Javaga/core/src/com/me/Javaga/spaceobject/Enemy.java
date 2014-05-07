@@ -6,11 +6,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.ArrayList;
 
 /**
+ * Create object of this class to spawn enemies.
  * Created by Dansel on 2014-05-02.
  */
 public class Enemy extends SpaceObject {
 	private static String FILENAME;
-	private int ID;
 
 	public Enemy(float xPos, float yPos, int type) {
 		super(xPos, yPos);
@@ -32,6 +32,7 @@ public class Enemy extends SpaceObject {
 		xPos += dX;
 		sprite.setX(xPos);
 		wrap();
+		hitbox.setCenter(xCenter, yCenter);
 	}
 
 	@Override
@@ -56,9 +57,9 @@ public class Enemy extends SpaceObject {
 		for (Bullet bullet : bullets) {
 			if (overlap(bullet)){
 				System.out.println("COLLISION!");
-				return false;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 }

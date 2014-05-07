@@ -77,8 +77,8 @@ public class PlayState extends GameState {
 
 		while (enemyIterator.hasNext()) {
 			Enemy enemy = enemyIterator.next();
-			if (!enemy.checkForCollision(bullets)) {
-				bulletIterator.remove();
+			if (enemy.checkForCollision(bullets)) {
+				enemyIterator.remove();
 			}
 		}
 	}
