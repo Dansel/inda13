@@ -6,7 +6,7 @@ import com.badlogic.gdx.audio.Music;
 /**
  * Created by Lukas on 2014-05-06.
  */
-public class MusicManeger {
+public class MusicManager {
 
     private static Music musicPlayer;
     public static final String PLAYSONG = "Test.mp3";

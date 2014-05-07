@@ -1,7 +1,6 @@
 package com.me.Javaga.gamestate;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.managers.*;
 
@@ -30,7 +29,7 @@ public class WelcomeState extends GameState {
             @Override
             public void preformAction() {
                 gameStateManager.setState(GameStateManager.PLAY, true);
-                MusicManeger.play();
+                MusicManager.play();
             }
         };
         startGame.setSprite("start_game.png");

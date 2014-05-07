@@ -1,19 +1,8 @@
 package com.me.Javaga.gamestate;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.*;
 import com.me.Javaga.managers.*;
-import com.me.Javaga.spaceobject.Bullet;
-import com.me.Javaga.spaceobject.Star;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
 
 /**
  * Created by Dansel on 2014-04-30.
@@ -39,7 +28,7 @@ public class PauseState extends GameState {
             @Override
             public void preformAction() {
                 gameStateManager.setState(GameStateManager.PLAY, false);
-                MusicManeger.play();
+                MusicManager.play();
             }
         };
 
@@ -77,7 +66,7 @@ public class PauseState extends GameState {
         // Lets you exit pause with escape
         if(GameKeys.isPressed(GameKeys.ESCAPE)) {
             gameStateManager.setState(GameStateManager.PLAY, false);
-            MusicManeger.play();
+            MusicManager.play();
 
         }
         currentMenu.handleInput();

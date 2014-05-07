@@ -1,13 +1,12 @@
 package com.me.Javaga.gamestate;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.gamestate.levels.Level;
 import com.me.Javaga.managers.BackgroundDrawer;
 import com.me.Javaga.managers.GameKeys;
 import com.me.Javaga.managers.GameStateManager;
-import com.me.Javaga.managers.MusicManeger;
+import com.me.Javaga.managers.MusicManager;
 import com.me.Javaga.spaceobject.Bullet;
 import com.me.Javaga.spaceobject.Enemy;
 import com.me.Javaga.spaceobject.Player;
@@ -80,7 +79,7 @@ public class PlayState extends GameState {
     @Override
     public void handleInput() {
         if(GameKeys.isPressed(GameKeys.ESCAPE)) {
-            MusicManeger.pause();
+            MusicManager.pause();
            gameStateManager.setState(GameStateManager.PAUSE, true);
         }
     }
