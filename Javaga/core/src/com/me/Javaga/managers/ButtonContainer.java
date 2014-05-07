@@ -30,6 +30,7 @@ public class ButtonContainer {
                     currentButton.setSelected(false);
                 }
                     currentButton = button;
+                    currentButtonIndex = buttons.indexOf(currentButton);
                     button.setSelected(true);
                 if(GameKeys.isMousePressed()) {
                     button.preformAction();
@@ -48,12 +49,13 @@ public class ButtonContainer {
             } else {
                 currentButtonIndex = 0;
                 currentButton = buttons.get(currentButtonIndex);
+                currentButton.setSelected(true);
             }
         }
 
         if(GameKeys.isPressed(GameKeys.DOWN)) {
             if(currentButton != null) {
-                if(currentButtonIndex < 1) {
+                if(currentButtonIndex != buttons.size()-1) {
                     currentButtonIndex++;
                 }
                 currentButton.setSelected(false);
@@ -62,6 +64,7 @@ public class ButtonContainer {
             } else {
                 currentButtonIndex = 0;
                 currentButton = buttons.get(currentButtonIndex);
+                currentButton.setSelected(true);
             }
         }
 
