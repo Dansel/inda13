@@ -1,11 +1,13 @@
 package com.me.Javaga.spaceobject;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.me.Javaga.managers.GameKeys;
+import com.me.Javaga.managers.GameStateManager;
 
 import java.util.ArrayList;
 
@@ -20,6 +22,7 @@ public class Player extends SpaceObject {
 	//private float rotation;
 	//private float scale;
 	private ArrayList<Bullet> bullets;
+    private Sound sound;
 
 
 	//Call the super-class's constructor
@@ -36,7 +39,7 @@ public class Player extends SpaceObject {
 
 		//Create the sprite with some texture
 		sprite = new Sprite(new Texture(Gdx.files.internal(FILENAME)));
-
+        sound = Gdx.audio.newSound(Gdx.files.internal("lazer.mp3"));
 		//Set scalefactor
 		setScale(0.4f);
 
@@ -127,6 +130,7 @@ public class Player extends SpaceObject {
 	}
 
 	private void fire() {
+        sound.play(GameStateManager.getEffectVolume()); // play lazer
 		bullets.add(new Bullet(xCenter, yCenter, 90));
 	}
 }
