@@ -1,5 +1,7 @@
 package com.me.Javaga.spaceobject;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -22,6 +24,9 @@ public abstract class SpaceObject {
 
 	protected float xCenter;
 	protected float yCenter;
+
+	protected float dX;
+	protected float dY;
 
 	protected float SCALEFACTOR;
 
@@ -86,4 +91,23 @@ public abstract class SpaceObject {
     public Rectangle getHitbox() {
         return hitbox;
     }
+
+	public void spriteSetUp(String FILENAME){
+		sprite = new Sprite(new Texture(Gdx.files.internal(FILENAME)));
+		sprite.setX(xPos);
+		sprite.setY(yPos);
+
+		sWidth = sprite.getWidth()*SCALEFACTOR;
+		sHeight = sprite.getHeight()*SCALEFACTOR;
+
+		//shift position down and to the left so we draw the sprite centered.
+		xPos -= sprite.getWidth()/2;
+		yPos -= sprite.getHeight()/2;
+
+		xCenter = xPos + sprite.getWidth()/2;
+		yCenter = yPos + sprite.getHeight()/2;
+
+		hitbox = new Rectangle();
+		hitbox.setHeight(sHeight).setWidth(sWidth).setCenter(xCenter,yCenter);
+	}
 }

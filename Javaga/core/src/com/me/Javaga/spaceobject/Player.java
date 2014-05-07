@@ -33,26 +33,9 @@ public class Player extends SpaceObject {
 
 	@Override
 	public void init() {
-
-		//Create the sprite with some texture
-		sprite = new Sprite(new Texture(Gdx.files.internal(FILENAME)));
-
+		spriteSetUp(FILENAME);
 		//Set scalefactor
 		setScale(0.4f);
-
-		//Find the sprites dimensions.
-		sWidth = sprite.getWidth()*SCALEFACTOR;
-		sHeight = sprite.getHeight()*SCALEFACTOR;
-
-		//shift position down and to the left so we draw the sprite centered.
-		xPos -= sprite.getWidth()/2;
-		yPos -= sprite.getHeight()/2;
-
-		xCenter = xPos + sprite.getWidth()/2;
-		yCenter = yPos + sprite.getHeight()/2;
-
-		hitbox = new Rectangle();
-		hitbox.setHeight(sHeight).setWidth(sWidth).setCenter(xCenter,yCenter);
 	}
 
 	/**

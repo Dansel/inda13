@@ -15,8 +15,6 @@ public class Bullet extends SpaceObject {
 
 	private static final String FILENAME = "snilsson.png";
 	private float degree;
-	private float dX;
-	private float dY;
 	private final static float SPEED = 20;
 	private final static float ROTATION = 30;
 
