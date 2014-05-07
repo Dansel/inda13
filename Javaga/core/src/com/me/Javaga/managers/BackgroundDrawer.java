@@ -18,33 +18,33 @@ public class BackgroundDrawer {
         time = 0;
     }
 
-    public static void update() {
-        if(System.currentTimeMillis() - time > 200) {
-            time = System.currentTimeMillis();
-            stars.add(new Star());
-        }
+    	public static void update() {
+		if(System.currentTimeMillis() - time > 200) {
+			time = System.currentTimeMillis();
+			stars.add(new Star());
+		}
 
-        Iterator<Star> iterator = stars.iterator();
-        while(iterator.hasNext()) {
-            Star star = iterator.next();
-            if(!star.checkHealthy()) {
-                iterator.remove();
-            }
-        }
+		Iterator<Star> iterator = stars.iterator();
+		while(iterator.hasNext()) {
+			Star star = iterator.next();
+			if(!star.checkHealthy()) {
+				iterator.remove();
+			}
+		}
 
-        iterator = stars.iterator();
-        while(iterator.hasNext()) {
-            Star star = iterator.next();
-            star.update();
-        }
-    }
+		iterator = stars.iterator();
+		while(iterator.hasNext()) {
+			Star star = iterator.next();
+			star.update();
+		}
+	}
 
-    public static void draw(SpriteBatch batch) {
-        //draw stars
-        Iterator<Star> iterator = stars.iterator();
-        while(iterator.hasNext()) {
-            Star star = iterator.next();
-            star.draw(batch);
-        }
-    }
+	public static void draw(SpriteBatch batch) {
+		//draw stars
+		Iterator<Star> iterator = stars.iterator();
+		while(iterator.hasNext()) {
+			Star star = iterator.next();
+			star.draw(batch);
+		}
+	}
 }
