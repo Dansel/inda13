@@ -38,7 +38,7 @@ public class PauseState extends GameState {
                 Gdx.graphics.getHeight()/2, gameStateManager) {
             @Override
             public void preformAction() {
-                gameStateManager.setState(GameStateManager.PLAY);
+                gameStateManager.setState(GameStateManager.PLAY, false);
                 MusicManeger.play();
             }
         };
@@ -48,7 +48,7 @@ public class PauseState extends GameState {
 
             @Override
             public void preformAction() {
-                gameStateManager.setState(GameStateManager.WELCOME);
+                gameStateManager.setState(GameStateManager.WELCOME, true);
             }
         };
 
@@ -76,7 +76,7 @@ public class PauseState extends GameState {
 	public void handleInput() {
         // Lets you exit pause with escape
         if(GameKeys.isPressed(GameKeys.ESCAPE)) {
-            gameStateManager.setState(GameStateManager.PLAY);
+            gameStateManager.setState(GameStateManager.PLAY, false);
             MusicManeger.play();
 
         }

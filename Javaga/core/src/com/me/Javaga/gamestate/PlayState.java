@@ -81,7 +81,7 @@ public class PlayState extends GameState {
     public void handleInput() {
         if(GameKeys.isPressed(GameKeys.ESCAPE)) {
             MusicManeger.pause();
-           gameStateManager.setState(GameStateManager.PAUSE);
+           gameStateManager.setState(GameStateManager.PAUSE, true);
         }
     }
 

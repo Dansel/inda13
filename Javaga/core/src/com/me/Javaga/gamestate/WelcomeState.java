@@ -29,7 +29,7 @@ public class WelcomeState extends GameState {
                 Gdx.graphics.getHeight()/2, gameStateManager) {
             @Override
             public void preformAction() {
-                gameStateManager.setState(GameStateManager.PLAY);
+                gameStateManager.setState(GameStateManager.PLAY, true);
                 MusicManeger.play();
             }
         };

@@ -27,7 +27,7 @@ public class GameStateManager {
         pause = new PauseState(this);
         welcome = new WelcomeState(this);
 
-        setState(WELCOME);
+        setState(WELCOME, false);
         MusicManeger.startNewSong(MusicManeger.PLAYSONG);
     }
 
@@ -35,17 +35,21 @@ public class GameStateManager {
 	 * Sets the gamestate.
 	 * @param state int number correlating a specific state. 0 = menu, 1= play, 2=pause, 3 = welcome screen
 	 */
-    public void setState(int state){
+    public void setState(int state, boolean reset){
         if (state == MENU) {
+            if(reset) {menu = new MenuState(this);}
             currentGameState = menu;
         }
         if(state == PLAY) {
+            if(reset) {play = new PlayState(this);}
             currentGameState = play;
         }
         if (state == PAUSE) {
+            if(reset) {pause = new PauseState(this);}
             currentGameState = pause;
         }
         if (state == WELCOME) {
+            if(reset) {welcome = new WelcomeState(this);}
             currentGameState = welcome;
         }
 
