@@ -3,16 +3,14 @@ package com.me.Javaga.gamestate;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.managers.GameStateManager;
 
-import java.awt.*;
-
 /**
  * Created by Dansel on 2014-04-30.
  */
 public class MenuState extends GameState {
 
-    public MenuState(GameStateManager gameStateManager) {
-        super(gameStateManager);
-    }
+	public MenuState(GameStateManager gameStateManager) {
+		super(gameStateManager);
+	}
 
 	@Override
 	public void init() {

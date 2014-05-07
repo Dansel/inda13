@@ -9,48 +9,48 @@ import com.me.Javaga.managers.*;
  */
 public class WelcomeState extends GameState {
 
-    private ButtonContainer menuContainer;
-    private Button startGame;
-    private Button settings;
-    private static final String START = "start_game.png";
-    //private static final String SETTING = "";
+	private static final String START = "start_game.png";
+	private ButtonContainer menuContainer;
+	private Button startGame;
+	private Button settings;
+	//private static final String SETTING = "";
 
-    public WelcomeState(GameStateManager gameStateManager) {
-        super(gameStateManager);
-        init();
-    }
+	public WelcomeState(GameStateManager gameStateManager) {
+		super(gameStateManager);
+		init();
+	}
 
 	@Override
 	public void init() {
-        menuContainer = new ButtonContainer();
+		menuContainer = new ButtonContainer();
 
-        startGame = new Button(Gdx.graphics.getWidth()/2,
-                Gdx.graphics.getHeight()/2, gameStateManager) {
-            @Override
-            public void preformAction() {
-                gameStateManager.setState(GameStateManager.PLAY, true);
-                MusicManager.startNewSong(MusicManager.PLAYSONG);
-            }
-        };
-        startGame.setSprite("start_game.png");
-        menuContainer.addButton(startGame);
+		startGame = new Button(Gdx.graphics.getWidth() / 2,
+				Gdx.graphics.getHeight() / 2, gameStateManager) {
+			@Override
+			public void preformAction() {
+				gameStateManager.setState(GameStateManager.PLAY, true);
+				MusicManager.startNewSong(MusicManager.PLAYSONG);
+			}
+		};
+		startGame.setSprite("start_game.png");
+		menuContainer.addButton(startGame);
 	}
 
 	@Override
 	public void update() {
-        handleInput();
-        BackgroundDrawer.update();
+		handleInput();
+		BackgroundDrawer.update();
 	}
 
 	@Override
 	public void draw(SpriteBatch batch) {
-        BackgroundDrawer.draw(batch);
-        menuContainer.draw(batch);
+		BackgroundDrawer.draw(batch);
+		menuContainer.draw(batch);
 	}
 
 	@Override
 	public void handleInput() {
-        menuContainer.handleInput();
+		menuContainer.handleInput();
 	}
 
 	@Override

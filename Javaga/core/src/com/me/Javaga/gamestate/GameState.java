@@ -8,19 +8,19 @@ import com.me.Javaga.managers.GameStateManager;
  */
 public abstract class GameState {
 
-    protected GameStateManager gameStateManager;
+	protected GameStateManager gameStateManager;
 
-    public GameState(GameStateManager gameStateManager) {
-        this.gameStateManager = gameStateManager;
-    }
+	public GameState(GameStateManager gameStateManager) {
+		this.gameStateManager = gameStateManager;
+	}
 
-    public abstract void init();
+	public abstract void init();
 
-    public abstract void update();
+	public abstract void update();
 
-    public abstract void draw(SpriteBatch batch);
+	public abstract void draw(SpriteBatch batch);
 
-    public abstract void handleInput();
+	public abstract void handleInput();
 
-    public abstract void dispose();
+	public abstract void dispose();
 }

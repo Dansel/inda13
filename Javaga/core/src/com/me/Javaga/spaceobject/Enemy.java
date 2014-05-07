@@ -1,30 +1,22 @@
 package com.me.Javaga.spaceobject;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 
 import java.util.ArrayList;
 
 /**
- *
  * Created by Dansel on 2014-05-02.
  */
 public class Enemy extends SpaceObject {
-	private int ID;
 	private static String FILENAME;
-    protected ArrayList<Enemy> enemies;
-	private float dX;
-	private float dY;
+	private int ID;
 
-	public Enemy(float xPos, float yPos, ArrayList<Enemy> list, int type){
-		super(xPos,yPos);
+	public Enemy(float xPos, float yPos, int type) {
+		super(xPos, yPos);
 		HEIGHT = Gdx.graphics.getHeight();
 		WIDTH = Gdx.graphics.getWidth();
-        this.enemies = list;
-		FILENAME = type + ".png";
+		FILENAME = "sprite" + type + ".png";
 		init();
 	}
 
@@ -32,7 +24,7 @@ public class Enemy extends SpaceObject {
 	public void init() {
 		spriteSetUp(FILENAME);
 		setScale(1);
-		dX = 8;
+		dX = 4;
 	}
 
 	@Override
@@ -49,13 +41,24 @@ public class Enemy extends SpaceObject {
 
 	@Override
 	public void wrap() {
-		if (xPos > WIDTH - WIDTH*0.2 || xPos > WIDTH*0.2) {
+		if (xPos > WIDTH * 0.8f || xPos < WIDTH * 0.2f) {
 			dX = -dX;
 		}
 	}
 
 	@Override
 	public boolean checkHealthy() {
+		return isHealthy;
+	}
+
+	@Override
+	public boolean checkForCollision(ArrayList<Bullet> bullets) {
+		for (Bullet bullet : bullets) {
+			if (overlap(bullet)){
+				System.out.println("COLLISION!");
+				return false;
+			}
+		}
 		return true;
 	}
 }

@@ -1,7 +1,5 @@
 package com.me.Javaga.gamestate.levels;
 
-import com.me.Javaga.managers.GameStateManager;
-
 /**
  * Created by Dansel on 2014-05-05.
  */
@@ -12,7 +10,7 @@ public class Level {
 	private int currentLevel;
 	private int currentStage;
 
-	public Level(){
+	public Level() {
 		numOfLevels = 2;
 		numOfStages = 5;
 		currentLevel = 0;
@@ -21,26 +19,26 @@ public class Level {
 	}
 
 	private void init() {
-		levels = new int[][][] {
-			{{1,10},{2,10},{3,10},{4,10},{5,1}},    //level 1
-			{{1,10},{2,10},{3,10},{4,10},{5,1}}     //level 2
+		levels = new int[][][]{
+				{{1, 10}, {2, 10}, {3, 10}, {4, 10}, {5, 1}},    //level 1
+				{{1, 10}, {2, 10}, {3, 10}, {4, 10}, {5, 1}}     //level 2
 		};
 		//first is the number of levels, containing subarrays of stages.
 		//each subarray contains a 2-length array which is in format of{ID, Amount}
 	}
 
 	public int[] getNextStage() {
-		if (currentStage >= numOfStages){
+		if (currentStage >= numOfStages) {
 			currentStage = 0;
 			currentLevel++;
 		}
-		if (currentLevel>=numOfLevels){
+		if (currentLevel >= numOfLevels) {
 			//GameStateManager.WON; //TODO
 
-			return new int[] {0};
+			return new int[]{0};
 		}
 		currentStage++;
-		return levels[currentLevel][currentStage-1];
+		return levels[currentLevel][currentStage - 1];
 	}
 }
 

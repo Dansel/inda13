@@ -8,88 +8,93 @@ import com.me.Javaga.gamestate.*;
  * Created by Dansel on 2014-04-30.
  */
 public class GameStateManager {
-    private GameState currentGameState;
+	public static final int MENU = 0;
+	public static final int PLAY = 1;
+	public static final int PAUSE = 2;
+	public static final int WELCOME = 3;
+	private static float musicVolume;
+	private static float effectVolume;
+	private GameState currentGameState;
+	private MenuState menu;
+	private PlayState play;
+	private PauseState pause;
+	private WelcomeState welcome;
 
-    private MenuState menu;
-    private PlayState play;
-    private PauseState pause;
-    private WelcomeState welcome;
+	public GameStateManager() {
 
-    private static float musicVolume;
-    private static float effectVolume;
+		menu = new MenuState(this);
+		play = new PlayState(this);
+		pause = new PauseState(this);
+		welcome = new WelcomeState(this);
 
-    public static final int MENU = 0;
-    public static final int PLAY = 1;
-    public static final int PAUSE = 2;
-    public static final int WELCOME = 3;
+		setMusicVolume(1f);
+		setEffectVolume(0.5f);
+		setState(WELCOME, false);
+		MusicManager.startNewSong(MusicManager.WELCOMESONG);
+	}
 
-    public GameStateManager() {
+	public static float getMusicVolume() {
+		return musicVolume;
+	}
 
-        menu = new MenuState(this);
-        play = new PlayState(this);
-        pause = new PauseState(this);
-        welcome = new WelcomeState(this);
+	public static void setMusicVolume(float volume) {
+		musicVolume = volume;
+	}
 
-        setMusicVolume(1f);
-        setEffectVolume(0.5f);
-        setState(WELCOME, false);
-        MusicManager.startNewSong(MusicManager.WELCOMESONG);
-    }
+	public static float getEffectVolume() {
+		return effectVolume;
+	}
+
+	public static void setEffectVolume(float volume) {
+		effectVolume = volume;
+	}
 
 	/**
 	 * Sets the gamestate.
+	 *
 	 * @param state int number correlating a specific state. 0 = menu, 1= play, 2=pause, 3 = welcome screen
 	 */
-    public void setState(int state, boolean reset){
-        if (state == MENU) {
-            if(reset) {menu = new MenuState(this);}
-            currentGameState = menu;
-        }
-        if(state == PLAY) {
-            if(reset) {play = new PlayState(this);}
-            currentGameState = play;
-        }
-        if (state == PAUSE) {
-            if(reset) {pause = new PauseState(this);}
-            currentGameState = pause;
-        }
-        if (state == WELCOME) {
-            if(reset) {welcome = new WelcomeState(this);}
-            currentGameState = welcome;
-        }
+	public void setState(int state, boolean reset) {
+		if (state == MENU) {
+			if (reset) {
+				menu = new MenuState(this);
+			}
+			currentGameState = menu;
+		}
+		if (state == PLAY) {
+			if (reset) {
+				play = new PlayState(this);
+			}
+			currentGameState = play;
+		}
+		if (state == PAUSE) {
+			if (reset) {
+				pause = new PauseState(this);
+			}
+			currentGameState = pause;
+		}
+		if (state == WELCOME) {
+			if (reset) {
+				welcome = new WelcomeState(this);
+			}
+			currentGameState = welcome;
+		}
 
-    }
+	}
 
 	/**
 	 * Updates the game.
 	 */
-    public void update() {
-        currentGameState.update();
-    }
-
+	public void update() {
+		currentGameState.update();
+	}
 
 	/**
 	 * Draws the entire canvas.
+	 *
 	 * @param batch SpriteBatch containing a collection of sprites.
 	 */
-    public void draw(SpriteBatch batch) {
-        currentGameState.draw(batch);
-    }
-
-
-    public static void setMusicVolume(float volume) {
-        musicVolume = volume;
-    }
-
-    public static void setEffectVolume(float volume) {
-        effectVolume = volume;
-    }
-
-    public static float getMusicVolume() {
-        return musicVolume;
-    }
-
-    public static float getEffectVolume() {
-        return effectVolume;
-    }
+	public void draw(SpriteBatch batch) {
+		currentGameState.draw(batch);
+	}
 }

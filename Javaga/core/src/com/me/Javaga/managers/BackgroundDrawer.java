@@ -10,30 +10,30 @@ import java.util.Iterator;
  * Created by Lukas on 2014-05-06.
  */
 public class BackgroundDrawer {
-    private static ArrayList<Star> stars;
-    private static long time; // Keep track of the star animation time
+	private static ArrayList<Star> stars;
+	private static long time; // Keep track of the star animation time
 
-    static {
-        stars = new ArrayList<Star>();
-        time = 0;
-    }
+	static {
+		stars = new ArrayList<Star>();
+		time = 0;
+	}
 
-    	public static void update() {
-		if(System.currentTimeMillis() - time > 200) {
+	public static void update() {
+		if (System.currentTimeMillis() - time > 200) {
 			time = System.currentTimeMillis();
 			stars.add(new Star());
 		}
 
 		Iterator<Star> iterator = stars.iterator();
-		while(iterator.hasNext()) {
+		while (iterator.hasNext()) {
 			Star star = iterator.next();
-			if(!star.checkHealthy()) {
+			if (!star.checkHealthy()) {
 				iterator.remove();
 			}
 		}
 
 		iterator = stars.iterator();
-		while(iterator.hasNext()) {
+		while (iterator.hasNext()) {
 			Star star = iterator.next();
 			star.update();
 		}
@@ -42,7 +42,7 @@ public class BackgroundDrawer {
 	public static void draw(SpriteBatch batch) {
 		//draw stars
 		Iterator<Star> iterator = stars.iterator();
-		while(iterator.hasNext()) {
+		while (iterator.hasNext()) {
 			Star star = iterator.next();
 			star.draw(batch);
 		}

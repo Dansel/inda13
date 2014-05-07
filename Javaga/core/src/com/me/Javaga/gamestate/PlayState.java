@@ -22,75 +22,95 @@ public class PlayState extends GameState {
 	private Player player;
 	private ArrayList<Bullet> bullets;
 	private ArrayList<Enemy> enemies;
-    private ArrayList<Star> stars;
+	private ArrayList<Star> stars;
 	private Level levels;
-    private long time;
+	private long time;
 
 	public PlayState(GameStateManager gameStateManager) {
 		super(gameStateManager);
 		init();
 	}
 
-    @Override
-    public void init() {
-	    bullets = new ArrayList<Bullet>();
-	    enemies = new ArrayList<Enemy>();
-	    levels = new Level();
-	    player = new Player(Gdx.graphics.getWidth() / 2, 30, bullets);
-        stars = new ArrayList<Star>();
-        time = System.currentTimeMillis();
+	@Override
+	public void init() {
+		bullets = new ArrayList<Bullet>();
+		enemies = new ArrayList<Enemy>();
+		levels = new Level();
+		player = new Player(Gdx.graphics.getWidth() / 2, 30, bullets);
+		stars = new ArrayList<Star>();
+		time = System.currentTimeMillis();
 
-    }
+		spawnEnemies(); //TEMPORARY! FIX-ME! TODO!
+
+
+	}
 
 	@Override
 	public void update() {
-        handleInput();
-		chechHealth();
+		handleInput();
+		checkHealth();
 		player.update();
-        BackgroundDrawer.update();
+		BackgroundDrawer.update();
 
-		for(Bullet bullet: bullets) {
+		for (Enemy enemy : enemies) {
+			enemy.update();
+		}
+
+		for (Bullet bullet : bullets) {
 			bullet.update();
 		}
 	}
 
-	private void chechHealth() {
-		if(!player.checkHealthy()) {
+	private void checkHealth() {
+		if (!player.checkHealthy()) {
 
 		}
-		Iterator<Bullet> iterator = bullets.iterator();
-		while(iterator.hasNext()) {
-			Bullet bullet = iterator.next();
-			if(!bullet.checkHealthy()) {
-				iterator.remove();
+		Iterator<Bullet> bulletIterator = bullets.iterator();
+		Iterator<Enemy> enemyIterator = enemies.iterator();
+
+		while (bulletIterator.hasNext()) {
+			Bullet bullet = bulletIterator.next();
+			if (!bullet.checkHealthy()) {
+				bulletIterator.remove();
+			}
+		}
+
+		while (enemyIterator.hasNext()) {
+			Enemy enemy = enemyIterator.next();
+			if (!enemy.checkForCollision(bullets)) {
+				bulletIterator.remove();
 			}
 		}
 	}
 
-    @Override
-    public void draw(SpriteBatch batch) {
-        BackgroundDrawer.draw(batch);
-	    player.draw(batch);
-	    for(Bullet bullet: bullets) {
-		    bullet.draw(batch);
-	    }
-    }
+	@Override
+	public void draw(SpriteBatch batch) {
+		BackgroundDrawer.draw(batch);
+		player.draw(batch);
+		for (Bullet bullet : bullets) {
+			bullet.draw(batch);
+		}
+		for (Enemy enemy : enemies) {
+			enemy.draw(batch);
+		}
+	}
 
-    @Override
-    public void handleInput() {
-        if(GameKeys.isPressed(GameKeys.ESCAPE)) {
-            MusicManager.pause();
-           gameStateManager.setState(GameStateManager.PAUSE, true);
-        }
-    }
+	@Override
+	public void handleInput() {
+		if (GameKeys.isPressed(GameKeys.ESCAPE)) {
+			MusicManager.pause();
+			gameStateManager.setState(GameStateManager.PAUSE, true);
+		}
+	}
 
-    @Override
-    public void dispose() {
-    }
+	@Override
+	public void dispose() {
+	}
 
-    /**
-     * Spawn enemies onto the level
-     */
-	public void spawnEnemies(){
+	/**
+	 * Spawn enemies onto the level
+	 */
+	public void spawnEnemies() {
+		enemies.add(new Enemy(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() * 0.8f, 1));
 	}
 }
