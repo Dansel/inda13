@@ -16,6 +16,7 @@ public class Star extends SpaceObject {
     private final static String FILENAME = "star.png";
     private Random random;
 
+
     public Star() {
         super(0, 0);
         init();

@@ -15,6 +15,9 @@ public class GameStateManager {
     private PauseState pause;
     private WelcomeState welcome;
 
+    private static float musicVolume;
+    private static float effectVolume;
+
     public static final int MENU = 0;
     public static final int PLAY = 1;
     public static final int PAUSE = 2;
@@ -27,6 +30,8 @@ public class GameStateManager {
         pause = new PauseState(this);
         welcome = new WelcomeState(this);
 
+        setMusicVolume(1f);
+        setEffectVolume(0.5f);
         setState(WELCOME, false);
         MusicManager.startNewSong(MusicManager.WELCOMESONG);
     }
@@ -69,5 +74,22 @@ public class GameStateManager {
 	 */
     public void draw(SpriteBatch batch) {
         currentGameState.draw(batch);
+    }
+
+
+    public static void setMusicVolume(float volume) {
+        musicVolume = volume;
+    }
+
+    public static void setEffectVolume(float volume) {
+        effectVolume = volume;
+    }
+
+    public static float getMusicVolume() {
+        return musicVolume;
+    }
+
+    public static float getEffectVolume() {
+        return effectVolume;
     }
 }
