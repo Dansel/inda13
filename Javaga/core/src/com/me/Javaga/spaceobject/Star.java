@@ -17,6 +17,7 @@ public class Star extends SpaceObject {
     private float dY;
     private Random random;
 
+
     public Star() {
         super(0, 0);
         init();
