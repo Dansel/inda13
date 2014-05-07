@@ -26,11 +26,8 @@ public class Star extends SpaceObject {
 		xPos = random.nextFloat() * Gdx.graphics.getWidth();
 		yPos = Gdx.graphics.getHeight();
 
+        setScale(0.2f);
 		spriteSetUp(FILENAME);
-
-		//Set scalefactor
-		setScale(0.2f);
-
 		dY = -random.nextFloat() * 30 + 10;
 	}
 

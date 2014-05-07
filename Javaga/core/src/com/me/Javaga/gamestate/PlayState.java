@@ -2,6 +2,7 @@ package com.me.Javaga.gamestate;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.me.Javaga.gamestate.levels.Level;
 import com.me.Javaga.managers.BackgroundDrawer;
 import com.me.Javaga.managers.GameKeys;
@@ -22,9 +23,7 @@ public class PlayState extends GameState {
 	private Player player;
 	private ArrayList<Bullet> bullets;
 	private ArrayList<Enemy> enemies;
-	private ArrayList<Star> stars;
 	private Level levels;
-	private long time;
 
 	public PlayState(GameStateManager gameStateManager) {
 		super(gameStateManager);
@@ -37,12 +36,7 @@ public class PlayState extends GameState {
 		enemies = new ArrayList<Enemy>();
 		levels = new Level();
 		player = new Player(Gdx.graphics.getWidth() / 2, 30, bullets);
-		stars = new ArrayList<Star>();
-		time = System.currentTimeMillis();
-
 		spawnEnemies(); //TEMPORARY! FIX-ME! TODO!
-
-
 	}
 
 	@Override

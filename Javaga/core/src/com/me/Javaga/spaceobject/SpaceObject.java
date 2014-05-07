@@ -64,7 +64,6 @@ public abstract class SpaceObject {
 
 	public void setScale(float scaleFactor) {
 		SCALEFACTOR = scaleFactor;
-		sprite.setScale(SCALEFACTOR);
 	}
 
 	/**
@@ -108,6 +107,7 @@ public abstract class SpaceObject {
 		sprite.setX(xPos);
 		sprite.setY(yPos);
 
+        sprite.setScale(SCALEFACTOR);
 		sWidth = sprite.getWidth() * SCALEFACTOR;
 		sHeight = sprite.getHeight() * SCALEFACTOR;
 

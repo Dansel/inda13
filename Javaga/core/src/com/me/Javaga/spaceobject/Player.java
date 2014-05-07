@@ -3,6 +3,8 @@ package com.me.Javaga.spaceobject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector;
 import com.me.Javaga.managers.GameKeys;
 import com.me.Javaga.managers.GameStateManager;
 
@@ -34,12 +36,12 @@ public class Player extends SpaceObject {
 
 	@Override
 	public void init() {
+        //Set scalefactor
+        setScale(0.4f);
 		spriteSetUp(FILENAME);
 
 		//Create the sprite with some texture
 		sound = Gdx.audio.newSound(Gdx.files.internal("lazer.mp3"));
-		//Set scalefactor
-		setScale(0.4f);
 	}
 
 	/**
@@ -48,16 +50,16 @@ public class Player extends SpaceObject {
 	@Override
 	public void update() {
 		if (GameKeys.isDown(GameKeys.UP)) {
-			yPos += 10;
+			yPos += 5;
 		}
 		if (GameKeys.isDown(GameKeys.DOWN)) {
-			yPos -= 10;
+			yPos -= 5;
 		}
 		if (GameKeys.isDown(GameKeys.LEFT)) {
-			xPos -= 10;
+			xPos -= 5;
 		}
 		if (GameKeys.isDown(GameKeys.RIGHT)) {
-			xPos += 10;
+			xPos += 5;
 		}
 
 		if (GameKeys.isPressed(GameKeys.SPACE)) {

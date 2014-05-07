@@ -22,8 +22,8 @@ public class Enemy extends SpaceObject {
 
 	@Override
 	public void init() {
+        setScale(1);
 		spriteSetUp(FILENAME);
-		setScale(1);
 		dX = 4;
 	}
 
@@ -31,8 +31,9 @@ public class Enemy extends SpaceObject {
 	public void update() {
 		xPos += dX;
 		sprite.setX(xPos);
+        xCenter = xPos + sprite.getWidth() / 2;
 		wrap();
-		hitbox.setCenter(xCenter, yCenter);
+        hitbox.setCenter(xCenter, yCenter);
 	}
 
 	@Override
