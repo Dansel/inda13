@@ -34,10 +34,10 @@ public class PauseState extends GameState {
 
         quitButton = new Button(Gdx.graphics.getWidth()/2,
                 Gdx.graphics.getHeight()/2 - 200, gameStateManager) {
-
             @Override
             public void preformAction() {
                 gameStateManager.setState(GameStateManager.WELCOME, true);
+                MusicManager.startNewSong(MusicManager.WELCOMESONG);
             }
         };
 

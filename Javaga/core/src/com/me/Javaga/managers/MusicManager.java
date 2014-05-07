@@ -10,9 +10,13 @@ public class MusicManager {
 
     private static Music musicPlayer;
     public static final String PLAYSONG = "Test.mp3";
+    public static final String WELCOMESONG = "Test2.mp3";
 
     public static void startNewSong(String filename) {
-        musicPlayer = musicPlayer = Gdx.audio.newMusic(Gdx.files.internal(PLAYSONG));
+        if(musicPlayer != null) {
+            musicPlayer.dispose();
+        }
+        musicPlayer = Gdx.audio.newMusic(Gdx.files.internal(filename));
         musicPlayer.play();
         musicPlayer.setLooping(true);
     }

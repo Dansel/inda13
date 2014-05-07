@@ -28,7 +28,7 @@ public class GameStateManager {
         welcome = new WelcomeState(this);
 
         setState(WELCOME, false);
-        MusicManager.startNewSong(MusicManager.PLAYSONG);
+        MusicManager.startNewSong(MusicManager.WELCOMESONG);
     }
 
 	/**

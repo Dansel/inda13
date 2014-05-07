@@ -62,7 +62,7 @@ public class ButtonContainer {
                 currentButton = buttons.get(currentButtonIndex);
                 currentButton.setSelected(true);
             } else {
-                currentButtonIndex = 0;
+                currentButtonIndex = buttons.size() - 1;
                 currentButton = buttons.get(currentButtonIndex);
                 currentButton.setSelected(true);
             }

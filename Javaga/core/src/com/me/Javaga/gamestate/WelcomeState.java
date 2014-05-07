@@ -29,7 +29,7 @@ public class WelcomeState extends GameState {
             @Override
             public void preformAction() {
                 gameStateManager.setState(GameStateManager.PLAY, true);
-                MusicManager.play();
+                MusicManager.startNewSong(MusicManager.PLAYSONG);
             }
         };
         startGame.setSprite("start_game.png");
