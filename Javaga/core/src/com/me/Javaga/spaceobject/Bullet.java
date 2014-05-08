@@ -29,7 +29,7 @@ public class Bullet extends SpaceObject {
 
 	@Override
 	public void init() {
-        setScale(0.1f);
+		setScale(0.1f);
 		spriteSetUp(FILENAME);
 	}
 

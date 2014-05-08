@@ -16,11 +16,11 @@ import java.util.ArrayList;
 public class Player extends SpaceObject {
 
 	private static final String FILENAME = "snilsson.png";
+	private static long time;
 	//private float rotation;
 	//private float scale;
 	private ArrayList<Bullet> bullets;
 	private Sound sound;
-	private static long time;
 
 
 	//Call the super-class's constructor
@@ -34,8 +34,8 @@ public class Player extends SpaceObject {
 
 	@Override
 	public void init() {
-        //Set scalefactor
-        setScale(0.4f);
+		//Set scalefactor
+		setScale(0.4f);
 		spriteSetUp(FILENAME);
 
 		//Create the sprite with some texture
@@ -95,13 +95,14 @@ public class Player extends SpaceObject {
 	@Override
 	public boolean checkForCollision(ArrayList<Bullet> enemyBullets) {
 		for (Bullet bullet : enemyBullets) {
-			if (overlap(bullet)){
+			if (overlap(bullet)) {
 				System.out.println("COLLISION!");
 				return true;
 			}
 		}
 		return false;
 	}
+
 	/**
 	 * Makes sure the players sprite may not move outside the window.
 	 */
@@ -134,12 +135,12 @@ public class Player extends SpaceObject {
 		bullets.add(new Bullet(xCenter, yCenter, 90));
 	}
 
-    public float getX() {
-	    return xCenter;
-    }
+	public float getX() {
+		return xCenter;
+	}
 
-    public float getY() {
-	    return yCenter;
-    }
+	public float getY() {
+		return yCenter;
+	}
 }
 

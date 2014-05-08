@@ -107,7 +107,7 @@ public abstract class SpaceObject {
 		sprite.setX(xPos);
 		sprite.setY(yPos);
 
-        sprite.setScale(SCALEFACTOR);
+		sprite.setScale(SCALEFACTOR);
 		sWidth = sprite.getWidth() * SCALEFACTOR;
 		sHeight = sprite.getHeight() * SCALEFACTOR;
 

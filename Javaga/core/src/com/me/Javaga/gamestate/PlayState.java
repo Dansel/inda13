@@ -1,7 +1,6 @@
 package com.me.Javaga.gamestate;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.gamestate.levels.Level;
 import com.me.Javaga.managers.BackgroundDrawer;
@@ -90,9 +89,12 @@ public class PlayState extends GameState {
 				spawEnemy = true;
 			}
 		}
-		if(spawEnemy) {spawnEnemies();};
+		if (spawEnemy) {
+			spawnEnemies();
+		}
+		;
 
-		if(player.checkForCollision(enemyBullets)) {
+		if (player.checkForCollision(enemyBullets)) {
 			gameStateManager.setState(GameStateManager.WELCOME, true);
 			MusicManager.startNewSong(MusicManager.WELCOMESONG);
 		}
