@@ -130,4 +130,13 @@ public class Player extends SpaceObject {
 		sound.play(GameStateManager.getEffectVolume()); // play lazer
 		bullets.add(new Bullet(xCenter, yCenter, 90));
 	}
+
+    public float getX() {
+	    return xCenter;
+    }
+
+    public float getY() {
+	    return yCenter;
+    }
 }
+

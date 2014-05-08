@@ -2,7 +2,6 @@ package com.me.Javaga.gamestate;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.me.Javaga.gamestate.levels.Level;
 import com.me.Javaga.managers.BackgroundDrawer;
 import com.me.Javaga.managers.GameKeys;
@@ -11,7 +10,6 @@ import com.me.Javaga.managers.MusicManager;
 import com.me.Javaga.spaceobject.Bullet;
 import com.me.Javaga.spaceobject.Enemy;
 import com.me.Javaga.spaceobject.Player;
-import com.me.Javaga.spaceobject.Star;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,6 +20,7 @@ import java.util.Iterator;
 public class PlayState extends GameState {
 	private Player player;
 	private ArrayList<Bullet> bullets;
+	private ArrayList<Bullet> enemyBullets;
 	private ArrayList<Enemy> enemies;
 	private Level levels;
 
@@ -33,6 +32,7 @@ public class PlayState extends GameState {
 	@Override
 	public void init() {
 		bullets = new ArrayList<Bullet>();
+		enemyBullets = new ArrayList<Bullet>();
 		enemies = new ArrayList<Enemy>();
 		levels = new Level();
 		player = new Player(Gdx.graphics.getWidth() / 2, 30, bullets);
@@ -53,6 +53,10 @@ public class PlayState extends GameState {
 		for (Bullet bullet : bullets) {
 			bullet.update();
 		}
+
+		for (Bullet bullet : enemyBullets) {
+			bullet.update();
+		}
 	}
 
 	private void checkHealth() {
@@ -60,12 +64,20 @@ public class PlayState extends GameState {
 
 		}
 		Iterator<Bullet> bulletIterator = bullets.iterator();
+		Iterator<Bullet> enemyBulletIterator = enemyBullets.iterator();
 		Iterator<Enemy> enemyIterator = enemies.iterator();
 
 		while (bulletIterator.hasNext()) {
 			Bullet bullet = bulletIterator.next();
 			if (!bullet.checkHealthy()) {
 				bulletIterator.remove();
+			}
+		}
+
+		while (enemyBulletIterator.hasNext()) {
+			Bullet bullet = enemyBulletIterator.next();
+			if (!bullet.checkHealthy()) {
+				enemyBulletIterator.remove();
 			}
 		}
 
@@ -79,11 +91,17 @@ public class PlayState extends GameState {
 
 	@Override
 	public void draw(SpriteBatch batch) {
-		BackgroundDrawer.draw(batch);
-		player.draw(batch);
+		BackgroundDrawer.draw(batch); //draw background
+		player.draw(batch); // draw player
+		// draw player bullets
 		for (Bullet bullet : bullets) {
 			bullet.draw(batch);
 		}
+		//draw enemy bullets
+		for (Bullet bullet : enemyBullets) {
+			bullet.draw(batch);
+		}
+		//draw enemies
 		for (Enemy enemy : enemies) {
 			enemy.draw(batch);
 		}
@@ -105,6 +123,8 @@ public class PlayState extends GameState {
 	 * Spawn enemies onto the level
 	 */
 	public void spawnEnemies() {
-		enemies.add(new Enemy(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() * 0.8f, 1));
+		enemies.add(new Enemy(Gdx.graphics.getWidth() / 2,
+				Gdx.graphics.getHeight() * 0.8f, 1,
+				this.enemyBullets, this.player));
 	}
 }

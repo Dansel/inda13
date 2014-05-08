@@ -1,7 +1,9 @@
 package com.me.Javaga.spaceobject;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.me.Javaga.managers.GameStateManager;
 
 import java.util.ArrayList;
 
@@ -11,12 +13,20 @@ import java.util.ArrayList;
  */
 public class Enemy extends SpaceObject {
 	private static String FILENAME;
+    private ArrayList<Bullet> enemyBullets;
+	private Sound sound;
+    private Player player;
+	private long time;
 
-	public Enemy(float xPos, float yPos, int type) {
+	public Enemy(float xPos, float yPos, int type,
+                 ArrayList<Bullet> enemyBullets, Player player) {
 		super(xPos, yPos);
 		HEIGHT = Gdx.graphics.getHeight();
 		WIDTH = Gdx.graphics.getWidth();
 		FILENAME = "sprite" + type + ".png";
+        this.enemyBullets = enemyBullets;
+        this.player = player;
+		this. time = System.currentTimeMillis();
 		init();
 	}
 
@@ -25,6 +35,7 @@ public class Enemy extends SpaceObject {
         setScale(1);
 		spriteSetUp(FILENAME);
 		dX = 4;
+		sound = Gdx.audio.newSound(Gdx.files.internal("lazer.mp3"));
 	}
 
 	@Override
@@ -34,6 +45,10 @@ public class Enemy extends SpaceObject {
         xCenter = xPos + sprite.getWidth() / 2;
 		wrap();
         hitbox.setCenter(xCenter, yCenter);
+		if(System.currentTimeMillis() - time > 100) {
+			fire();
+			time = System.currentTimeMillis();
+		}
 	}
 
 	@Override
@@ -63,4 +78,14 @@ public class Enemy extends SpaceObject {
 		}
 		return false;
 	}
+
+    public void fire() {
+	    float dX = xCenter - player.getX();
+	    float dY = yCenter - player.getY();
+
+	    double radian = Math.atan(dX/dY);
+	    float degree =(float) (270 - Math.toDegrees(radian));
+	    sound.play(GameStateManager.getEffectVolume()); // play lazer
+	    enemyBullets.add(new Bullet(xCenter, yCenter - sHeight/2, degree));
+    }
 }
