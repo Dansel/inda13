@@ -45,7 +45,7 @@ public class Enemy extends SpaceObject {
         xCenter = xPos + sprite.getWidth() / 2;
 		wrap();
         hitbox.setCenter(xCenter, yCenter);
-		if(System.currentTimeMillis() - time > 100) {
+		if(System.currentTimeMillis() - time > 1000) {
 			fire();
 			time = System.currentTimeMillis();
 		}
@@ -83,9 +83,11 @@ public class Enemy extends SpaceObject {
 	    float dX = xCenter - player.getX();
 	    float dY = yCenter - player.getY();
 
-	    double radian = Math.atan(dX/dY);
-	    float degree =(float) (270 - Math.toDegrees(radian));
-	    sound.play(GameStateManager.getEffectVolume()); // play lazer
-	    enemyBullets.add(new Bullet(xCenter, yCenter - sHeight/2, degree));
+	    if(yCenter - player.getY() >= 0) {
+		    double radian = Math.atan(dX / dY);
+		    float degree = (float) (270 - Math.toDegrees(radian));
+		    sound.play(GameStateManager.getEffectVolume()); // play lazer
+		    enemyBullets.add(new Bullet(xCenter, yCenter - sHeight / 2, degree));
+	    }
     }
 }

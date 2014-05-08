@@ -93,10 +93,15 @@ public class Player extends SpaceObject {
 	}
 
 	@Override
-	public boolean checkForCollision(ArrayList<Bullet> bullets) {
+	public boolean checkForCollision(ArrayList<Bullet> enemyBullets) {
+		for (Bullet bullet : enemyBullets) {
+			if (overlap(bullet)){
+				System.out.println("COLLISION!");
+				return true;
+			}
+		}
 		return false;
 	}
-
 	/**
 	 * Makes sure the players sprite may not move outside the window.
 	 */
