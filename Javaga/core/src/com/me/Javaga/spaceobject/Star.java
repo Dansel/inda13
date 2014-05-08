@@ -11,7 +11,7 @@ import java.util.Random;
  */
 public class Star extends SpaceObject {
 
-	private final static String FILENAME = "star.png";
+	private final static String FILENAME = "snilsson.png";
 	private Random random;
 
 
@@ -26,7 +26,7 @@ public class Star extends SpaceObject {
 		xPos = random.nextFloat() * Gdx.graphics.getWidth();
 		yPos = Gdx.graphics.getHeight();
 
-		setScale(0.2f);
+		setScale(0.015f);
 		spriteSetUp(FILENAME);
 		dY = -random.nextFloat() * 30 + 10;
 	}
