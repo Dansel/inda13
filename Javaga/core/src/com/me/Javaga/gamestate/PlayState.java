@@ -132,6 +132,31 @@ public class PlayState extends GameState {
 
 	@Override
 	public void dispose() {
+
+		player.dispose();
+		player = null;
+
+		Iterator<Bullet> bulletIterator = bullets.iterator();
+		Iterator<Bullet> enemyBulletIterator = enemyBullets.iterator();
+		Iterator<Enemy> enemyIterator = enemies.iterator();
+
+		while (bulletIterator.hasNext()) {
+			Bullet bullet = bulletIterator.next();
+				bullet.dispose();
+				bulletIterator.remove();
+		}
+
+		while (enemyBulletIterator.hasNext()) {
+			Bullet bullet = enemyBulletIterator.next();
+				bullet.dispose();
+				enemyBulletIterator.remove();
+		}
+
+		while (enemyIterator.hasNext()) {
+			Enemy enemy = enemyIterator.next();
+				enemy.dispose();
+				enemyIterator.remove();
+		}
 	}
 
 	/**

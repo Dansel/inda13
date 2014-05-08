@@ -11,9 +11,6 @@ public class WelcomeState extends GameState {
 
 	private static final String START = "start_game.png";
 	private ButtonContainer menuContainer;
-	private Button startGame;
-	private Button settings;
-	//private static final String SETTING = "";
 
 	public WelcomeState(GameStateManager gameStateManager) {
 		super(gameStateManager);
@@ -24,7 +21,7 @@ public class WelcomeState extends GameState {
 	public void init() {
 		menuContainer = new ButtonContainer();
 
-		startGame = new Button(Gdx.graphics.getWidth() / 2,
+		Button startGame = new Button(Gdx.graphics.getWidth() / 2,
 				Gdx.graphics.getHeight() / 2, gameStateManager) {
 			@Override
 			public void preformAction() {
@@ -55,6 +52,6 @@ public class WelcomeState extends GameState {
 
 	@Override
 	public void dispose() {
-
+		menuContainer.dispose();
 	}
 }

@@ -11,8 +11,6 @@ public class PauseState extends GameState {
 
 	private static final String PAUSE = "resume.png";
 	private static final String QUIT = "quit.png";
-	private Button pauseButton;
-	private Button quitButton;
 	private ButtonContainer currentMenu;
 
 	public PauseState(GameStateManager gameStateManager) {
@@ -24,7 +22,7 @@ public class PauseState extends GameState {
 	public void init() {
 
 		//Create a new button and override the necisary methods
-		pauseButton = new Button(Gdx.graphics.getWidth() / 2,
+		Button pauseButton = new Button(Gdx.graphics.getWidth() / 2,
 				Gdx.graphics.getHeight() / 2, gameStateManager) {
 			@Override
 			public void preformAction() {
@@ -33,7 +31,7 @@ public class PauseState extends GameState {
 			}
 		};
 
-		quitButton = new Button(Gdx.graphics.getWidth() / 2,
+		Button quitButton = new Button(Gdx.graphics.getWidth() / 2,
 				Gdx.graphics.getHeight() / 2 - 200, gameStateManager) {
 			@Override
 			public void preformAction() {
@@ -74,6 +72,6 @@ public class PauseState extends GameState {
 
 	@Override
 	public void dispose() {
-
+		currentMenu.dispose();
 	}
 }

@@ -123,7 +123,6 @@ public abstract class SpaceObject {
 	}
 
 	public void dispose() {
-		Texture tex = sprite.getTexture();
-		tex.dispose();
+		sprite.getTexture().dispose();
 	}
 }

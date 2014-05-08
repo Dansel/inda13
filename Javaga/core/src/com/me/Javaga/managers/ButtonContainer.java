@@ -81,4 +81,14 @@ public class ButtonContainer {
 		}
 	}
 
+	public void dispose() {
+		Iterator<Button> buttonIterator = buttons.iterator();
+		while(buttonIterator.hasNext()) {
+			Button button = buttonIterator.next();
+			button.dispose();
+			buttonIterator.remove();
+		}
+
+	}
+
 }

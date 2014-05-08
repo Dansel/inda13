@@ -57,24 +57,28 @@ public class GameStateManager {
 	public void setState(int state, boolean reset) {
 		if (state == MENU) {
 			if (reset) {
+				menu.dispose();
 				menu = new MenuState(this);
 			}
 			currentGameState = menu;
 		}
 		if (state == PLAY) {
 			if (reset) {
+				play.dispose();
 				play = new PlayState(this);
 			}
 			currentGameState = play;
 		}
 		if (state == PAUSE) {
 			if (reset) {
+				pause.dispose();
 				pause = new PauseState(this);
 			}
 			currentGameState = pause;
 		}
 		if (state == WELCOME) {
 			if (reset) {
+				welcome.dispose();
 				welcome = new WelcomeState(this);
 			}
 			currentGameState = welcome;
