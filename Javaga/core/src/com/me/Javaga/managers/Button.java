@@ -81,10 +81,7 @@ public class Button {
 	 * @return true if the button is hovering over the button
 	 */
 	public boolean isHovering() {
-		if (rectangle.contains((float) GameKeys.xMouse(), (float) GameKeys.yMouse())) {
-			return true;
-		}
-		return false;
+		return rectangle.contains((float) GameKeys.xMouse(), (float) GameKeys.yMouse());
 	}
 
 	public void setSelected(boolean selected) {
