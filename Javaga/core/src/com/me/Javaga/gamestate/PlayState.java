@@ -70,6 +70,7 @@ public class PlayState extends GameState {
 		while (bulletIterator.hasNext()) {
 			Bullet bullet = bulletIterator.next();
 			if (!bullet.checkHealthy()) {
+				bullet.dispose();
 				bulletIterator.remove();
 			}
 		}
@@ -77,27 +78,30 @@ public class PlayState extends GameState {
 		while (enemyBulletIterator.hasNext()) {
 			Bullet bullet = enemyBulletIterator.next();
 			if (!bullet.checkHealthy()) {
+				bullet.dispose();
 				enemyBulletIterator.remove();
 			}
 		}
 
-		boolean spawEnemy = false;
+		boolean spawnEnemy = false;
 		while (enemyIterator.hasNext()) {
 			Enemy enemy = enemyIterator.next();
 			if (enemy.checkForCollision(bullets)) {
+				enemy.dispose();
 				enemyIterator.remove();
-				spawEnemy = true;
+				spawnEnemy = true;
 			}
 		}
-		if (spawEnemy) {
+		if (spawnEnemy) {
 			spawnEnemies();
 		}
 
-
+		/*
 		if (player.checkForCollision(enemyBullets)) {
 			gameStateManager.setState(GameStateManager.WELCOME, true);
 			MusicManager.startNewSong(MusicManager.WELCOMESONG);
 		}
+		*/
 	}
 
 	@Override

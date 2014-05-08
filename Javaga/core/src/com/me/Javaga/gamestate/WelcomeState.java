@@ -39,12 +39,12 @@ public class WelcomeState extends GameState {
 	@Override
 	public void update() {
 		handleInput();
-		//BackgroundDrawer.update();
+		BackgroundDrawer.update();
 	}
 
 	@Override
 	public void draw(SpriteBatch batch) {
-		//BackgroundDrawer.draw(batch);
+		BackgroundDrawer.draw(batch);
 		menuContainer.draw(batch);
 	}
 
