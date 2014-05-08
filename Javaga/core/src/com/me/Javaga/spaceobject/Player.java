@@ -144,5 +144,11 @@ public class Player extends SpaceObject {
 	public float getY() {
 		return yCenter;
 	}
+
+	@Override
+	public void dispose() {
+		super.dispose();
+		sound.dispose();
+	}
 }
 

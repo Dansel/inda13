@@ -117,4 +117,10 @@ public class Enemy extends SpaceObject {
 			time = System.currentTimeMillis();
 		}
 	}
+
+	@Override
+	public void dispose() {
+		super.dispose();
+		sound.dispose();
+	}
 }

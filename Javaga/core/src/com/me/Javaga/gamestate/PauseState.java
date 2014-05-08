@@ -35,6 +35,7 @@ public class PauseState extends GameState {
 				Gdx.graphics.getHeight() / 2 - 200, gameStateManager) {
 			@Override
 			public void preformAction() {
+				gameStateManager.dispose(GameStateManager.PLAY);
 				gameStateManager.setState(GameStateManager.WELCOME, true);
 				MusicManager.startNewSong(MusicManager.WELCOMESONG);
 			}
