@@ -17,6 +17,12 @@ public class Enemy extends SpaceObject {
 	private Sound sound;
 	private Player player;
 	private long time;
+	private float degree;
+	private float speed;
+	private float acceleration;
+	private float shootLimit;
+	private float moveX;
+	private float moveY;
 
 	public Enemy(float xPos, float yPos, int type,
 	             ArrayList<Bullet> enemyBullets, Player player) {
@@ -34,21 +40,34 @@ public class Enemy extends SpaceObject {
 	public void init() {
 		setScale(1);
 		spriteSetUp(FILENAME);
-		dX = 4;
+		dX = 10;
+		dY = 10;
+		degree = 270;
+		speed = 10;
+		acceleration = 3;
+		shootLimit = 1000;
+		moveX = 5;
+		moveY = 5;
 		sound = Gdx.audio.newSound(Gdx.files.internal("lazer.mp3"));
 	}
 
 	@Override
 	public void update() {
-		xPos += dX;
+		dX = (float) Math.cos(Math.toRadians(degree)) * speed;
+		dY = (float) Math.sin(Math.toRadians(degree)) * speed;
+		xPos += dX + moveX;
+		yPos += dY - moveY;
 		sprite.setX(xPos);
+		sprite.setY(yPos);
 		xCenter = xPos + sprite.getWidth() / 2;
+		yCenter = yPos + sprite.getHeight() / 2;
 		wrap();
 		hitbox.setCenter(xCenter, yCenter);
-		if (System.currentTimeMillis() - time > 1000) {
-			fire();
-			time = System.currentTimeMillis();
-		}
+		fire();
+		acceleration += 0.05;
+		speed += 0.05;
+		shootLimit -= 1;
+		degree += acceleration;
 	}
 
 	@Override
@@ -59,7 +78,11 @@ public class Enemy extends SpaceObject {
 	@Override
 	public void wrap() {
 		if (xPos > WIDTH * 0.8f || xPos < WIDTH * 0.2f) {
-			dX = -dX;
+			moveX = -moveX;
+		}
+
+		if (yPos > HEIGHT * 0.8f || yPos < HEIGHT * 0.2f) {
+			moveY = -moveY;
 		}
 	}
 
@@ -80,6 +103,9 @@ public class Enemy extends SpaceObject {
 	}
 
 	public void fire() {
+		if (System.currentTimeMillis() - time < shootLimit) {
+			return;
+		}
 		float dX = xCenter - player.getX();
 		float dY = yCenter - player.getY();
 
@@ -88,6 +114,7 @@ public class Enemy extends SpaceObject {
 			float degree = (float) (270 - Math.toDegrees(radian));
 			sound.play(GameStateManager.getEffectVolume()); // play lazer
 			enemyBullets.add(new Bullet(xCenter, yCenter - sHeight / 2, degree));
+			time = System.currentTimeMillis();
 		}
 	}
 }
