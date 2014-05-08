@@ -142,20 +142,20 @@ public class PlayState extends GameState {
 
 		while (bulletIterator.hasNext()) {
 			Bullet bullet = bulletIterator.next();
-				bullet.dispose();
-				bulletIterator.remove();
+			bullet.dispose();
+			bulletIterator.remove();
 		}
 
 		while (enemyBulletIterator.hasNext()) {
 			Bullet bullet = enemyBulletIterator.next();
-				bullet.dispose();
-				enemyBulletIterator.remove();
+			bullet.dispose();
+			enemyBulletIterator.remove();
 		}
 
 		while (enemyIterator.hasNext()) {
 			Enemy enemy = enemyIterator.next();
-				enemy.dispose();
-				enemyIterator.remove();
+			enemy.dispose();
+			enemyIterator.remove();
 		}
 	}
 

@@ -105,16 +105,16 @@ public class GameStateManager {
 
 	public void dispose(int state) {
 		if (state == MENU) {
-				menu.dispose();
+			menu.dispose();
 		}
 		if (state == PLAY) {
-				play.dispose();
+			play.dispose();
 		}
 		if (state == PAUSE) {
-				pause.dispose();
+			pause.dispose();
 		}
 		if (state == WELCOME) {
-				welcome.dispose();
+			welcome.dispose();
 		}
 	}
 }
