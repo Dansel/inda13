@@ -108,6 +108,7 @@ public class Button {
 
 	public void dispose() {
 		sprite.getTexture().dispose();
+		//test
 	}
 
 }
