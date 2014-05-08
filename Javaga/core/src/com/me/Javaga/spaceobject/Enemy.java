@@ -46,8 +46,8 @@ public class Enemy extends SpaceObject {
 		speed = 10;
 		acceleration = 3;
 		shootLimit = 1000;
-		moveX = 5;
-		moveY = 5;
+		moveX = 20;
+		moveY = 20;
 		sound = Gdx.audio.newSound(Gdx.files.internal("lazer.mp3"));
 	}
 
@@ -66,7 +66,7 @@ public class Enemy extends SpaceObject {
 		fire();
 		acceleration += 0.05;
 		speed += 0.05;
-		shootLimit -= 1;
+		shootLimit = 0;
 		degree += acceleration;
 	}
 

@@ -93,11 +93,12 @@ public class PlayState extends GameState {
 			spawnEnemies();
 		}
 		;
-
+/*
 		if (player.checkForCollision(enemyBullets)) {
 			gameStateManager.setState(GameStateManager.WELCOME, true);
 			MusicManager.startNewSong(MusicManager.WELCOMESONG);
 		}
+		*/
 	}
 
 	@Override
