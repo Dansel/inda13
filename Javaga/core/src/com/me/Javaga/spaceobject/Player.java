@@ -3,8 +3,6 @@ package com.me.Javaga.spaceobject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector;
 import com.me.Javaga.managers.GameKeys;
 import com.me.Javaga.managers.GameStateManager;
 
@@ -62,7 +60,7 @@ public class Player extends SpaceObject {
 			xPos += 5;
 		}
 
-		if (GameKeys.isPressed(GameKeys.SPACE)) {
+		if (GameKeys.isDown(GameKeys.SPACE)) {
 			if (System.currentTimeMillis() - time > 100) {
 				time = System.currentTimeMillis();
 				fire();
