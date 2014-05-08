@@ -121,4 +121,9 @@ public abstract class SpaceObject {
 		hitbox = new Rectangle();
 		hitbox.setHeight(sHeight).setWidth(sWidth).setCenter(xCenter, yCenter);
 	}
+
+	public void dispose() {
+		Texture tex = sprite.getTexture();
+		tex.dispose();
+	}
 }

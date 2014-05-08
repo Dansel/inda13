@@ -52,13 +52,12 @@ public class PauseState extends GameState {
 	@Override
 	public void update() {
 		handleInput();
-		// backgroundDrawer.update();
-		BackgroundDrawer.update();
+		//BackgroundDrawer.update();
 	}
 
 	@Override
 	public void draw(SpriteBatch batch) {
-		BackgroundDrawer.draw(batch);
+		//BackgroundDrawer.draw(batch);
 		currentMenu.draw(batch);
 	}
 
