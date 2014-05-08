@@ -101,4 +101,20 @@ public class GameStateManager {
 	public void draw(SpriteBatch batch) {
 		currentGameState.draw(batch);
 	}
+
+
+	public void dispose(int state) {
+		if (state == MENU) {
+				menu.dispose();
+		}
+		if (state == PLAY) {
+				play.dispose();
+		}
+		if (state == PAUSE) {
+				pause.dispose();
+		}
+		if (state == WELCOME) {
+				welcome.dispose();
+		}
+	}
 }
