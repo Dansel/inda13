@@ -36,11 +36,11 @@ public class PlayState extends GameState {
 		enemies = new ArrayList<Enemy>();
 		levels = new Level();
 		player = new Player(Gdx.graphics.getWidth() / 2, 30, bullets);
-		spawnEnemies(); //TEMPORARY! FIX-ME! TODO!
 	}
 
 	@Override
 	public void update() {
+		spawnEnemies();
 		handleInput();
 		checkHealth();
 		player.update();
@@ -96,12 +96,11 @@ public class PlayState extends GameState {
 			spawnEnemies();
 		}
 
-		/*
 		if (player.checkForCollision(enemyBullets)) {
 			gameStateManager.setState(GameStateManager.WELCOME, true);
 			MusicManager.startNewSong(MusicManager.WELCOMESONG);
 		}
-		*/
+
 	}
 
 	@Override
@@ -163,8 +162,23 @@ public class PlayState extends GameState {
 	 * Spawn enemies onto the level
 	 */
 	public void spawnEnemies() {
-		enemies.add(new Enemy(Gdx.graphics.getWidth() / 2,
-				Gdx.graphics.getHeight() * 0.8f, 1,
-				this.enemyBullets, this.player));
+		if (enemies.isEmpty()) {
+			for (int i = 0; i < 5; i++) {
+				Enemy enemy = new Enemy((Gdx.graphics.getWidth() / 5) * i,
+						Gdx.graphics.getHeight() + 100
+						, 1, this.enemyBullets, this.player);
+				enemy.addNewGoal(Gdx.graphics.getWidth() / 5 * i, Gdx.graphics.getHeight() / 2);
+				enemy.addNewGoal((float) (Gdx.graphics.getWidth() / 5 * (i + 2)),
+						Gdx.graphics.getHeight() / 2);
+				enemy.addNewGoal(Gdx.graphics.getWidth() / 5 * i, Gdx.graphics.getHeight() / 2);
+				enemy.addNewGoal((float) (Gdx.graphics.getWidth() / 5 * (i + 2)),
+						Gdx.graphics.getHeight() / 2);
+				enemy.addNewGoal(Gdx.graphics.getWidth() / 5 * i, Gdx.graphics.getHeight() / 2);
+				enemy.addNewGoal(Gdx.graphics.getWidth() / 5 * i, -100);
+				enemy.setDirection(100, 90);
+				enemy.setSpeed(1.5f);
+				enemies.add(enemy);
+			}
+		}
 	}
 }

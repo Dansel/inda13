@@ -13,13 +13,14 @@ public class Bullet extends SpaceObject {
 
 
 	private static final String FILENAME = "bullet.png";
-	private final static float SPEED = 10;
+	private final float SPEED;
 	private final static float ROTATION = 30;
 	private float degree;
 
-	public Bullet(float xPos, float yPos, float degree) {
+	public Bullet(float xPos, float yPos, float degree, float speed) {
 		super(xPos, yPos);
 		this.degree = degree;
+		this.SPEED = speed;
 		dX = (float) Math.cos(Math.toRadians(degree)) * SPEED;
 		dY = (float) Math.sin(Math.toRadians(degree)) * SPEED;
 		HEIGHT = Gdx.graphics.getHeight();

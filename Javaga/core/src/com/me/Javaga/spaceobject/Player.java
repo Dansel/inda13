@@ -21,6 +21,7 @@ public class Player extends SpaceObject {
 	//private float scale;
 	private ArrayList<Bullet> bullets;
 	private Sound sound;
+	private int shootLimit;
 
 
 
@@ -35,6 +36,7 @@ public class Player extends SpaceObject {
 
 	@Override
 	public void init() {
+		shootLimit = 200;
 		//Set scalefactor
 		setScale(0.4f);
 		spriteSetUp(FILENAME);
@@ -62,7 +64,7 @@ public class Player extends SpaceObject {
 		}
 
 		if (GameKeys.isDown(GameKeys.SPACE)) {
-			if (System.currentTimeMillis() - time > 500) {
+			if (System.currentTimeMillis() - time > shootLimit) {
 				time = System.currentTimeMillis();
 				fire();
 			}
@@ -133,7 +135,7 @@ public class Player extends SpaceObject {
 
 	private void fire() {
 		sound.play(GameStateManager.getEffectVolume()); // play lazer
-		bullets.add(new Bullet(xCenter, yCenter, 90));
+		bullets.add(new Bullet(xCenter, yCenter, 90, 20));
 	}
 
 	public float getX() {

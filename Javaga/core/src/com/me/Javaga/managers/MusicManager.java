@@ -11,6 +11,7 @@ public class MusicManager {
 	public static final String PLAYSONG = "Test.mp3";
 	public static final String WELCOMESONG = "Test2.mp3";
 	private static Music musicPlayer;
+	private static float musicVolume = 0.3f;
 
 	public static void startNewSong(String filename) {
 		if (musicPlayer != null) {
@@ -18,6 +19,7 @@ public class MusicManager {
 		}
 		musicPlayer = Gdx.audio.newMusic(Gdx.files.internal(filename));
 		musicPlayer.play();
+		musicPlayer.setVolume(musicVolume);
 		musicPlayer.setLooping(true);
 	}
 
