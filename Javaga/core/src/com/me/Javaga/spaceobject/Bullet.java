@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Bullet extends SpaceObject {
 
 
-	private static final String FILENAME = "snilsson.png";
+	private static final String FILENAME = "bullet.png";
 	private final static float SPEED = 10;
 	private final static float ROTATION = 30;
 	private float degree;
@@ -29,7 +29,7 @@ public class Bullet extends SpaceObject {
 
 	@Override
 	public void init() {
-		setScale(0.1f);
+		setScale(0.6f);
 		spriteSetUp(FILENAME);
 	}
 

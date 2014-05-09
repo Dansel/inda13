@@ -3,7 +3,6 @@ package com.me.Javaga.spaceobject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector;
 import com.me.Javaga.managers.GameKeys;
 import com.me.Javaga.managers.GameStateManager;
 
@@ -16,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Player extends SpaceObject {
 
-	private static final String FILENAME = "snilsson.png";
+	private static final String FILENAME = "ship.png";
 	private static long time;
 	//private float rotation;
 	//private float scale;
