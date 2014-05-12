@@ -106,6 +106,7 @@ public class PlayState extends GameState {
 			MusicManager.startNewSong(MusicManager.WELCOMESONG);
 		}
 
+
 	}
 
 	@Override

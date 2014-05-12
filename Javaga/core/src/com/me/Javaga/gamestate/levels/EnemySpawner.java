@@ -40,18 +40,11 @@ public class EnemySpawner {
 		float speed;
 		float enemyDifference = Gdx.graphics.getWidth() /
 				stage.getNumberOfEnemies();
-		EnemyMovement movement;
-		if (stage.type() == 1) {
-			System.out.println("Type 1");
-			movement = EnemyMovement.Type1;
-		} else {
-			movement = EnemyMovement.Type2;
-		}
+		EnemyMovement movement = EnemyMovement.getType(stage.type());
 
 		start = movement.getStartCoordinate();
 		goals = movement.getCoordinates();
 		direction = movement.getStartDirection();
-		speed = movement.getSpeed();
 		float x = 0;
 		for (int i = 0, j = 0; i < stage.getNumberOfEnemies(); i++) {
 			float degree;
@@ -69,7 +62,6 @@ public class EnemySpawner {
 					start.y,
 					stage.type(), enemyBullets, player);
 			enemy.setDirection(direction.x, direction.y);
-			enemy.setSpeed(speed);
 
 			for (Vector2 vector : goals) {
 				enemy.addNewGoal(vector.x + x,

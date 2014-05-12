@@ -65,11 +65,11 @@ public class Level {
 						new StageDescription(1, 5, 5)
 				},
 				//level 2
-				{new StageDescription(2, 10, 30),
-						new StageDescription(1, 10, 20),
-						new StageDescription(2, 10, 20),
-						new StageDescription(1, 10, 10),
-						new StageDescription(2, 10, 10)
+				{new StageDescription(3, 10, 30),
+						new StageDescription(3, 10, 20),
+						new StageDescription(3, 10, 20),
+						new StageDescription(3, 10, 10),
+						new StageDescription(3, 10, 10)
 						}
 				};
 

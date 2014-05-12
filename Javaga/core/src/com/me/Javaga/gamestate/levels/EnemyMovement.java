@@ -3,8 +3,6 @@ package com.me.Javaga.gamestate.levels;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
-import java.util.ArrayList;
-
 /**
  * Created by Lukas on 2014-05-12.
  */
@@ -20,8 +18,7 @@ public enum EnemyMovement {
 					new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 - 100),
 					new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 100),
 					new Vector2(Gdx.graphics.getWidth() / 2, -100),
-			},
-			3
+			}
 	),
 	Type2(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 100),
 
@@ -34,21 +31,20 @@ public enum EnemyMovement {
 					new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 - 100),
 					new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 100),
 					new Vector2(Gdx.graphics.getWidth() / 2, -100),
-			},
-			3
+			}
 	);
 
 	private Vector2 startCoordinate;
 	private Vector2 startDirection;
 	private Vector2[] coordinates;
-	private float speed;
+
 
 	private EnemyMovement(Vector2 startCoordinates, Vector2 startDirection,
-	                      Vector2[] cordinates, float speed) {
+	                      Vector2[] cordinates) {
 		this.startCoordinate = startCoordinates;
 		this.startDirection = startDirection;
 		this.coordinates = cordinates;
-		this.speed = speed;
+
 	}
 
 	public Vector2[] getCoordinates() {
@@ -63,7 +59,13 @@ public enum EnemyMovement {
 		return this.startDirection;
 	}
 
-	public float getSpeed() {
-		return this.speed;
+	public static EnemyMovement getType(int type) {
+		if (type == 1) {
+			return Type1;
+		} else if (type == 2) {
+			return Type2;
+		} else {
+			return Type1;
+		}
 	}
 }

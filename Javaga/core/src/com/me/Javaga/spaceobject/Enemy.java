@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.me.Javaga.gamestate.levels.EnemyDescription;
 import com.me.Javaga.managers.GameStateManager;
 
 import java.util.ArrayList;
@@ -15,7 +16,6 @@ import java.util.Random;
  * Created by Dansel on 2014-05-02.
  */
 public class Enemy extends SpaceObject {
-	private static String FILENAME;
 	private ArrayList<Bullet> enemyBullets;
 	ArrayList<Vector2> goals;
 	private Vector2 direction;
@@ -25,17 +25,18 @@ public class Enemy extends SpaceObject {
 	private long time;
 	private float shootLimit;
 	private int goalIndex;
-	private float speed;
 	private Random random;
-	private float accuracy;
 	private boolean outsideBourder;
+	private EnemyDescription description;
 
 	public Enemy(float xPos, float yPos, int type,
 	             ArrayList<Bullet> enemyBullets, Player player) {
 		super(xPos, yPos);
+
 		HEIGHT = Gdx.graphics.getHeight();
 		WIDTH = Gdx.graphics.getWidth();
-		FILENAME = "snilsson.png";
+
+		description = EnemyDescription.getType(type);
 		this.enemyBullets = enemyBullets;
 		this.player = player;
 		this.time = System.currentTimeMillis();
@@ -45,12 +46,10 @@ public class Enemy extends SpaceObject {
 	@Override
 	public void init() {
 		random = new Random();
-		speed = 5f;
-		setScale(0.3f);
-		spriteSetUp(FILENAME);
+		setScale(description.getScale());
+		spriteSetUp(description.getFilename());
 		sound = Gdx.audio.newSound(Gdx.files.internal("lazer.mp3"));
 		shootLimit = 1000;
-		accuracy = 5;
 		goals = new ArrayList<Vector2>();
 		setDirection(20f, 270);
 		wrap();
@@ -106,8 +105,10 @@ public class Enemy extends SpaceObject {
 		while (iterator.hasNext()) {
 			Bullet bullet = iterator.next();
 			if (overlap(bullet)) {
-				bullet.dispose();
-				iterator.remove();
+				if (!bullet.isIndestructable()) {
+					bullet.dispose();
+					iterator.remove();
+				}
 				return true;
 			}
 		}
@@ -128,10 +129,10 @@ public class Enemy extends SpaceObject {
 
 			double radian = Math.atan(dX / dY);
 			float degree = (float) (270 - Math.toDegrees(radian));
-			float miss = (random.nextBoolean()) ? random.nextFloat() * accuracy
-					: random.nextFloat() * -accuracy; // Makes their aim awful,
+			float miss = (random.nextBoolean()) ? random.nextFloat() * description.getAccuracy()
+					: random.nextFloat() * -1 * description.getAccuracy(); // Makes their aim awful,
 			//// probably should do it some other this
-			enemyBullets.add(new Bullet(xCenter, yCenter - sHeight / 2, degree + miss, 5));
+			enemyBullets.add(new Bullet(xCenter, yCenter - sHeight / 2, degree + miss, description.getBulletType()));
 
 			sound.play(GameStateManager.getEffectVolume()); // play lazer
 			time = System.currentTimeMillis(); // reset time
@@ -167,10 +168,6 @@ public class Enemy extends SpaceObject {
 		currentGoal = newGoal;
 	}
 
-	public void setSpeed(float speed) {
-		this.speed = speed;
-	}
-
 	/**
 	 * Update the direction for the enemy object
 	 */
@@ -178,7 +175,7 @@ public class Enemy extends SpaceObject {
 		if (currentGoal != null) {
 			Vector2 newDirection = new Vector2(currentGoal.x - xCenter, currentGoal.y - yCenter);
 			direction.add(newDirection.nor().scl(0.5f));
-			direction.nor().scl(speed);
+			direction.nor().scl(description.getSpeed());
 		} else {
 			if (!goals.isEmpty()) {
 				currentGoal = goals.get(0);

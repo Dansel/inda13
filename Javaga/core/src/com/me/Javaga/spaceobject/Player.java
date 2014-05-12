@@ -3,6 +3,7 @@ package com.me.Javaga.spaceobject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.me.Javaga.gamestate.levels.BulletDescription;
 import com.me.Javaga.managers.GameKeys;
 import com.me.Javaga.managers.GameStateManager;
 
@@ -21,7 +22,8 @@ public class Player extends SpaceObject {
 	//private float scale;
 	private ArrayList<Bullet> bullets;
 	private Sound sound;
-	private int shootLimit;
+	private int bulletType;
+	private long shootLimit;
 
 
 
@@ -36,7 +38,8 @@ public class Player extends SpaceObject {
 
 	@Override
 	public void init() {
-		shootLimit = 200;
+		bulletType = 1;
+		shootLimit = BulletDescription.getType(bulletType).getTime();
 		//Set scalefactor
 		setScale(0.4f);
 		spriteSetUp(FILENAME);
@@ -134,7 +137,7 @@ public class Player extends SpaceObject {
 
 	private void fire() {
 		sound.play(GameStateManager.getEffectVolume()); // play lazer
-		bullets.add(new Bullet(xCenter, yCenter, 90, 20));
+		bullets.add(new Bullet(xCenter, yCenter, 90, 3));
 	}
 
 	public float getX() {

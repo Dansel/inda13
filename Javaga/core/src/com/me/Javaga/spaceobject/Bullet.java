@@ -2,6 +2,7 @@ package com.me.Javaga.spaceobject;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.me.Javaga.gamestate.levels.BulletDescription;
 
 import java.util.ArrayList;
 
@@ -12,26 +13,24 @@ import java.util.ArrayList;
 public class Bullet extends SpaceObject {
 
 
-	private static final String FILENAME = "bullet.png";
-	private final float SPEED;
-	private final static float ROTATION = 30;
-	private float degree;
+	//private final static float ROTATION = 30;
+	private BulletDescription description;
 
-	public Bullet(float xPos, float yPos, float degree, float speed) {
+	public Bullet(float xPos, float yPos, float degree, int type) {
 		super(xPos, yPos);
-		this.degree = degree;
-		this.SPEED = speed;
-		dX = (float) Math.cos(Math.toRadians(degree)) * SPEED;
-		dY = (float) Math.sin(Math.toRadians(degree)) * SPEED;
+		this.description = BulletDescription.getType(type);
+		dX = (float) Math.cos(Math.toRadians(degree)) * description.getSpeed();
+		dY = (float) Math.sin(Math.toRadians(degree)) * description.getSpeed();
 		HEIGHT = Gdx.graphics.getHeight();
 		WIDTH = Gdx.graphics.getWidth();
 		init();
+		sprite.rotate(degree - 90);
 	}
 
 	@Override
 	public void init() {
-		setScale(0.6f);
-		spriteSetUp(FILENAME);
+		setScale(description.getScale());
+		spriteSetUp(description.getFilename());
 	}
 
 	@Override
@@ -40,7 +39,7 @@ public class Bullet extends SpaceObject {
 		xPos += dX;
 		xCenter = xPos + sprite.getWidth() / 2;
 		yCenter = yPos + sprite.getHeight() / 2;
-		sprite.rotate(ROTATION);
+		//sprite.rotate(ROTATION);
 		sprite.setX(xPos);
 		sprite.setY(yPos);
 		hitbox.setCenter(xCenter, yCenter);
@@ -54,10 +53,14 @@ public class Bullet extends SpaceObject {
 
 	@Override
 	public void wrap() {
-		if ((xCenter - sWidth / 2 < 0) || (xCenter + sWidth / 2 > WIDTH)
-				|| (yCenter - sHeight / 2 < 0) || (yCenter + sHeight / 2 > HEIGHT)) {
+		if ((xCenter - sWidth / 2 + 100 < 0) || (xCenter + sWidth / 2 - 100 > WIDTH)
+				|| (yCenter - sHeight / 2 + 20 < 0) || (yCenter + sHeight / 2 - 20 > HEIGHT)) {
 			isHealthy = false;
 		}
+	}
+
+	public boolean isIndestructable() {
+		return description.isIndestructable();
 	}
 
 	@Override
