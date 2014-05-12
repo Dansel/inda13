@@ -2,6 +2,7 @@ package com.me.Javaga.gamestate;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.me.Javaga.gamestate.levels.EnemySpawner;
 import com.me.Javaga.gamestate.levels.Level;
 import com.me.Javaga.managers.BackgroundDrawer;
 import com.me.Javaga.managers.GameKeys;
@@ -23,6 +24,7 @@ public class PlayState extends GameState {
 	private ArrayList<Bullet> enemyBullets;
 	private ArrayList<Enemy> enemies;
 	private Level levels;
+	private EnemySpawner spawner;
 
 	public PlayState(GameStateManager gameStateManager) {
 		super(gameStateManager);
@@ -36,6 +38,7 @@ public class PlayState extends GameState {
 		enemies = new ArrayList<Enemy>();
 		levels = new Level();
 		player = new Player(Gdx.graphics.getWidth() / 2, 30, bullets);
+		spawner = new EnemySpawner(levels, enemyBullets, enemies, player, gameStateManager);
 	}
 
 	@Override
@@ -90,6 +93,8 @@ public class PlayState extends GameState {
 				enemy.dispose();
 				enemyIterator.remove();
 				spawnEnemy = true;
+			} else if (!enemy.checkHealthy()) {
+				enemyIterator.remove();
 			}
 		}
 		if (spawnEnemy) {
@@ -162,23 +167,8 @@ public class PlayState extends GameState {
 	 * Spawn enemies onto the level
 	 */
 	public void spawnEnemies() {
-		if (enemies.isEmpty()) {
-			for (int i = 0; i < 5; i++) {
-				Enemy enemy = new Enemy((Gdx.graphics.getWidth() / 5) * i,
-						Gdx.graphics.getHeight() + 100
-						, 1, this.enemyBullets, this.player);
-				enemy.addNewGoal(Gdx.graphics.getWidth() / 5 * i, Gdx.graphics.getHeight() / 2);
-				enemy.addNewGoal((float) (Gdx.graphics.getWidth() / 5 * (i + 2)),
-						Gdx.graphics.getHeight() / 2);
-				enemy.addNewGoal(Gdx.graphics.getWidth() / 5 * i, Gdx.graphics.getHeight() / 2);
-				enemy.addNewGoal((float) (Gdx.graphics.getWidth() / 5 * (i + 2)),
-						Gdx.graphics.getHeight() / 2);
-				enemy.addNewGoal(Gdx.graphics.getWidth() / 5 * i, Gdx.graphics.getHeight() / 2);
-				enemy.addNewGoal(Gdx.graphics.getWidth() / 5 * i, -100);
-				enemy.setDirection(100, 90);
-				enemy.setSpeed(1.5f);
-				enemies.add(enemy);
-			}
+		if (enemies.isEmpty() || spawner.canSpawn()) {
+			spawner.spawnEnemy();
 		}
 	}
 }

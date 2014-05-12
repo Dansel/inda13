@@ -36,8 +36,8 @@ public abstract class SpaceObject {
 
 
 	public SpaceObject(float xPos, float yPos) {
-		this.xPos = xPos;
-		this.yPos = yPos;
+		this.xCenter = xPos;
+		this.yCenter = yPos;
 		this.isHealthy = true;
 	}
 
@@ -104,19 +104,16 @@ public abstract class SpaceObject {
 
 	public void spriteSetUp(String FILENAME) {
 		sprite = new Sprite(new Texture(Gdx.files.internal(FILENAME)));
+
+		xPos = xCenter - sprite.getWidth() / 2;
+		yPos = yCenter - sprite.getHeight() / 2;
+
 		sprite.setX(xPos);
 		sprite.setY(yPos);
 
 		sprite.setScale(SCALEFACTOR);
 		sWidth = sprite.getWidth() * SCALEFACTOR;
 		sHeight = sprite.getHeight() * SCALEFACTOR;
-
-		//shift position down and to the left so we draw the sprite centered.
-		xPos -= sprite.getWidth() / 2;
-		yPos -= sprite.getHeight() / 2;
-
-		xCenter = xPos + sprite.getWidth() / 2;
-		yCenter = yPos + sprite.getHeight() / 2;
 
 		hitbox = new Rectangle();
 		hitbox.setHeight(sHeight).setWidth(sWidth).setCenter(xCenter, yCenter);

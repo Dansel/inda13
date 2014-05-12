@@ -28,6 +28,7 @@ public class Enemy extends SpaceObject {
 	private float speed;
 	private Random random;
 	private float accuracy;
+	private boolean outsideBourder;
 
 	public Enemy(float xPos, float yPos, int type,
 	             ArrayList<Bullet> enemyBullets, Player player) {
@@ -45,13 +46,14 @@ public class Enemy extends SpaceObject {
 	public void init() {
 		random = new Random();
 		speed = 5f;
-		setScale(0.5f);
+		setScale(0.3f);
 		spriteSetUp(FILENAME);
 		sound = Gdx.audio.newSound(Gdx.files.internal("lazer.mp3"));
 		shootLimit = 1000;
-		accuracy = 15;
+		accuracy = 5;
 		goals = new ArrayList<Vector2>();
 		setDirection(20f, 270);
+		wrap();
 	}
 
 	@Override
@@ -68,7 +70,6 @@ public class Enemy extends SpaceObject {
 		wrap();
 		hitbox.setCenter(xCenter, yCenter);
 		if (currentGoal != null && hitbox.contains(currentGoal.x, currentGoal.y)) {
-			System.out.println("Found goal " + goalIndex);
 			direction.set(0, 0);
 			updateGoal();
 		} else {
@@ -87,10 +88,10 @@ public class Enemy extends SpaceObject {
 	// Need to decide how we should dispose us of our enemies
 	// when they leave the field
 	public void wrap() {
-		if (xPos > WIDTH * 0.8f || xPos < WIDTH * 0.2f) {
-		}
-
-		if (yPos > HEIGHT * 0.8f || yPos < HEIGHT * 0.2f) {
+		if (xCenter > WIDTH || xCenter < 0 || yCenter > HEIGHT || yCenter < 0) {
+			outsideBourder = true;
+		} else {
+			outsideBourder = false;
 		}
 	}
 
@@ -117,7 +118,7 @@ public class Enemy extends SpaceObject {
 	 * Fire a shoot
 	 */
 	public void fire() {
-		if (System.currentTimeMillis() - time < shootLimit) {
+		if (System.currentTimeMillis() - time < shootLimit || outsideBourder) {
 			return;
 		}
 		float dX = xCenter - player.getX(); // Aim for the player
@@ -186,12 +187,11 @@ public class Enemy extends SpaceObject {
 	}
 
 	private void updateGoal() {
-		goalIndex++; // FIX ME
-		if (goalIndex != goals.size()) {
+		if (goalIndex + 1 < goals.size()) {
+			goalIndex++;
 			currentGoal = goals.get(goalIndex);
 		} else {
-			goalIndex = 0;
-			currentGoal = goals.get(goalIndex);
+			isHealthy = false;
 		}
 	}
 

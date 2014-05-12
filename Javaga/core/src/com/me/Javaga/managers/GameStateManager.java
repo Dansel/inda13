@@ -28,7 +28,7 @@ public class GameStateManager {
 		welcome = new WelcomeState(this);
 
 		setMusicVolume(1f);
-		setEffectVolume(0.5f);
+		setEffectVolume(0.3f);
 		setState(WELCOME, false);
 		MusicManager.startNewSong(MusicManager.WELCOMESONG);
 	}

@@ -23,12 +23,12 @@ public class Star extends SpaceObject {
 	@Override
 	public void init() {
 		random = new Random();
-		xPos = random.nextFloat() * Gdx.graphics.getWidth();
-		yPos = Gdx.graphics.getHeight();
+		xCenter = random.nextFloat() * Gdx.graphics.getWidth();
+		yCenter = Gdx.graphics.getHeight();
 
-		setScale(0.2f);
+		setScale(0.3f);
 		spriteSetUp(FILENAME);
-		dY = -random.nextFloat() * 30 + 10;
+		dY = -(random.nextFloat() * 20 + 5);
 	}
 
 	@Override

@@ -40,7 +40,7 @@ public class Player extends SpaceObject {
 		//Set scalefactor
 		setScale(0.4f);
 		spriteSetUp(FILENAME);
-
+		hitbox.setHeight(sHeight * 0.3f).setWidth(sWidth * 0.3f).setCenter(xCenter, yCenter);
 		//Create the sprite with some texture
 		sound = Gdx.audio.newSound(Gdx.files.internal("lazer.mp3"));
 	}
@@ -99,7 +99,6 @@ public class Player extends SpaceObject {
 	public boolean checkForCollision(ArrayList<Bullet> enemyBullets) {
 		for (Bullet bullet : enemyBullets) {
 			if (overlap(bullet)) {
-				System.out.println("COLLISION!");
 				return true;
 			}
 		}
