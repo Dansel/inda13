@@ -81,7 +81,6 @@ public enum EnemyDescription {
 			true
 	);
 
-
 	private String filename;
 	private float scale;
 	private float hitBoxScale;
