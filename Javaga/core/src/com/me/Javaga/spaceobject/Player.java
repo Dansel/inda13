@@ -54,16 +54,16 @@ public class Player extends SpaceObject {
 	@Override
 	public void update() {
 		if (GameKeys.isDown(GameKeys.UP)) {
-			yPos += 5;
+			yPos += 10;
 		}
 		if (GameKeys.isDown(GameKeys.DOWN)) {
-			yPos -= 5;
+			yPos -= 10;
 		}
 		if (GameKeys.isDown(GameKeys.LEFT)) {
-			xPos -= 5;
+			xPos -= 10;
 		}
 		if (GameKeys.isDown(GameKeys.RIGHT)) {
-			xPos += 5;
+			xPos += 10;
 		}
 
 		if (GameKeys.isDown(GameKeys.SPACE)) {
