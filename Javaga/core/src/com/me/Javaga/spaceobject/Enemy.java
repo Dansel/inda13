@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.me.Javaga.gamestate.levels.BulletDescription;
 import com.me.Javaga.gamestate.levels.EnemyDescription;
 import com.me.Javaga.managers.GameStateManager;
 
@@ -16,18 +17,19 @@ import java.util.Random;
  * Created by Dansel on 2014-05-02.
  */
 public class Enemy extends SpaceObject {
-	private ArrayList<Bullet> enemyBullets;
-	ArrayList<Vector2> goals;
-	private Vector2 direction;
-	private Vector2 currentGoal;
-	private Sound sound;
-	private Player player;
-	private long time;
-	private float shootLimit;
-	private int goalIndex;
-	private Random random;
-	private boolean outsideBourder;
-	private EnemyDescription description;
+	protected ArrayList<Bullet> enemyBullets;
+	protected ArrayList<Vector2> goals;
+	protected Vector2 direction;
+	protected Vector2 currentGoal;
+	protected Sound sound;
+	protected Player player;
+	protected long time;
+	protected float shootLimit;
+	protected int goalIndex;
+	protected Random random;
+	protected boolean outsideBourder;
+	protected EnemyDescription description;
+	protected int health;
 
 	public Enemy(float xPos, float yPos, int type,
 	             ArrayList<Bullet> enemyBullets, Player player) {
@@ -35,8 +37,8 @@ public class Enemy extends SpaceObject {
 
 		HEIGHT = Gdx.graphics.getHeight();
 		WIDTH = Gdx.graphics.getWidth();
-
 		description = EnemyDescription.getType(type);
+		health = description.getHealth();
 		this.enemyBullets = enemyBullets;
 		this.player = player;
 		this.time = System.currentTimeMillis();
@@ -49,7 +51,7 @@ public class Enemy extends SpaceObject {
 		setScale(description.getScale());
 		spriteSetUp(description.getFilename());
 		sound = Gdx.audio.newSound(Gdx.files.internal("lazer.mp3"));
-		shootLimit = 1000;
+		shootLimit = BulletDescription.getType(description.getBulletType()).getTime();
 		goals = new ArrayList<Vector2>();
 		setDirection(20f, 270);
 		wrap();
@@ -73,6 +75,9 @@ public class Enemy extends SpaceObject {
 			updateGoal();
 		} else {
 			updateDirection();
+		}
+		if (health <= 0) {
+			isHealthy = false;
 		}
 		fire();
 	}
@@ -105,7 +110,11 @@ public class Enemy extends SpaceObject {
 		while (iterator.hasNext()) {
 			Bullet bullet = iterator.next();
 			if (overlap(bullet)) {
-				if (!bullet.isIndestructable()) {
+				health -= bullet.getDamage();
+				if (health <= 0) {
+					isHealthy = false;
+				}
+				if (!bullet.isIndestructable() || isHealthy) {
 					bullet.dispose();
 					iterator.remove();
 				}
@@ -171,7 +180,7 @@ public class Enemy extends SpaceObject {
 	/**
 	 * Update the direction for the enemy object
 	 */
-	private void updateDirection() {
+	protected void updateDirection() {
 		if (currentGoal != null) {
 			Vector2 newDirection = new Vector2(currentGoal.x - xCenter, currentGoal.y - yCenter);
 			direction.add(newDirection.nor().scl(0.5f));
@@ -183,7 +192,7 @@ public class Enemy extends SpaceObject {
 		}
 	}
 
-	private void updateGoal() {
+	protected void updateGoal() {
 		if (goalIndex + 1 < goals.size()) {
 			goalIndex++;
 			currentGoal = goals.get(goalIndex);

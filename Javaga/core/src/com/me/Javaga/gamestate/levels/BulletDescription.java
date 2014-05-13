@@ -7,26 +7,46 @@ import com.me.Javaga.spaceobject.Bullet;
  */
 public enum BulletDescription {
 	Type1(
-			"bullet.png",
-			3f,
-			10,
-			200,
+			"bullet.png", // filename
+			2f,//scale
+			3, // speed
+			2000,
+			1,
 			false
 	),
 
 	Type2(
 			"bullet.png",
-			5f,
-			5,
-			1000,
+			4f,
+			0.5f,
+			3000,
+			1,
+			false
+	),
+	Type3(
+			"bullet.png",
+			1f,
+			10,
+			200,
+			1,
 			false
 	),
 
-	Type3(
+	Type4(
 			"missile.gif",
 			1f,
 			10,
 			1000,
+			10,
+			true
+	),
+
+	Type5(
+			"missile.gif",
+			1.5f,
+			3,
+			3000,
+			10,
 			true
 	);
 
@@ -34,14 +54,16 @@ public enum BulletDescription {
 	private float scale;
 	private float speed;
 	private long time;
+	private int damage;
 	private boolean indestructable;
 
 	private BulletDescription(String filename, float scale, float speed,
-	                          long time, boolean indesctructable) {
+	                          long time, int damage, boolean indesctructable) {
 		this.filename = filename;
 		this.scale = scale;
 		this.speed = speed;
 		this.time = time;
+		this.damage = damage;
 		this.indestructable = indesctructable;
 	}
 
@@ -61,6 +83,10 @@ public enum BulletDescription {
 		return this.time;
 	}
 
+	public int getDamage() {
+		return this.damage;
+	}
+
 	public boolean isIndestructable() {
 		return this.indestructable;
 	}
@@ -72,6 +98,10 @@ public enum BulletDescription {
 			return Type2;
 		} else if (type == 3) {
 			return Type3;
+		} else if (type == 4) {
+			return Type4;
+		} else if (type == 5) {
+			return Type5;
 		} else {
 			return Type1;
 		}

@@ -3,6 +3,7 @@ package com.me.Javaga.gamestate.levels;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.me.Javaga.managers.GameStateManager;
+import com.me.Javaga.spaceobject.Boss;
 import com.me.Javaga.spaceobject.Bullet;
 import com.me.Javaga.spaceobject.Enemy;
 import com.me.Javaga.spaceobject.Player;
@@ -34,19 +35,19 @@ public class EnemySpawner {
 	}
 
 	private void setEnemyWawe(Level.StageDescription stage) {
-		Vector2 start;
-		Vector2 direction;
-		Vector2[] goals;
-		float speed;
-		float enemyDifference = Gdx.graphics.getWidth() /
-				stage.getNumberOfEnemies();
-		EnemyMovement movement = EnemyMovement.getType(stage.type());
+		EnemyMovement movement = EnemyMovement.getType(stage.getMovementType());
 
-		start = movement.getStartCoordinate();
-		goals = movement.getCoordinates();
-		direction = movement.getStartDirection();
-		float x = 0;
-		for (int i = 0, j = 0; i < stage.getNumberOfEnemies(); i++) {
+		Vector2 start = movement.getStartCoordinate();
+		Vector2[] goals = movement.getCoordinates();
+		Vector2 direction = movement.getStartDirection();
+
+		float enemyDifferenceX = movement.getdX() / stage.getNumberOfEnemies();
+		float enemyDifferenceY = movement.getdY() / stage.getNumberOfEnemies();
+
+		float dX = 0;
+		float dY = 0;
+
+		for (int i = 0, j; i < stage.getNumberOfEnemies(); i++) {
 			float degree;
 
 			if (i % 2 != 0) {
@@ -54,18 +55,29 @@ public class EnemySpawner {
 			} else {
 				j = -1;
 			}
-			x += i * j * enemyDifference;
+
+			dX += i * j * enemyDifferenceX;
+			dY += i * j * enemyDifferenceY;
 			degree = (90 / stage.getNumberOfEnemies()) * i * j;
 			direction.rotate(degree);
 
-			Enemy enemy = new Enemy(start.x + x,
-					start.y,
-					stage.type(), enemyBullets, player);
+			Enemy enemy;
+
+			if (EnemyDescription.isBoss(stage.getEnemyType())) {
+				enemy = new Boss(start.x + dX,
+						start.y + dY,
+						stage.getEnemyType(), enemyBullets, player);
+			} else {
+				enemy = new Enemy(start.x + dX,
+						start.y + dY,
+						stage.getEnemyType(), enemyBullets, player);
+			}
+
 			enemy.setDirection(direction.x, direction.y);
 
 			for (Vector2 vector : goals) {
-				enemy.addNewGoal(vector.x + x,
-						vector.y);
+				enemy.addNewGoal(vector.x + dX,
+						vector.y + dY);
 			}
 			this.enemies.add(enemy);
 		}
@@ -83,6 +95,9 @@ public class EnemySpawner {
 	}
 
 	public boolean canSpawn() {
+		if (time == -1000) {
+			return false;
+		}
 		return System.currentTimeMillis() - currentTime > time;
 	}
 }

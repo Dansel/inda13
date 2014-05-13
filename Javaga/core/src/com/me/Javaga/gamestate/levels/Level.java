@@ -12,20 +12,22 @@ public class Level {
 
 	public Level() {
 		numOfLevels = 2;
-		numOfStages = 5;
+		numOfStages = 10;
 		currentLevel = 0;
 		currentStage = 0;
 		init();
 	}
 
 	public static class StageDescription {
-		private int type;
+		private int enemyType;
+		private int movementType;
 		private int numberOfEnemies;
 		private int time;
 		private boolean gameOver;
 
-		public StageDescription(int type, int numberOfEnemies, int time) {
-			this.type = type;
+		public StageDescription(int enemyType, int movementType, int numberOfEnemies, int time) {
+			this.enemyType = enemyType;
+			this.movementType = movementType;
 			this.numberOfEnemies = numberOfEnemies;
 			this.time = time;
 		}
@@ -34,8 +36,12 @@ public class Level {
 			this.gameOver = gameOver;
 		}
 
-		public int type() {
-			return this.type;
+		public int getEnemyType() {
+			return this.enemyType;
+		}
+
+		public int getMovementType() {
+			return this.movementType;
 		}
 
 		public int getNumberOfEnemies() {
@@ -46,30 +52,36 @@ public class Level {
 			return this.gameOver;
 		}
 
-		/**
-		 * Get the time which
-		 *
-		 * @return
-		 */
 		public int time() {
 			return this.time;
 		}
+
 	}
 
 	private void init() {
 		levels = new StageDescription[][]{
-				{new StageDescription(1, 5, 5),
-						new StageDescription(2, 5, 5),
-						new StageDescription(1, 5, 5),
-						new StageDescription(2, 5, 5),
-						new StageDescription(1, 5, 5)
+				{new StageDescription(1, 1, 5, 5),
+						new StageDescription(1, 1, 5, 5),
+						new StageDescription(1, 1, 5, 5),
+						new StageDescription(3, 3, 3, 0),
+						new StageDescription(3, 4, 3, 30),
+						new StageDescription(1, 1, 5, 5),
+						new StageDescription(1, 1, 5, 5),
+						new StageDescription(3, 3, 3, 0),
+						new StageDescription(3, 4, 3, 30),
+						new StageDescription(4, 5, 1, -1)
 				},
 				//level 2
-				{new StageDescription(3, 10, 30),
-						new StageDescription(3, 10, 20),
-						new StageDescription(3, 10, 20),
-						new StageDescription(3, 10, 10),
-						new StageDescription(3, 10, 10)
+				{new StageDescription(3, 1, 10, 30),
+						new StageDescription(3, 2, 10, 20),
+						new StageDescription(3, 2, 10, 20),
+						new StageDescription(3, 3, 10, 10),
+						new StageDescription(3, 4, 10, 10),
+						new StageDescription(3, 1, 10, 30),
+						new StageDescription(3, 2, 10, 20),
+						new StageDescription(3, 2, 10, 20),
+						new StageDescription(3, 3, 10, 10),
+						new StageDescription(4, 1, 1, -1)
 						}
 				};
 

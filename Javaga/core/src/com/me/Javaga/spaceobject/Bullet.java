@@ -59,6 +59,10 @@ public class Bullet extends SpaceObject {
 		}
 	}
 
+	public int getDamage() {
+		return description.getDamage();
+	}
+
 	public boolean isIndestructable() {
 		return description.isIndestructable();
 	}

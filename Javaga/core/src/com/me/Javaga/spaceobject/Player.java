@@ -38,7 +38,7 @@ public class Player extends SpaceObject {
 
 	@Override
 	public void init() {
-		bulletType = 1;
+		bulletType = 3;
 		shootLimit = BulletDescription.getType(bulletType).getTime();
 		//Set scalefactor
 		setScale(0.4f);
@@ -137,7 +137,7 @@ public class Player extends SpaceObject {
 
 	private void fire() {
 		sound.play(GameStateManager.getEffectVolume()); // play lazer
-		bullets.add(new Bullet(xCenter, yCenter, 90, 3));
+		bullets.add(new Bullet(xCenter, yCenter, 90, bulletType));
 	}
 
 	public float getX() {
