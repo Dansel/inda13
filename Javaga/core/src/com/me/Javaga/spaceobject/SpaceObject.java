@@ -17,6 +17,8 @@ public abstract class SpaceObject {
 	protected float yPos;
 	protected Sprite sprite;
 	protected boolean isHealthy;
+	protected boolean isDisposable;
+	protected boolean draw;
 
 	protected float HEIGHT;
 	protected float WIDTH;
@@ -29,10 +31,12 @@ public abstract class SpaceObject {
 
 	protected float dX;
 	protected float dY;
+	protected float health;
 
 	protected float SCALEFACTOR;
 
 	protected Rectangle hitbox;
+	protected int disposeIndex;
 
 
 	public SpaceObject(float xPos, float yPos) {
@@ -60,7 +64,11 @@ public abstract class SpaceObject {
 	 * @param batch A Sprite batch which draws the sprite onto
 	 *              the canvas
 	 */
-	public abstract void draw(SpriteBatch batch);
+	public void draw(SpriteBatch batch) {
+		if (isHealthy || draw) {
+			sprite.draw(batch);
+		}
+	}
 
 	public void setScale(float scaleFactor) {
 		SCALEFACTOR = scaleFactor;
@@ -76,7 +84,18 @@ public abstract class SpaceObject {
 	 *
 	 * @return True if it is healthy, false if it should be discarded
 	 */
-	public abstract boolean checkHealthy();
+	public boolean checkHealthy() {
+		return isHealthy;
+	}
+
+	/**
+	 * Check if an object should be discarded and the dispose method should be called
+	 * @return
+	 */
+	public boolean isDisposable() {
+		return isDisposable;
+	}
+
 
 	/**
 	 *
@@ -117,6 +136,48 @@ public abstract class SpaceObject {
 
 		hitbox = new Rectangle();
 		hitbox.setHeight(sHeight).setWidth(sWidth).setCenter(xCenter, yCenter);
+	}
+
+	/**
+	 * Return the x position of the player
+	 *
+	 * @return the x position of the player's centrum
+	 */
+	public float getX() {
+		return this.xCenter;
+	}
+
+	/**
+	 * Return the y position of the player
+	 *
+	 * @return the y position of the player's centrum
+	 */
+	public float getY() {
+		return this.yCenter;
+	}
+
+	/**
+	 * Creates a flashy effect when the object is damaged
+	 */
+	protected void hurt() {
+		if (health <= 0) {
+			isDisposable = true;
+		} else {
+			if (disposeIndex > 100) {
+				isHealthy = true;
+				draw = true;
+				disposeIndex = 0;
+				return;
+			}
+			disposeIndex++;
+			if (disposeIndex % 10 == 0) {
+				if (draw) {
+					draw = false;
+				} else {
+					draw = true;
+				}
+			}
+		}
 	}
 
 	public void dispose() {

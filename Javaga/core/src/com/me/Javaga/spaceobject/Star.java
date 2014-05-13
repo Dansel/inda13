@@ -48,13 +48,9 @@ public class Star extends SpaceObject {
 	public void wrap() {
 		if ((yCenter - sHeight / 2 < 0)) {
 			isHealthy = false;
+			isDisposable = true;
 		}
 
-	}
-
-	@Override
-	public boolean checkHealthy() {
-		return isHealthy;
 	}
 
 	@Override

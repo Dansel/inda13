@@ -3,6 +3,7 @@ package com.me.Javaga.spaceobject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.me.Javaga.gamestate.levels.BulletDescription;
 import com.me.Javaga.gamestate.levels.EnemyDescription;
@@ -29,15 +30,15 @@ public class Enemy extends SpaceObject {
 	protected Random random;
 	protected boolean outsideBourder;
 	protected EnemyDescription description;
-	protected int health;
+	protected Rectangle directionBox;
 
-	public Enemy(float xPos, float yPos, int type,
+	public Enemy(float xPos, float yPos, EnemyDescription description,
 	             ArrayList<Bullet> enemyBullets, Player player) {
 		super(xPos, yPos);
 
 		HEIGHT = Gdx.graphics.getHeight();
 		WIDTH = Gdx.graphics.getWidth();
-		description = EnemyDescription.getType(type);
+		this.description = description;
 		health = description.getHealth();
 		this.enemyBullets = enemyBullets;
 		this.player = player;
@@ -50,41 +51,61 @@ public class Enemy extends SpaceObject {
 		random = new Random();
 		setScale(description.getScale());
 		spriteSetUp(description.getFilename());
+
+		hitbox.setWidth(sWidth * description.getHitBoxScale()).
+				setHeight(sHeight * description.getHitBoxScale());
 		sound = Gdx.audio.newSound(Gdx.files.internal("lazer.mp3"));
-		shootLimit = BulletDescription.getType(description.getBulletType()).getTime();
+		shootLimit = description.getBulletType().getShootLimit();
 		goals = new ArrayList<Vector2>();
-		setDirection(20f, 270);
+		directionBox = new Rectangle();
+		directionBox.setWidth(4).setHeight(4).setCenter(xCenter, yCenter);
 		wrap();
 	}
 
 	@Override
 	public void update() {
-		xPos += direction.x;
-		yPos += direction.y;
-		//System.out.println("y: " + yPos);
-		//System.out.println("x: " + xPos);
+		if (isHealthy) {
+			xPos += direction.x;
+			yPos += direction.y;
+			//System.out.println("y: " + yPos);
+			//System.out.println("x: " + xPos);
 
-		sprite.setX(xPos);
-		sprite.setY(yPos);
-		xCenter = xPos + sprite.getWidth() / 2;
-		yCenter = yPos + sprite.getHeight() / 2;
-		wrap();
-		hitbox.setCenter(xCenter, yCenter);
-		if (currentGoal != null && hitbox.contains(currentGoal.x, currentGoal.y)) {
-			direction.set(0, 0);
-			updateGoal();
+			sprite.setX(xPos);
+			sprite.setY(yPos);
+			xCenter = xPos + sprite.getWidth() / 2;
+			yCenter = yPos + sprite.getHeight() / 2;
+			wrap();
+			hitbox.setCenter(xCenter, yCenter);
+			directionBox.setCenter(xCenter, yCenter);
+			if (currentGoal != null && directionBox.contains(currentGoal.x, currentGoal.y)) {
+				direction.set(0, 0);
+				updateGoal();
+			} else {
+				updateDirection();
+			}
+			if (health <= 0) {
+				isHealthy = false;
+			}
+			fire();
 		} else {
-			updateDirection();
+			hurt();
 		}
-		if (health <= 0) {
-			isHealthy = false;
-		}
-		fire();
 	}
 
 	@Override
-	public void draw(SpriteBatch batch) {
-		sprite.draw(batch);
+	protected void hurt() {
+		if (disposeIndex > 50) {
+			isDisposable = true;
+		} else {
+			disposeIndex++;
+			if (disposeIndex % 10 == 0) {
+				if (draw) {
+					draw = false;
+				} else {
+					draw = true;
+				}
+			}
+		}
 	}
 
 	@Override
@@ -97,11 +118,6 @@ public class Enemy extends SpaceObject {
 		} else {
 			outsideBourder = false;
 		}
-	}
-
-	@Override
-	public boolean checkHealthy() {
-		return isHealthy;
 	}
 
 	@Override
@@ -132,16 +148,24 @@ public class Enemy extends SpaceObject {
 			return;
 		}
 		float dX = xCenter - player.getX(); // Aim for the player
-		float dY = yCenter - player.getY(); // Aim for the player
+		float dY = (yCenter - sWidth / 2) - player.getY(); // Aim for the player
 
-		if (yCenter - player.getY() >= 0) { // Dont shoot if the player is behind you
+		if ((yCenter - sWidth / 2) - player.getY() >= 0) { // Dont shoot if the player is behind you
 
 			double radian = Math.atan(dX / dY);
 			float degree = (float) (270 - Math.toDegrees(radian));
 			float miss = (random.nextBoolean()) ? random.nextFloat() * description.getAccuracy()
 					: random.nextFloat() * -1 * description.getAccuracy(); // Makes their aim awful,
 			//// probably should do it some other this
-			enemyBullets.add(new Bullet(xCenter, yCenter - sHeight / 2, degree + miss, description.getBulletType()));
+
+			Bullet bullet;
+			if (description.getBulletType().isMotionSeeker()) {
+				bullet = new MotionSeeker(xCenter, yCenter - sHeight / 2, 90, description.getBulletType(), player);
+			} else {
+				bullet = new Bullet(xCenter, yCenter - sHeight / 2, degree + miss, description.getBulletType());
+			}
+
+			enemyBullets.add(bullet);
 
 			sound.play(GameStateManager.getEffectVolume()); // play lazer
 			time = System.currentTimeMillis(); // reset time
@@ -183,8 +207,10 @@ public class Enemy extends SpaceObject {
 	protected void updateDirection() {
 		if (currentGoal != null) {
 			Vector2 newDirection = new Vector2(currentGoal.x - xCenter, currentGoal.y - yCenter);
-			direction.add(newDirection.nor().scl(0.5f));
+			direction.add(newDirection.nor().scl(description.getSpeed()));
+			//direction.nor().scl(description.getSpeed());
 			direction.nor().scl(description.getSpeed());
+
 		} else {
 			if (!goals.isEmpty()) {
 				currentGoal = goals.get(0);

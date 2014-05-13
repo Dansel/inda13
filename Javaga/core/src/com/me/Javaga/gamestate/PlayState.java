@@ -23,7 +23,6 @@ public class PlayState extends GameState {
 	private ArrayList<Bullet> bullets;
 	private ArrayList<Bullet> enemyBullets;
 	private ArrayList<Enemy> enemies;
-	private Level levels;
 	private EnemySpawner spawner;
 
 	public PlayState(GameStateManager gameStateManager) {
@@ -36,9 +35,8 @@ public class PlayState extends GameState {
 		bullets = new ArrayList<Bullet>();
 		enemyBullets = new ArrayList<Bullet>();
 		enemies = new ArrayList<Enemy>();
-		levels = new Level();
 		player = new Player(Gdx.graphics.getWidth() / 2, 30, bullets);
-		spawner = new EnemySpawner(levels, enemyBullets, enemies, player, gameStateManager);
+		spawner = new EnemySpawner(enemyBullets, enemies, player, gameStateManager);
 	}
 
 	@Override
@@ -63,8 +61,9 @@ public class PlayState extends GameState {
 	}
 
 	private void checkHealth() {
-		if (!player.checkHealthy()) {
-
+		if (player.isDisposable()) {
+			gameStateManager.setState(GameStateManager.WELCOME, true);
+			MusicManager.startNewSong(MusicManager.WELCOMESONG);
 		}
 		Iterator<Bullet> bulletIterator = bullets.iterator();
 		Iterator<Bullet> enemyBulletIterator = enemyBullets.iterator();
@@ -72,7 +71,7 @@ public class PlayState extends GameState {
 
 		while (bulletIterator.hasNext()) {
 			Bullet bullet = bulletIterator.next();
-			if (!bullet.checkHealthy()) {
+			if (bullet.isDisposable()) {
 				bullet.dispose();
 				bulletIterator.remove();
 			}
@@ -80,30 +79,24 @@ public class PlayState extends GameState {
 
 		while (enemyBulletIterator.hasNext()) {
 			Bullet bullet = enemyBulletIterator.next();
-			if (!bullet.checkHealthy()) {
+			if (bullet.isDisposable()) {
 				bullet.dispose();
 				enemyBulletIterator.remove();
 			}
 		}
 
-		boolean spawnEnemy = false;
 		while (enemyIterator.hasNext()) {
 			Enemy enemy = enemyIterator.next();
-			if (enemy.checkForCollision(bullets)) {
-			} else if (!enemy.checkHealthy()) {
+			if (enemy.checkHealthy()) {
+				enemy.checkForCollision(bullets);
+			}
+			if (enemy.isDisposable()) {
 				enemyIterator.remove();
 			}
 		}
-		if (spawnEnemy) {
-			spawnEnemies();
+		if (player.checkHealthy()) {
+			player.checkForCollision(enemyBullets);
 		}
-
-		if (player.checkForCollision(enemyBullets)) {
-			gameStateManager.setState(GameStateManager.WELCOME, true);
-			MusicManager.startNewSong(MusicManager.WELCOMESONG);
-		}
-
-
 	}
 
 	@Override
@@ -165,8 +158,6 @@ public class PlayState extends GameState {
 	 * Spawn enemies onto the level
 	 */
 	public void spawnEnemies() {
-		if (enemies.isEmpty() || spawner.canSpawn()) {
 			spawner.spawnEnemy();
-		}
 	}
 }

@@ -14,18 +14,22 @@ import java.util.ArrayList;
  * Created by Lukas on 2014-05-12.
  */
 public class EnemySpawner {
-	private Level level;
 	private ArrayList<Bullet> enemyBullets;
 	private ArrayList<Enemy> enemies;
 	private Player player;
 	private GameStateManager gameStateManager;
 	private int time;
+	private boolean rest;
 	private long currentTime;
+	private Level currentLevel;
+	private int stageIndex;
+	private int levelIndex;
 
-	public EnemySpawner(Level level,
+	public EnemySpawner(
 	                    ArrayList<Bullet> enemyBullets, ArrayList<Enemy> enemies, Player player,
 	                    GameStateManager gameStateManager) {
-		this.level = level;
+		this.currentLevel = Level.LEVEL1;
+		this.stageIndex = -1;
 		this.enemyBullets = enemyBullets;
 		this.enemies = enemies;
 		this.player = player;
@@ -35,7 +39,7 @@ public class EnemySpawner {
 	}
 
 	private void setEnemyWawe(Level.StageDescription stage) {
-		EnemyMovement movement = EnemyMovement.getType(stage.getMovementType());
+		EnemyMovement movement = stage.getMovementType();
 
 		Vector2 start = movement.getStartCoordinate();
 		Vector2[] goals = movement.getCoordinates();
@@ -63,7 +67,7 @@ public class EnemySpawner {
 
 			Enemy enemy;
 
-			if (EnemyDescription.isBoss(stage.getEnemyType())) {
+			if (stage.getEnemyType().isBoss()) {
 				enemy = new Boss(start.x + dX,
 						start.y + dY,
 						stage.getEnemyType(), enemyBullets, player);
@@ -81,23 +85,55 @@ public class EnemySpawner {
 			}
 			this.enemies.add(enemy);
 		}
-		time = stage.time() * 1000;
-		currentTime = System.currentTimeMillis();
 	}
 
 	public void spawnEnemy() {
-		Level.StageDescription stage = level.getNextStage();
+		if (!canSpawn()) {
+			return;
+		}
+		Level.StageDescription stage = getNextStage();
 		if (stage.isGameOver()) {
 			gameStateManager.setState(GameStateManager.WELCOME, true);
 			return;
 		}
-		setEnemyWawe(stage);
+		if (!stage.rest()) {
+			setEnemyWawe(stage);
+		} else {
+			rest = true;
+		}
+		time = stage.time() * 1000;
+		currentTime = System.currentTimeMillis();
+	}
+
+	public Level.StageDescription getNextStage() {
+		if (stageIndex + 1 >= currentLevel.getLevelLenght()) {
+			stageIndex = -1;
+			levelIndex++;
+			System.out.println("new Level");
+			currentLevel = Level.getLevel(levelIndex + 1);
+			player.resetHealth();
+		}
+		if (levelIndex >= Level.NUMBER_OF_LEVELS) {
+			return new Level.StageDescription(true); // tells the game the level is won
+		}
+		stageIndex++;
+		System.out.println("Stage: " + stageIndex + " Level: " + levelIndex);
+		return currentLevel.getStage(stageIndex);
 	}
 
 	public boolean canSpawn() {
-		if (time == -1000) {
+		if (time == -1000 && !enemies.isEmpty()) {
 			return false;
 		}
-		return System.currentTimeMillis() - currentTime > time;
+
+		if (rest) {
+			if (System.currentTimeMillis() - currentTime > time) {
+				rest = false;
+				return true;
+			}
+			return false;
+		}
+
+		return (System.currentTimeMillis() - currentTime > time) || enemies.isEmpty();
 	}
 }

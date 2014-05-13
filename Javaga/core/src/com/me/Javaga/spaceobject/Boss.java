@@ -1,5 +1,6 @@
 package com.me.Javaga.spaceobject;
 
+import com.me.Javaga.gamestate.levels.EnemyDescription;
 import com.me.Javaga.managers.GameStateManager;
 
 import java.util.ArrayList;
@@ -9,9 +10,9 @@ import java.util.ArrayList;
  */
 public class Boss extends Enemy {
 
-	public Boss(float xPos, float yPos, int type,
+	public Boss(float xPos, float yPos, EnemyDescription description,
 	            ArrayList<Bullet> enemyBullets, Player player) {
-		super(xPos, yPos, type, enemyBullets, player);
+		super(xPos, yPos, description, enemyBullets, player);
 	}
 
 	@Override
@@ -31,9 +32,9 @@ public class Boss extends Enemy {
 			return;
 		}
 		float dX = xCenter - player.getX(); // Aim for the player
-		float dY = yCenter - player.getY(); // Aim for the player
+		float dY = (yCenter - sHeight / 2) - player.getY(); // Aim for the player
 		float startDegree = 270;
-		if (yCenter - player.getY() < 0) { // Dont shoot if the player is behind you
+		if ((yCenter - sHeight / 2) - player.getY() < 0) { // Dont shoot if the player is behind you
 			startDegree = 90;
 		}
 		double radian = Math.atan(dX / dY);
@@ -41,8 +42,14 @@ public class Boss extends Enemy {
 		float miss = (random.nextBoolean()) ? random.nextFloat() * description.getAccuracy()
 				: random.nextFloat() * -1 * description.getAccuracy(); // Makes their aim awful,
 		//// probably should do it some other this
-		enemyBullets.add(new Bullet(xCenter, yCenter - sHeight / 2, degree, description.getBulletType()));
+		Bullet bullet;
+		if (description.getBulletType().isMotionSeeker()) {
+			bullet = new MotionSeeker(xCenter, yCenter - sHeight / 2, degree + miss, description.getBulletType(), player);
+		} else {
+			bullet = new Bullet(xCenter, yCenter - sHeight / 2, degree + miss, description.getBulletType());
+		}
 
+		enemyBullets.add(bullet);
 		sound.play(GameStateManager.getEffectVolume()); // play lazer
 		time = System.currentTimeMillis(); // reset time
 

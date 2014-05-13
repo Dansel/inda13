@@ -3,44 +3,162 @@ package com.me.Javaga.gamestate.levels;
 /**
  * Created by Dansel on 2014-05-05.
  */
-public class Level {
-	private StageDescription[][] levels;
-	private int numOfLevels;
-	private int numOfStages;
-	private int currentLevel;
-	private int currentStage;
+public enum Level {
 
-	public Level() {
-		numOfLevels = 2;
-		numOfStages = 10;
-		currentLevel = 0;
-		currentStage = 0;
-		init();
+	LEVEL1(
+			new StageDescription[]{
+					new StageDescription(true, 10),
+					new StageDescription(EnemyDescription.SHIP_BOSS4,
+							EnemyMovement.MOVEMENT5, 1, -1),
+					new StageDescription(EnemyDescription.UFO,
+							EnemyMovement.MOVEMENT1, 3, -1),
+					new StageDescription(EnemyDescription.UFO,
+							EnemyMovement.MOVEMENT3, 3, 0),
+					new StageDescription(EnemyDescription.UFO,
+							EnemyMovement.MOVEMENT4, 5, 10),
+					new StageDescription(EnemyDescription.UFO,
+							EnemyMovement.MOVEMENT3, 3, 0),
+					new StageDescription(EnemyDescription.UFO,
+							EnemyMovement.MOVEMENT4, 3, -1),
+					new StageDescription(EnemyDescription.BIG_SNILSSON,
+							EnemyMovement.MOVEMENT3, 5, 0),
+					new StageDescription(EnemyDescription.BIG_SNILSSON,
+							EnemyMovement.MOVEMENT4, 5, 10),
+					new StageDescription(EnemyDescription.SHIP_BOSS,
+							EnemyMovement.MOVEMENT5, 1, -1)
+			}
+	),
+	LEVEL2(
+			new StageDescription[]{new StageDescription(EnemyDescription.UFO,
+					EnemyMovement.MOVEMENT1, 5, 10),
+					new StageDescription(EnemyDescription.UFO,
+							EnemyMovement.MOVEMENT3, 5, 0),
+					new StageDescription(EnemyDescription.UFO,
+							EnemyMovement.MOVEMENT4, 5, -1),
+					new StageDescription(EnemyDescription.SNILSSON,
+							EnemyMovement.MOVEMENT1, 3, 0),
+					new StageDescription(EnemyDescription.SNILSSON,
+							EnemyMovement.MOVEMENT3, 3, 0),
+					new StageDescription(EnemyDescription.SNILSSON,
+							EnemyMovement.MOVEMENT4, 3, -1),
+					new StageDescription(EnemyDescription.BIG_SNILSSON,
+							EnemyMovement.MOVEMENT1, 3, 0),
+					new StageDescription(EnemyDescription.BIG_SNILSSON,
+							EnemyMovement.MOVEMENT3, 3, 0),
+					new StageDescription(EnemyDescription.BIG_SNILSSON,
+							EnemyMovement.MOVEMENT4, 3, -1),
+					new StageDescription(EnemyDescription.SHIP_BOSS3,
+							EnemyMovement.MOVEMENT1, 1, -1)
+			}
+	),
+	LEVEL3(
+			new StageDescription[]{new StageDescription(EnemyDescription.UFO,
+					EnemyMovement.MOVEMENT1, 5, 10),
+					new StageDescription(EnemyDescription.UFO,
+							EnemyMovement.MOVEMENT3, 5, 0),
+					new StageDescription(EnemyDescription.UFO,
+							EnemyMovement.MOVEMENT4, 5, -1),
+					new StageDescription(EnemyDescription.SNILSSON,
+							EnemyMovement.MOVEMENT1, 3, 0),
+					new StageDescription(EnemyDescription.SNILSSON,
+							EnemyMovement.MOVEMENT3, 3, 0),
+					new StageDescription(EnemyDescription.SNILSSON,
+							EnemyMovement.MOVEMENT4, 3, -1),
+					new StageDescription(EnemyDescription.BIG_SNILSSON,
+							EnemyMovement.MOVEMENT1, 3, 0),
+					new StageDescription(EnemyDescription.BIG_SNILSSON,
+							EnemyMovement.MOVEMENT3, 3, 0),
+					new StageDescription(EnemyDescription.BIG_SNILSSON,
+							EnemyMovement.MOVEMENT4, 3, -1),
+					new StageDescription(EnemyDescription.SHIP_BOSS3,
+							EnemyMovement.MOVEMENT1, 1, -1)
+			}
+	),
+	LEVEL4(
+			new StageDescription[]{new StageDescription(EnemyDescription.UFO,
+					EnemyMovement.MOVEMENT5, 5, 10),
+					new StageDescription(EnemyDescription.UFO,
+							EnemyMovement.MOVEMENT3, 5, 0),
+					new StageDescription(EnemyDescription.UFO,
+							EnemyMovement.MOVEMENT4, 5, -1),
+					new StageDescription(EnemyDescription.SNILSSON,
+							EnemyMovement.MOVEMENT1, 3, 0),
+					new StageDescription(EnemyDescription.SNILSSON,
+							EnemyMovement.MOVEMENT3, 3, 0),
+					new StageDescription(EnemyDescription.SNILSSON,
+							EnemyMovement.MOVEMENT4, 3, -1),
+					new StageDescription(EnemyDescription.BIG_SNILSSON,
+							EnemyMovement.MOVEMENT1, 3, 0),
+					new StageDescription(EnemyDescription.BIG_SNILSSON,
+							EnemyMovement.MOVEMENT3, 3, 0),
+					new StageDescription(EnemyDescription.BIG_SNILSSON,
+							EnemyMovement.MOVEMENT4, 3, -1),
+					new StageDescription(EnemyDescription.SHIP_BOSS3,
+							EnemyMovement.MOVEMENT1, 1, -1)
+			}
+	),
+	LEVEL5(
+			new StageDescription[]{new StageDescription(EnemyDescription.UFO,
+					EnemyMovement.MOVEMENT5, 5, 10),
+					new StageDescription(EnemyDescription.UFO,
+							EnemyMovement.MOVEMENT3, 5, 0),
+					new StageDescription(EnemyDescription.UFO,
+							EnemyMovement.MOVEMENT4, 5, -1),
+					new StageDescription(EnemyDescription.SNILSSON,
+							EnemyMovement.MOVEMENT1, 3, 0),
+					new StageDescription(EnemyDescription.SNILSSON,
+							EnemyMovement.MOVEMENT3, 3, 0),
+					new StageDescription(EnemyDescription.SNILSSON,
+							EnemyMovement.MOVEMENT4, 3, -1),
+					new StageDescription(EnemyDescription.BIG_SNILSSON,
+							EnemyMovement.MOVEMENT1, 3, 0),
+					new StageDescription(EnemyDescription.BIG_SNILSSON,
+							EnemyMovement.MOVEMENT3, 3, 0),
+					new StageDescription(EnemyDescription.BIG_SNILSSON,
+							EnemyMovement.MOVEMENT4, 3, -1),
+					new StageDescription(EnemyDescription.SHIP_BOSS3,
+							EnemyMovement.MOVEMENT1, 1, -1)
+			}
+	);
+
+	private StageDescription[] stages;
+	public static final int NUMBER_OF_LEVELS = 5;
+
+	private Level(StageDescription[] stages) {
+		this.stages = stages;
 	}
 
 	public static class StageDescription {
-		private int enemyType;
-		private int movementType;
+		private EnemyDescription enemyType;
+		private EnemyMovement movementType;
 		private int numberOfEnemies;
 		private int time;
 		private boolean gameOver;
+		private boolean rest;
 
-		public StageDescription(int enemyType, int movementType, int numberOfEnemies, int time) {
+		public StageDescription(EnemyDescription enemyType, EnemyMovement movementType,
+		                        int numberOfEnemies, int time) {
 			this.enemyType = enemyType;
 			this.movementType = movementType;
 			this.numberOfEnemies = numberOfEnemies;
 			this.time = time;
 		}
 
+
 		public StageDescription(boolean gameOver) {
 			this.gameOver = gameOver;
 		}
 
-		public int getEnemyType() {
+		public StageDescription(boolean rest, int time) {
+			this.rest = rest;
+			this.time = time;
+		}
+
+		public EnemyDescription getEnemyType() {
 			return this.enemyType;
 		}
 
-		public int getMovementType() {
+		public EnemyMovement getMovementType() {
 			return this.movementType;
 		}
 
@@ -52,55 +170,38 @@ public class Level {
 			return this.gameOver;
 		}
 
+		public boolean rest() {
+			return this.rest;
+		}
+
 		public int time() {
 			return this.time;
 		}
 
 	}
 
-	private void init() {
-		levels = new StageDescription[][]{
-				{new StageDescription(1, 1, 5, 5),
-						new StageDescription(1, 1, 5, 5),
-						new StageDescription(1, 1, 5, 5),
-						new StageDescription(3, 3, 3, 0),
-						new StageDescription(3, 4, 3, 30),
-						new StageDescription(1, 1, 5, 5),
-						new StageDescription(1, 1, 5, 5),
-						new StageDescription(3, 3, 3, 0),
-						new StageDescription(3, 4, 3, 30),
-						new StageDescription(4, 5, 1, -1)
-				},
-				//level 2
-				{new StageDescription(3, 1, 10, 30),
-						new StageDescription(3, 2, 10, 20),
-						new StageDescription(3, 2, 10, 20),
-						new StageDescription(3, 3, 10, 10),
-						new StageDescription(3, 4, 10, 10),
-						new StageDescription(3, 1, 10, 30),
-						new StageDescription(3, 2, 10, 20),
-						new StageDescription(3, 2, 10, 20),
-						new StageDescription(3, 3, 10, 10),
-						new StageDescription(4, 1, 1, -1)
-						}
-				};
-
-		//first is the number of levels, containing subarrays of stages.
-		//each subarray contains a 2-length array which is in format of{ID, Amount}
+	public static Level getLevel(int level) {
+		if (level == 1) {
+			return LEVEL1;
+		} else if (level == 2) {
+			return LEVEL2;
+		} else if (level == 3) {
+			return LEVEL3;
+		} else if (level == 4) {
+			return LEVEL4;
+		} else if (level == 5) {
+			return LEVEL5;
+		} else {
+			return LEVEL1;
+		}
 	}
 
-	public StageDescription getNextStage() {
-		if (currentStage >= numOfStages) {
-			currentStage = 0;
-			currentLevel++;
-		}
-		if (currentLevel >= numOfLevels) {
-			//GameStateManager.WON; //TODO
+	public StageDescription getStage(int index) {
+		return stages[index];
+	}
 
-			return new StageDescription(true); // tells the game the level is won
-		}
-		currentStage++;
-		return levels[currentLevel][currentStage - 1];
+	public int getLevelLenght() {
+		return stages.length;
 	}
 }
 

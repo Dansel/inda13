@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
  * Created by Lukas on 2014-05-12.
  */
 public enum EnemyMovement {
-	Type1(
+	MOVEMENT1(
 			new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() + 100), // startposition
 
 			new Vector2(0, -1), // start direction
@@ -24,7 +24,7 @@ public enum EnemyMovement {
 			0, // dY
 			Gdx.graphics.getWidth() //dX
 	),
-	Type2(
+	MOVEMENT2(
 			new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 100),
 
 			new Vector2(0, 0),
@@ -40,8 +40,8 @@ public enum EnemyMovement {
 			0,
 			Gdx.graphics.getWidth()
 	),
-	Type3(
-			new Vector2(-20, 3 * Gdx.graphics.getHeight() / 4),
+	MOVEMENT3(
+			new Vector2(-20, Gdx.graphics.getHeight() / 2),
 
 			new Vector2(0, 0),
 
@@ -55,8 +55,8 @@ public enum EnemyMovement {
 			0
 	),
 
-	Type4(
-			new Vector2(Gdx.graphics.getWidth() + 100, 3 * Gdx.graphics.getHeight() / 4),
+	MOVEMENT4(
+			new Vector2(Gdx.graphics.getWidth() + 20, 3 * Gdx.graphics.getHeight() / 4),
 
 			new Vector2(0, 0),
 
@@ -69,8 +69,8 @@ public enum EnemyMovement {
 			Gdx.graphics.getHeight() / 2,
 			0
 	),
-	Type5(
-			new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() + 100),
+	MOVEMENT5(
+			new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() + 200),
 
 			new Vector2(0, 0),
 
@@ -123,19 +123,4 @@ public enum EnemyMovement {
 		return this.dX;
 	}
 
-	public static EnemyMovement getType(int type) {
-		if (type == 1) {
-			return Type1;
-		} else if (type == 2) {
-			return Type2;
-		} else if (type == 3) {
-			return Type3;
-		} else if (type == 4) {
-			return Type4;
-		} else if (type == 5) {
-			return Type5;
-		} else {
-			return Type1;
-		}
-	}
 }

@@ -27,7 +27,7 @@ public class BackgroundDrawer {
 		Iterator<Star> iterator = stars.iterator();
 		while (iterator.hasNext()) {
 			Star star = iterator.next();
-			if (!star.checkHealthy()) {
+			if (star.isDisposable()) {
 				star.dispose();
 				iterator.remove();
 			}
