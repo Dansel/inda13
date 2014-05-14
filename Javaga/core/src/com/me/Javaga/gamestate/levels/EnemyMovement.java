@@ -48,7 +48,7 @@ public enum EnemyMovement {
 			new Vector2[]{
 					new Vector2(Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() / 2),
 					new Vector2(Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() / 4),
-					new Vector2(Gdx.graphics.getWidth() + 20, Gdx.graphics.getHeight() / 4)
+					new Vector2(Gdx.graphics.getWidth() + 100, Gdx.graphics.getHeight() / 4)
 			},
 
 			Gdx.graphics.getHeight() / 2,
@@ -63,7 +63,7 @@ public enum EnemyMovement {
 			new Vector2[]{
 					new Vector2(Gdx.graphics.getWidth() / 2 + 50, 3 * Gdx.graphics.getHeight() / 4),
 					new Vector2(Gdx.graphics.getWidth() / 2 + 50, 2 * Gdx.graphics.getHeight() / 4),
-					new Vector2(-20, 2 * Gdx.graphics.getHeight() / 4)
+					new Vector2(-100, 2 * Gdx.graphics.getHeight() / 4)
 			},
 
 			Gdx.graphics.getHeight() / 2,
@@ -82,6 +82,39 @@ public enum EnemyMovement {
 			},
 
 			Gdx.graphics.getHeight() / 2,
+			Gdx.graphics.getWidth() / 2
+	),
+	MOVEMENT6(
+			new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() + 200),
+
+			new Vector2(0, 0),
+
+			new Vector2[]{
+					new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 100),
+					new Vector2(Gdx.graphics.getWidth() / 2 + 100, Gdx.graphics.getHeight() / 2 + 100),
+					new Vector2(Gdx.graphics.getWidth() / 2 + 100, Gdx.graphics.getHeight() / 2 - 100),
+					new Vector2(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100),
+					new Vector2(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 + 100),
+			},
+
+			0,
+			Gdx.graphics.getWidth() / 2
+	),
+	MOVEMENT7(
+			new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() + 200),
+
+			new Vector2(0, 0),
+
+			new Vector2[]{
+					new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 100),
+					new Vector2(Gdx.graphics.getWidth() / 2 + 100, Gdx.graphics.getHeight() / 2 + 100),
+					new Vector2(Gdx.graphics.getWidth() / 2 + 100, Gdx.graphics.getHeight() / 2 - 100),
+					new Vector2(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100),
+					new Vector2(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 + 100),
+					new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() + 200)
+			},
+
+			0,
 			Gdx.graphics.getWidth() / 2
 	);
 

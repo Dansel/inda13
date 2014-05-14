@@ -4,10 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.gamestate.levels.EnemySpawner;
 import com.me.Javaga.gamestate.levels.Level;
-import com.me.Javaga.managers.BackgroundDrawer;
-import com.me.Javaga.managers.GameKeys;
-import com.me.Javaga.managers.GameStateManager;
-import com.me.Javaga.managers.MusicManager;
+import com.me.Javaga.managers.*;
 import com.me.Javaga.spaceobject.Bullet;
 import com.me.Javaga.spaceobject.Enemy;
 import com.me.Javaga.spaceobject.Player;
@@ -37,6 +34,7 @@ public class PlayState extends GameState {
 		enemies = new ArrayList<Enemy>();
 		player = new Player(Gdx.graphics.getWidth() / 2, 30, bullets);
 		spawner = new EnemySpawner(enemyBullets, enemies, player, gameStateManager);
+		InformationDrawer.reset();
 	}
 
 	@Override
@@ -115,6 +113,8 @@ public class PlayState extends GameState {
 		for (Enemy enemy : enemies) {
 			enemy.draw(batch);
 		}
+
+		InformationDrawer.draw(batch);
 	}
 
 	@Override

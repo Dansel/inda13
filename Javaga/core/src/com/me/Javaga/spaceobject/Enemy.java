@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.me.Javaga.gamestate.levels.BulletDescription;
 import com.me.Javaga.gamestate.levels.EnemyDescription;
 import com.me.Javaga.managers.GameStateManager;
+import com.me.Javaga.managers.InformationDrawer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -128,6 +129,7 @@ public class Enemy extends SpaceObject {
 			if (overlap(bullet)) {
 				health -= bullet.getDamage();
 				if (health <= 0) {
+					InformationDrawer.updatePoints(10);
 					isHealthy = false;
 				}
 				if (!bullet.isIndestructable() || isHealthy) {

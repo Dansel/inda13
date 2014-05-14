@@ -40,6 +40,16 @@ public enum EnemyDescription {
 			1,
 			false
 	),
+	UFO2(
+			"ufo2.png",
+			1f,
+			1f,
+			5f,
+			0,
+			BulletDescription.FAST_BULLETS,
+			1,
+			false
+	),
 	SHIP_BOSS(
 			"ufo.png",
 			5f,
@@ -54,10 +64,10 @@ public enum EnemyDescription {
 			"Boss2.png",
 			0.8f,
 			0.9f,
-			0.5f,
+			3f,
 			0,
-			BulletDescription.MISSILES,
-			30,
+			BulletDescription.FAST_BULLETS,
+			20,
 			true
 	),
 	SHIP_BOSS3(
@@ -78,6 +88,26 @@ public enum EnemyDescription {
 			0,
 			BulletDescription.MOTION_MISSILES,
 			40,
+			true
+	),
+	SHIELD_UFO(
+			"shield.png",
+			0.2f,
+			0.8f,
+			0.5f,
+			0,
+			BulletDescription.ENERGY_BLAST,
+			20,
+			false
+	),
+	SHIELD4(
+			"shield.png",
+			0.8f,
+			0.8f,
+			0.2f,
+			0,
+			BulletDescription.ENERGY_BLAST,
+			50,
 			true
 	);
 

@@ -79,6 +79,16 @@ public enum BulletDescription {
 			0.1f,
 			false,
 			false
+	),
+	ENERGY_BLAST(
+			"energy_blast.png",
+			1f,
+			2f,
+			6000,
+			5000,
+			2f,
+			false,
+			false
 	);
 
 	private String filename;

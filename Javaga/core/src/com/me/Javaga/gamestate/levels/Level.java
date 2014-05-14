@@ -8,18 +8,16 @@ public enum Level {
 	LEVEL1(
 			new StageDescription[]{
 					new StageDescription(true, 10),
-					new StageDescription(EnemyDescription.SHIP_BOSS4,
-							EnemyMovement.MOVEMENT5, 1, -1),
 					new StageDescription(EnemyDescription.UFO,
 							EnemyMovement.MOVEMENT1, 3, -1),
 					new StageDescription(EnemyDescription.UFO,
 							EnemyMovement.MOVEMENT3, 3, 0),
 					new StageDescription(EnemyDescription.UFO,
-							EnemyMovement.MOVEMENT4, 5, 10),
+							EnemyMovement.MOVEMENT4, 3, 10),
 					new StageDescription(EnemyDescription.UFO,
-							EnemyMovement.MOVEMENT3, 3, 0),
+							EnemyMovement.MOVEMENT3, 5, 0),
 					new StageDescription(EnemyDescription.UFO,
-							EnemyMovement.MOVEMENT4, 3, -1),
+							EnemyMovement.MOVEMENT4, 5, -1),
 					new StageDescription(EnemyDescription.BIG_SNILSSON,
 							EnemyMovement.MOVEMENT3, 5, 0),
 					new StageDescription(EnemyDescription.BIG_SNILSSON,
@@ -29,26 +27,36 @@ public enum Level {
 			}
 	),
 	LEVEL2(
-			new StageDescription[]{new StageDescription(EnemyDescription.UFO,
-					EnemyMovement.MOVEMENT1, 5, 10),
-					new StageDescription(EnemyDescription.UFO,
-							EnemyMovement.MOVEMENT3, 5, 0),
-					new StageDescription(EnemyDescription.UFO,
-							EnemyMovement.MOVEMENT4, 5, -1),
+			new StageDescription[]{new StageDescription(EnemyDescription.UFO2,
+					EnemyMovement.MOVEMENT7, 1, 20),
+					new StageDescription(EnemyDescription.UFO2,
+							EnemyMovement.MOVEMENT3, 1, 20),
+					new StageDescription(EnemyDescription.UFO2,
+							EnemyMovement.MOVEMENT4, 1, -1),
 					new StageDescription(EnemyDescription.SNILSSON,
 							EnemyMovement.MOVEMENT1, 3, 0),
 					new StageDescription(EnemyDescription.SNILSSON,
 							EnemyMovement.MOVEMENT3, 3, 0),
 					new StageDescription(EnemyDescription.SNILSSON,
 							EnemyMovement.MOVEMENT4, 3, -1),
+					new StageDescription(EnemyDescription.UFO2,
+							EnemyMovement.MOVEMENT7, 1, 5),
+					new StageDescription(EnemyDescription.UFO2,
+							EnemyMovement.MOVEMENT3, 1, 3),
+					new StageDescription(EnemyDescription.UFO2,
+							EnemyMovement.MOVEMENT4, 1, -1),
 					new StageDescription(EnemyDescription.BIG_SNILSSON,
 							EnemyMovement.MOVEMENT1, 3, 0),
 					new StageDescription(EnemyDescription.BIG_SNILSSON,
 							EnemyMovement.MOVEMENT3, 3, 0),
 					new StageDescription(EnemyDescription.BIG_SNILSSON,
 							EnemyMovement.MOVEMENT4, 3, -1),
-					new StageDescription(EnemyDescription.SHIP_BOSS3,
-							EnemyMovement.MOVEMENT1, 1, -1)
+					new StageDescription(EnemyDescription.UFO2,
+							EnemyMovement.MOVEMENT3, 1, 0),
+					new StageDescription(EnemyDescription.UFO2,
+							EnemyMovement.MOVEMENT4, 1, -1),
+					new StageDescription(EnemyDescription.SHIP_BOSS2,
+							EnemyMovement.MOVEMENT6, 1, -1)
 			}
 	),
 	LEVEL3(
@@ -114,10 +122,12 @@ public enum Level {
 							EnemyMovement.MOVEMENT1, 3, 0),
 					new StageDescription(EnemyDescription.BIG_SNILSSON,
 							EnemyMovement.MOVEMENT3, 3, 0),
-					new StageDescription(EnemyDescription.BIG_SNILSSON,
-							EnemyMovement.MOVEMENT4, 3, -1),
-					new StageDescription(EnemyDescription.SHIP_BOSS3,
-							EnemyMovement.MOVEMENT1, 1, -1)
+					new StageDescription(EnemyDescription.SHIELD4,
+							EnemyMovement.MOVEMENT5, 1, 0),
+					new StageDescription(EnemyDescription.SHIELD4,
+							EnemyMovement.MOVEMENT5, 1, 0),
+					new StageDescription(EnemyDescription.SHIP_BOSS4,
+							EnemyMovement.MOVEMENT5, 1, -1)
 			}
 	);
 

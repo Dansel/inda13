@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.gamestate.levels.BulletDescription;
 import com.me.Javaga.managers.GameKeys;
 import com.me.Javaga.managers.GameStateManager;
+import com.me.Javaga.managers.InformationDrawer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -85,6 +86,7 @@ public class Player extends SpaceObject {
 		sprite.setY(yPos);
 		//Update hitbox
 		hitbox.setCenter(xCenter, yCenter);
+		InformationDrawer.setRemainingLife(health - 1);
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.me.Javaga.gamestate.levels;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.me.Javaga.managers.GameStateManager;
+import com.me.Javaga.managers.InformationDrawer;
 import com.me.Javaga.spaceobject.Boss;
 import com.me.Javaga.spaceobject.Bullet;
 import com.me.Javaga.spaceobject.Enemy;
@@ -109,7 +110,7 @@ public class EnemySpawner {
 		if (stageIndex + 1 >= currentLevel.getLevelLenght()) {
 			stageIndex = -1;
 			levelIndex++;
-			System.out.println("new Level");
+			InformationDrawer.setCurretLevel(levelIndex + 1);
 			currentLevel = Level.getLevel(levelIndex + 1);
 			player.resetHealth();
 		}
