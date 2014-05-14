@@ -1,7 +1,6 @@
 package com.me.Javaga.spaceobject;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.gamestate.levels.BulletDescription;
 
 import java.util.ArrayList;
@@ -79,11 +78,7 @@ public class Bullet extends SpaceObject {
 		} else {
 			disposeIndex++;
 			if (disposeIndex % 10 == 0) {
-				if (draw) {
-					draw = false;
-				} else {
-					draw = true;
-				}
+				draw = (draw) ? false : true;
 			}
 		}
 	}
@@ -102,7 +97,8 @@ public class Bullet extends SpaceObject {
 
 	/**
 	 * Get the damage which the bullet causes
-	 * @return
+	 *
+	 * @return the damage which the bullet deals
 	 */
 	public float getDamage() {
 		return description.getDamage();
@@ -110,6 +106,7 @@ public class Bullet extends SpaceObject {
 
 	/**
 	 * Check if the bullet is indesctrible and doesn't get destroyed after it killed something
+	 *
 	 * @return True if the bullet doesn't get destroyed on impact, false if it does
 	 */
 	public boolean isIndestructable() {
@@ -118,6 +115,7 @@ public class Bullet extends SpaceObject {
 
 	/**
 	 * Check if the bullet collides with other bullets
+	 *
 	 * @param bullets An arrayList of bullets
 	 * @return true if the colide, false if the don't
 	 */

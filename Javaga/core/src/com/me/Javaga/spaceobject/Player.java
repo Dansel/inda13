@@ -2,7 +2,6 @@ package com.me.Javaga.spaceobject;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.gamestate.levels.BulletDescription;
 import com.me.Javaga.managers.GameKeys;
 import com.me.Javaga.managers.GameStateManager;
@@ -92,8 +91,8 @@ public class Player extends SpaceObject {
 	/**
 	 * Check for collisions
 	 *
-	 * @param enemyBullets
-	 * @return true
+	 * @param enemyBullets An arraylist of enemybullets
+	 * @return true if the player is hit
 	 */
 	@Override
 	public boolean checkForCollision(ArrayList<Bullet> enemyBullets) {

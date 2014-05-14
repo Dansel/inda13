@@ -30,7 +30,7 @@ public class WelcomeState extends GameState {
 				MusicManager.startNewSong(MusicManager.PLAYSONG);
 			}
 		};
-		startGame.setSprite("start_game.png");
+		startGame.setSprite(START);
 		menuContainer.addButton(startGame);
 	}
 

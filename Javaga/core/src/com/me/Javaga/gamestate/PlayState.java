@@ -3,7 +3,6 @@ package com.me.Javaga.gamestate;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.gamestate.levels.EnemySpawner;
-import com.me.Javaga.gamestate.levels.Level;
 import com.me.Javaga.managers.*;
 import com.me.Javaga.spaceobject.Bullet;
 import com.me.Javaga.spaceobject.Enemy;

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.managers.GameStateManager;
 
 /**
+ * Unused class so far
  * Created by Dansel on 2014-04-30.
  */
 public class MenuState extends GameState {

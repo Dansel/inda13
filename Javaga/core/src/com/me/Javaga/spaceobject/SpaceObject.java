@@ -9,6 +9,8 @@ import com.badlogic.gdx.math.Rectangle;
 import java.util.ArrayList;
 
 /**
+ * An abstract class describing the essentials of all
+ * space objects in the game
  * Created by Dansel on 2014-04-30.
  */
 public abstract class SpaceObject {
@@ -90,7 +92,8 @@ public abstract class SpaceObject {
 
 	/**
 	 * Check if an object should be discarded and the dispose method should be called
-	 * @return
+	 *
+	 * @return True if the obejct should be disposed as soon as possible, otherwise false
 	 */
 	public boolean isDisposable() {
 		return isDisposable;
@@ -121,8 +124,8 @@ public abstract class SpaceObject {
 		return hitbox;
 	}
 
-	public void spriteSetUp(String FILENAME) {
-		sprite = new Sprite(new Texture(Gdx.files.internal(FILENAME)));
+	public void spriteSetUp(String filename) {
+		sprite = new Sprite(new Texture(Gdx.files.internal(filename)));
 
 		xPos = xCenter - sprite.getWidth() / 2;
 		yPos = yCenter - sprite.getHeight() / 2;
@@ -171,11 +174,7 @@ public abstract class SpaceObject {
 			}
 			disposeIndex++;
 			if (disposeIndex % 10 == 0) {
-				if (draw) {
-					draw = false;
-				} else {
-					draw = true;
-				}
+				draw = (draw) ? false : true;
 			}
 		}
 	}

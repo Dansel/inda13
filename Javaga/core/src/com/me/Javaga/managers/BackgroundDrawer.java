@@ -53,9 +53,7 @@ public class BackgroundDrawer {
 	 */
 	public static void draw(SpriteBatch batch) {
 		//draw stars
-		Iterator<Star> iterator = stars.iterator();
-		while (iterator.hasNext()) {
-			Star star = iterator.next();
+		for (Star star : stars) {
 			star.draw(batch);
 		}
 	}

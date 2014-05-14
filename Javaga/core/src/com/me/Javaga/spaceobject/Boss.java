@@ -6,6 +6,8 @@ import com.me.Javaga.managers.GameStateManager;
 import java.util.ArrayList;
 
 /**
+ * A boss class, a subclass of enemies which generally are stronger and
+ * have a little more edge to them
  * Created by Lukas on 2014-05-13.
  */
 public class Boss extends Enemy {

@@ -2,10 +2,8 @@ package com.me.Javaga.spaceobject;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
-import com.me.Javaga.gamestate.levels.BulletDescription;
+import com.badlogic.gdx.math.Vector2;;
 import com.me.Javaga.gamestate.levels.EnemyDescription;
 import com.me.Javaga.managers.GameStateManager;
 import com.me.Javaga.managers.InformationDrawer;
@@ -100,11 +98,7 @@ public class Enemy extends SpaceObject {
 		} else {
 			disposeIndex++;
 			if (disposeIndex % 10 == 0) {
-				if (draw) {
-					draw = false;
-				} else {
-					draw = true;
-				}
+				draw = (draw) ? false : true;
 			}
 		}
 	}
@@ -185,8 +179,8 @@ public class Enemy extends SpaceObject {
 	/**
 	 * Push the enemey object in a certain direction
 	 *
-	 * @param speed
-	 * @param degree
+	 * @param speed  The speed of the direction, or the length of the direction vector
+	 * @param degree The degree of the direction
 	 */
 	public void setDirection(float speed, float degree) {
 		direction = new Vector2((float) Math.cos(Math.toRadians(degree) * speed),
@@ -195,8 +189,9 @@ public class Enemy extends SpaceObject {
 
 	/**
 	 * Add a new goal to the enemy's list of goals
-	 * @param x
-	 * @param y
+	 *
+	 * @param x x coordinate of the goal
+	 * @param y y coordinate of the goal
 	 */
 	public void addNewGoal(float x, float y) {
 		goals.add(new Vector2(x, y));
@@ -205,8 +200,8 @@ public class Enemy extends SpaceObject {
 	/**
 	 * Remove the current goal and add new one
 	 *
-	 * @param x
-	 * @param y
+	 * @param x x coordinate of the goal
+	 * @param y y coordinate of the goal
 	 */
 	public void setCurrentGoal(float x, float y) {
 		goals.remove(goalIndex);
@@ -245,7 +240,7 @@ public class Enemy extends SpaceObject {
 	}
 
 	/**
-	 *Dispose all components in the object, no other methods can be called after this
+	 * Dispose all components in the object, no other methods can be called after this
 	 */
 	@Override
 	public void dispose() {

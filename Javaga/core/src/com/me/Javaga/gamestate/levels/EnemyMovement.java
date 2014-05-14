@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
+ * Describes the movement of enemies with predetermined coordinates
  * Created by Lukas on 2014-05-12.
  */
 public enum EnemyMovement {

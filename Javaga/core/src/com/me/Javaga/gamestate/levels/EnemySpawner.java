@@ -1,6 +1,5 @@
 package com.me.Javaga.gamestate.levels;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.me.Javaga.managers.GameStateManager;
 import com.me.Javaga.managers.InformationDrawer;
@@ -49,7 +48,7 @@ public class EnemySpawner {
 	/**
 	 * Spawn a new enemy wave
 	 *
-	 * @param stage
+	 * @param stage The current stage
 	 */
 	private void setEnemyWave(Level.StageDescription stage) {
 		EnemyMovement movement = stage.getMovementType();
@@ -127,7 +126,7 @@ public class EnemySpawner {
 	 * @return The next stageDescritpion or quits the game if there are no more levels
 	 */
 	private Level.StageDescription getNextStage() {
-		if (stageIndex + 1 >= currentLevel.getLevelLenght()) {
+		if (stageIndex + 1 >= currentLevel.getLevelLength()) {
 			stageIndex = -1;
 			levelIndex++;
 			InformationDrawer.setCurretLevel(levelIndex + 1);

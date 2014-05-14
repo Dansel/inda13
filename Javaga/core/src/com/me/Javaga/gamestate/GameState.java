@@ -28,7 +28,7 @@ public abstract class GameState {
 	/**
 	 * Draw something onto the canvas
 	 *
-	 * @param batch
+	 * @param batch A sprite batch
 	 */
 	public abstract void draw(SpriteBatch batch);
 

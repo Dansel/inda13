@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ * A star which flashes in the background
  * Created by Lukas on 2014-05-05.
  */
 public class Star extends SpaceObject {
 
 	private final static String FILENAME = "star.png";
-	private Random random;
 
 
 	public Star() {
@@ -22,7 +22,7 @@ public class Star extends SpaceObject {
 
 	@Override
 	public void init() {
-		random = new Random();
+		Random random = new Random();
 		xCenter = random.nextFloat() * Gdx.graphics.getWidth();
 		yCenter = Gdx.graphics.getHeight();
 

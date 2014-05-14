@@ -33,9 +33,7 @@ public class ButtonContainer {
 	 * Handle the user input
 	 */
 	public void handleInput() {
-		Iterator<Button> iterator = buttons.iterator();
-		while (iterator.hasNext()) {
-			Button button = iterator.next();
+		for (Button button : buttons) {
 			if (button.isHovering()) {
 				if (currentButton != null) {
 					currentButton.setSelected(false);

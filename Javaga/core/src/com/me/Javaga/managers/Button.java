@@ -19,10 +19,6 @@ public class Button {
 	protected Sprite sprite;
 	protected GameStateManager gameStateManager;
 	protected Rectangle rectangle;
-	protected boolean initialized;
-
-	protected float HEIGHT;
-	protected float WIDTH;
 
 	protected float sWidth;
 	protected float sHeight;
@@ -41,7 +37,7 @@ public class Button {
 	/**
 	 * Set the sprite of button, this method should be overriden when a button object is created
 	 *
-	 * @param filename
+	 * @param filename the name of the sprite
 	 */
 	//Should be overriden by all objects
 	public void setSprite(String filename) {
@@ -103,7 +99,8 @@ public class Button {
 	/**
 	 * Set the scale of the button
 	 *
-	 * @param scaleFactor
+	 * @param scaleFactor a float specifying the scale factor,
+	 *                    less than 1 to make it smaller and larger than 1 to make it bigger
 	 */
 	public void setScale(float scaleFactor) {
 		SCALEFACTOR = scaleFactor;
@@ -113,7 +110,7 @@ public class Button {
 	/**
 	 * Draw the button onto the canvas
 	 *
-	 * @param batch
+	 * @param batch A sprite batch
 	 */
 	public void draw(SpriteBatch batch) {
 		if (sprite != null) {

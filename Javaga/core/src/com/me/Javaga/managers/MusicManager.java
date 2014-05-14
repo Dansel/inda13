@@ -12,7 +12,6 @@ public class MusicManager {
 	public static final String PLAYSONG = "Test.mp3";
 	public static final String WELCOMESONG = "Test2.mp3";
 	private static Music musicPlayer;
-	private static float musicVolume = 0.3f;
 
 	/**
 	 * Dispose the current song if something was playing and start the new song
@@ -25,7 +24,7 @@ public class MusicManager {
 		}
 		musicPlayer = Gdx.audio.newMusic(Gdx.files.internal(filename));
 		musicPlayer.play();
-		musicPlayer.setVolume(musicVolume);
+		musicPlayer.setVolume(GameStateManager.getMusicVolume());
 		musicPlayer.setLooping(true);
 	}
 
@@ -45,6 +44,7 @@ public class MusicManager {
 
 	/**
 	 * Set if the song which is playing should start looping
+	 *
 	 * @param looping true if the song should start looping, false if it should not
 	 */
 	public static void setLooping(boolean looping) {

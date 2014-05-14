@@ -1,7 +1,6 @@
 package com.me.Javaga.managers;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -43,6 +42,7 @@ public class InformationDrawer {
 	 * Draw the information to the canvas, this
 	 * method should probably be called last of
 	 * all draw method sense this should be in the foreground
+	 *
 	 * @param batch A SpriteBatch
 	 */
 	public static void draw(SpriteBatch batch) {
@@ -58,6 +58,7 @@ public class InformationDrawer {
 
 	/**
 	 * Set the players remaining lifes
+	 *
 	 * @param life An int stating the amount of lifes the player have left
 	 */
 	public static void setRemainingLife(float life) {
@@ -66,6 +67,7 @@ public class InformationDrawer {
 
 	/**
 	 * Set the current level of the game
+	 *
 	 * @param level current level number
 	 */
 	public static void setCurretLevel(int level) {
@@ -74,6 +76,7 @@ public class InformationDrawer {
 
 	/**
 	 * Add more point to the players score
+	 *
 	 * @param point Number of points
 	 */
 	public static void updatePoints(int point) {

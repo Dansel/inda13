@@ -190,9 +190,9 @@ public enum Level {
 		}
 
 		/**
-		 * Return the enemydescription
+		 * Return the enemyDescription
 		 *
-		 * @return
+		 * @return EnemyDescription
 		 */
 		public EnemyDescription getEnemyType() {
 			return this.enemyType;
@@ -210,7 +210,7 @@ public enum Level {
 		/**
 		 * The number of enemies whish should be spawned during this stage
 		 *
-		 * @return
+		 * @return number of enemies
 		 */
 		public int getNumberOfEnemies() {
 			return this.numberOfEnemies;
@@ -235,9 +235,9 @@ public enum Level {
 		}
 
 		/**
-		 * Retunr the time it shoudl take for the next enemy sqaud to appear, in seconds
+		 * Retunr the time it should take for the next enemy squad to appear, in seconds
 		 *
-		 * @return
+		 * @return and int stating the time for the next spawning to occur
 		 */
 		public int time() {
 			return this.time;
@@ -271,7 +271,7 @@ public enum Level {
 	 * Get a specific stage in the level
 	 *
 	 * @param index
-	 * @return A Stagedescription
+	 * @return A StageDescription
 	 */
 
 	public StageDescription getStage(int index) {
@@ -283,7 +283,7 @@ public enum Level {
 	 *
 	 * @return
 	 */
-	public int getLevelLenght() {
+	public int getLevelLength() {
 		return stages.length;
 	}
 }

@@ -44,6 +44,7 @@ public class GameStateManager {
 
 	/**
 	 * Set the music volume of the game
+	 *
 	 * @param volume a float between 0-1, 0 is lowest and 1 highest
 	 */
 	public static void setMusicVolume(float volume) {
@@ -52,6 +53,7 @@ public class GameStateManager {
 
 	/**
 	 * Get the effect volume of the game
+	 *
 	 * @return a float between 0-1, 0 is lowest and 1 highest
 	 */
 	public static float getEffectVolume() {
@@ -60,8 +62,9 @@ public class GameStateManager {
 
 	/**
 	 * Get the effect volume of the game
-	 * @return a float between 0-1, 0 is lowest and 1 highest
-	*/
+	 *
+	 * @param volume a float between 0-1, 0 is lowest and 1 highest
+	 */
 	public static void setEffectVolume(float volume) {
 		effectVolume = volume;
 	}
@@ -123,7 +126,8 @@ public class GameStateManager {
 
 	/**
 	 * Dispose the current state and all the things within it
-	 * @param state
+	 *
+	 * @param state the state constant
 	 */
 	public void dispose(int state) {
 		if (state == MENU) {
