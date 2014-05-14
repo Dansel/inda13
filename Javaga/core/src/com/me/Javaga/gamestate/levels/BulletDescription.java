@@ -1,8 +1,7 @@
 package com.me.Javaga.gamestate.levels;
 
-import com.me.Javaga.spaceobject.Bullet;
-
 /**
+ * This enum class describes all kinds of bullet within the game
  * Created by Lukas on 2014-05-12.
  */
 public enum BulletDescription {
@@ -76,7 +75,7 @@ public enum BulletDescription {
 			10,
 			20,
 			3000,
-			0.1f,
+			0.2f,
 			false,
 			false
 	),
@@ -100,6 +99,16 @@ public enum BulletDescription {
 	private boolean indestructable;
 	private boolean motionSeeker;
 
+	/**
+	 * @param filename        the name of the sprite file
+	 * @param scale           the scale of the sprite
+	 * @param speed           the speed of the bullet
+	 * @param shootLimit      the time the gun needs to rest, in millseconds
+	 * @param lifeTime        the time the bullet will be active, in milliseconds
+	 * @param damage          the amount of damage the bullet deals
+	 * @param indesctructable if the bullet should continue to exist even after it kills an object, set this to true
+	 * @param motionSeeker    true if the bullet should follow the player
+	 */
 	private BulletDescription(String filename, float scale, float speed,
 	                          long shootLimit, long lifeTime, float damage, boolean indesctructable, boolean motionSeeker) {
 		this.filename = filename;

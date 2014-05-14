@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.managers.*;
 
 /**
+ * This is the class which shows the start screen of the game
  * Created by Dansel on 2014-04-30.
  */
 public class WelcomeState extends GameState {

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
 /**
+ * A button which reacts to user input
  * Created by Lukas on 2014-05-06.
  */
 public class Button {
@@ -38,7 +39,7 @@ public class Button {
 	}
 
 	/**
-	 * Set the sprite
+	 * Set the sprite of button, this method should be overriden when a button object is created
 	 *
 	 * @param filename
 	 */
@@ -48,6 +49,9 @@ public class Button {
 		init();
 	}
 
+	/**
+	 * Initialize all fields and components
+	 */
 	public void init() {
 		// Does the usuall initializations
 		if (sprite != null) {
@@ -70,7 +74,11 @@ public class Button {
 		}
 	}
 
-	//Override in object
+	/**
+	 * Preform an action of some sort when the button is pressed,
+	 * this method should be overriden and implemented when a button
+	 * object is created and added to a buttonContainer
+	 */
 	public void preformAction() {
 		// Overide this in all objects
 	}
@@ -92,17 +100,30 @@ public class Button {
 		}
 	}
 
+	/**
+	 * Set the scale of the button
+	 *
+	 * @param scaleFactor
+	 */
 	public void setScale(float scaleFactor) {
 		SCALEFACTOR = scaleFactor;
 		sprite.setScale(SCALEFACTOR);
 	}
 
+	/**
+	 * Draw the button onto the canvas
+	 *
+	 * @param batch
+	 */
 	public void draw(SpriteBatch batch) {
 		if (sprite != null) {
 			sprite.draw(batch);
 		}
 	}
 
+	/**
+	 * Dispose the button properly when it isn't used anymore
+	 */
 	public void dispose() {
 		sprite.getTexture().dispose();
 	}

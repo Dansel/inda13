@@ -55,7 +55,7 @@ public class Player extends SpaceObject {
 	@Override
 	public void update() {
 		if (!isHealthy) {
-			hurt();
+			hurt(); // start flashing if the player is hurt
 		}
 
 		if (GameKeys.isDown(GameKeys.UP)) {
@@ -89,6 +89,12 @@ public class Player extends SpaceObject {
 		InformationDrawer.setRemainingLife(health - 1);
 	}
 
+	/**
+	 * Check for collisions
+	 *
+	 * @param enemyBullets
+	 * @return true
+	 */
 	@Override
 	public boolean checkForCollision(ArrayList<Bullet> enemyBullets) {
 		Iterator<Bullet> iterator = enemyBullets.iterator();

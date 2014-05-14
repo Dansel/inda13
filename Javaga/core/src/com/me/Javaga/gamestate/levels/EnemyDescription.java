@@ -1,24 +1,19 @@
 package com.me.Javaga.gamestate.levels;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
-import com.me.Javaga.spaceobject.Bullet;
-
-import java.util.ArrayList;
-
 /**
+ * This enum contains a description of all enemy classes
  * Created by Lukas on 2014-05-12.
  */
 public enum EnemyDescription {
 	BIG_SNILSSON(
 			"snilsson.png", // filename
-			0.5f,
-			1f,
-			2f,
-			60,
-			BulletDescription.BULLETS,
-			1,
-			false
+			0.5f, // scale
+			1f, // hitbox scale
+			2f, // speed
+			60, // accyracy
+			BulletDescription.BULLETS, // bullet type
+			1, // health
+			false // is boss
 	),
 	SNILSSON(
 			"snilsson.png",
@@ -120,6 +115,18 @@ public enum EnemyDescription {
 	private int health;
 	private boolean isBoss;
 
+	/**
+	 * Create a description of an enemy type
+	 *
+	 * @param filename    The file name of the sprite for the enemy
+	 * @param scale       A float specifying the scale of the sprite
+	 * @param hitBoxScale A float specifying how the hitbox should be scaled(compared to the scaled sprite
+	 * @param speed       The speed if the enemy
+	 * @param accuracy    How accurate the enemys aiming should be, 0 is perfect and 360 is the worst
+	 * @param bulletType  A bullet type
+	 * @param health      How much healt the enemy should have
+	 * @param isBoss      A boolean stating if the enemy is a boss or a normal enemy
+	 */
 	private EnemyDescription(String filename, float scale, float hitBoxScale,
 	                         float speed, float accuracy, BulletDescription bulletType, int health, boolean isBoss) {
 		this.filename = filename;
@@ -132,35 +139,76 @@ public enum EnemyDescription {
 		this.isBoss = isBoss;
 	}
 
+	/**
+	 * Get the file name of sprite file
+	 *
+	 * @return String filename
+	 */
 	public String getFilename() {
 		return this.filename;
 	}
 
+	/**
+	 * Get the scale of the enemy
+	 *
+	 * @return float scale
+	 */
 	public float getScale() {
 		return this.scale;
 	}
 
+
+	/**
+	 * Get the scale of the hitbox
+	 *
+	 * @return float hitbox scale
+	 */
 	public float getHitBoxScale() {
 		return this.hitBoxScale;
 	}
 
+	/**
+	 * Get the speed
+	 *
+	 * @return float speed
+	 */
 	public float getSpeed() {
 		return this.speed;
 	}
 
 
+	/**
+	 * Get the enemey accuracy
+	 *
+	 * @return float accuracy, 0 is perfect and 360 is horrible
+	 */
 	public float getAccuracy() {
 		return this.accuracy;
 	}
 
+	/**
+	 * Get the health this enemy type have
+	 *
+	 * @return int health
+	 */
 	public int getHealth() {
 		return this.health;
 	}
 
+	/**
+	 * The type of bullet this enemy type has, is specified in the BulletDescription enum
+	 *
+	 * @return A BulletDescription
+	 */
 	public BulletDescription getBulletType() {
 		return this.bulletType;
 	}
 
+	/**
+	 * States if the enemy is a boss or not
+	 *
+	 * @return True if the enemy type is a boss, otherwise false
+	 */
 	public boolean isBoss() {
 		return this.isBoss;
 	}

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
+ * Draws information for the player onto the screen
  * Created by Lukas on 2014-05-14.
  */
 public class InformationDrawer {
@@ -31,10 +32,19 @@ public class InformationDrawer {
 		font.setScale(0.6f);
 	}
 
+	/**
+	 * Update the information drawer
+	 */
 	public static void update() {
 
 	}
 
+	/**
+	 * Draw the information to the canvas, this
+	 * method should probably be called last of
+	 * all draw method sense this should be in the foreground
+	 * @param batch A SpriteBatch
+	 */
 	public static void draw(SpriteBatch batch) {
 		sprite.setY(-sprite.getHeight() / 2 + 20);
 		for (float i = 0, x = -sprite.getWidth() / 2 + 20; i < remainingLife; i++) {
@@ -46,18 +56,33 @@ public class InformationDrawer {
 		font.draw(batch, "Current Level: " + Integer.toString(currentLevel), 0, 90);
 	}
 
+	/**
+	 * Set the players remaining lifes
+	 * @param life An int stating the amount of lifes the player have left
+	 */
 	public static void setRemainingLife(float life) {
 		remainingLife = life;
 	}
 
+	/**
+	 * Set the current level of the game
+	 * @param level current level number
+	 */
 	public static void setCurretLevel(int level) {
 		currentLevel = level;
 	}
 
+	/**
+	 * Add more point to the players score
+	 * @param point Number of points
+	 */
 	public static void updatePoints(int point) {
 		points += point;
 	}
 
+	/**
+	 * Reset all the fields
+	 */
 	public static void reset() {
 		points = 0;
 		currentLevel = 1;

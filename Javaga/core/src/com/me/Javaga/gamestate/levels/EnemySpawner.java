@@ -12,6 +12,7 @@ import com.me.Javaga.spaceobject.Player;
 import java.util.ArrayList;
 
 /**
+ * The class whish is responisble for spawning new enemies and keeping track on the current level
  * Created by Lukas on 2014-05-12.
  */
 public class EnemySpawner {
@@ -26,9 +27,15 @@ public class EnemySpawner {
 	private int stageIndex;
 	private int levelIndex;
 
+	/**
+	 * @param enemyBullets     The arraylist which contains all the enemy bullets
+	 * @param enemies          The arraylist in which all enemies should be spawned
+	 * @param player           The player of the playstate class
+	 * @param gameStateManager The games gamestate manager
+	 */
 	public EnemySpawner(
-	                    ArrayList<Bullet> enemyBullets, ArrayList<Enemy> enemies, Player player,
-	                    GameStateManager gameStateManager) {
+			ArrayList<Bullet> enemyBullets, ArrayList<Enemy> enemies, Player player,
+			GameStateManager gameStateManager) {
 		this.currentLevel = Level.LEVEL1;
 		this.stageIndex = -1;
 		this.enemyBullets = enemyBullets;
@@ -39,7 +46,12 @@ public class EnemySpawner {
 		this.currentTime = System.currentTimeMillis();
 	}
 
-	private void setEnemyWawe(Level.StageDescription stage) {
+	/**
+	 * Spawn a new enemy wave
+	 *
+	 * @param stage
+	 */
+	private void setEnemyWave(Level.StageDescription stage) {
 		EnemyMovement movement = stage.getMovementType();
 
 		Vector2 start = movement.getStartCoordinate();
@@ -88,6 +100,9 @@ public class EnemySpawner {
 		}
 	}
 
+	/**
+	 * If it is allowed to, this method will spawn a new wave of enemies onto the screen
+	 */
 	public void spawnEnemy() {
 		if (!canSpawn()) {
 			return;
@@ -98,7 +113,7 @@ public class EnemySpawner {
 			return;
 		}
 		if (!stage.rest()) {
-			setEnemyWawe(stage);
+			setEnemyWave(stage);
 		} else {
 			rest = true;
 		}
@@ -106,7 +121,12 @@ public class EnemySpawner {
 		currentTime = System.currentTimeMillis();
 	}
 
-	public Level.StageDescription getNextStage() {
+	/**
+	 * Returns the current stage description for the spawn enemies method
+	 *
+	 * @return The next stageDescritpion or quits the game if there are no more levels
+	 */
+	private Level.StageDescription getNextStage() {
 		if (stageIndex + 1 >= currentLevel.getLevelLenght()) {
 			stageIndex = -1;
 			levelIndex++;

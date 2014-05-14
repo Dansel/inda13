@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.me.Javaga.gamestate.levels.BulletDescription;
 
 /**
+ * A subclass of bullets which follows a target
  * Created by Lukas on 2014-05-13.
  */
 public class MotionSeeker extends Bullet {
@@ -12,13 +13,17 @@ public class MotionSeeker extends Bullet {
 	private Vector2 direction;
 	private float currentDegree;
 
-	public MotionSeeker(float xPos, float yPos, float degree, BulletDescription description, SpaceObject target) {
+	public MotionSeeker(float xPos, float yPos, float degree,
+	                    BulletDescription description, SpaceObject target) {
 		super(xPos, yPos, degree, description);
 		this.target = target;
 		direction = new Vector2(dX, dY);
 		currentDegree = degree;
 	}
 
+	/**
+	 * Update the bullet
+	 */
 	@Override
 	public void update() {
 		xPos += direction.x;
@@ -45,7 +50,7 @@ public class MotionSeeker extends Bullet {
 	}
 
 	/**
-	 * Update the direction for the enemy object
+	 * Update the direction towards the enemy object
 	 */
 	private void updateDirection() {
 		Vector2 newDirection = new Vector2(target.getX() - xCenter, target.getY() - yCenter);

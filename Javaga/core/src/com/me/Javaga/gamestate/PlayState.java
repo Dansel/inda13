@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
+ * This class handles all the game logic and iterates over all the objects in the game
  * Created by Dansel on 2014-04-30.
  */
 public class PlayState extends GameState {
@@ -158,6 +159,6 @@ public class PlayState extends GameState {
 	 * Spawn enemies onto the level
 	 */
 	public void spawnEnemies() {
-			spawner.spawnEnemy();
+		spawner.spawnEnemy();
 	}
 }

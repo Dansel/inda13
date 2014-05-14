@@ -15,6 +15,10 @@ public class Boss extends Enemy {
 		super(xPos, yPos, description, enemyBullets, player);
 	}
 
+	/**
+	 * Update the current goals, unlike the enemy,
+	 * the boss will start over if it is out of new goals
+	 */
 	@Override
 	protected void updateGoal() {
 		if (goalIndex + 1 < goals.size()) {
@@ -26,6 +30,10 @@ public class Boss extends Enemy {
 		}
 	}
 
+	/**
+	 * Fire a bullet att the pllayer, unlike the enemy,
+	 * the boss can fire in all directions
+	 */
 	@Override
 	public void fire() {
 		if (System.currentTimeMillis() - time < shootLimit || outsideBourder) {

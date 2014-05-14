@@ -110,9 +110,10 @@ public class Enemy extends SpaceObject {
 	}
 
 	@Override
-	//TODO
-	// Need to decide how we should dispose us of our enemies
-	// when they leave the field
+
+	/**
+	 * Check if the enemy is outside the game or not
+	 */
 	public void wrap() {
 		if (xCenter > WIDTH || xCenter < 0 || yCenter > HEIGHT || yCenter < 0) {
 			outsideBourder = true;
@@ -121,6 +122,12 @@ public class Enemy extends SpaceObject {
 		}
 	}
 
+	/**
+	 * Check if any bullet hits the enemy and deals the appropriate damage
+	 *
+	 * @param bullets An arraylist of bullets
+	 * @return true if there was a collision
+	 */
 	@Override
 	public boolean checkForCollision(ArrayList<Bullet> bullets) {
 		Iterator<Bullet> iterator = bullets.iterator();
@@ -186,6 +193,11 @@ public class Enemy extends SpaceObject {
 				(float) Math.sin(Math.toRadians(degree)) * speed);
 	}
 
+	/**
+	 * Add a new goal to the enemy's list of goals
+	 * @param x
+	 * @param y
+	 */
 	public void addNewGoal(float x, float y) {
 		goals.add(new Vector2(x, y));
 	}
@@ -220,6 +232,9 @@ public class Enemy extends SpaceObject {
 		}
 	}
 
+	/**
+	 * Update the current goal
+	 */
 	protected void updateGoal() {
 		if (goalIndex + 1 < goals.size()) {
 			goalIndex++;
@@ -229,6 +244,9 @@ public class Enemy extends SpaceObject {
 		}
 	}
 
+	/**
+	 *Dispose all components in the object, no other methods can be called after this
+	 */
 	@Override
 	public void dispose() {
 		super.dispose();

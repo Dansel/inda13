@@ -1,6 +1,7 @@
 package com.me.Javaga.gamestate.levels;
 
 /**
+ * The enum contains a description of all the levels and all the different stages in the game
  * Created by Dansel on 2014-05-05.
  */
 public enum Level {
@@ -134,6 +135,9 @@ public enum Level {
 	private StageDescription[] stages;
 	public static final int NUMBER_OF_LEVELS = 5;
 
+	/**
+	 * @param stages an array consisting of stageDescriptiont which describes the level
+	 */
 	private Level(StageDescription[] stages) {
 		this.stages = stages;
 	}
@@ -146,6 +150,16 @@ public enum Level {
 		private boolean gameOver;
 		private boolean rest;
 
+		/**
+		 * @param enemyType       An EnemyDescription object which describes the enemy type
+		 *                        (if you wish to spawn several different enemies, simply create a new stage and set this time to 0)
+		 * @param movementType    An EnemyMovement object which describes the movement of the enemywave
+		 * @param numberOfEnemies the number of enemies which should be spawned during this wave
+		 * @param time            The time it should take for the follow
+		 *                        enemy squad to spawn, in seconds or -1
+		 *                        if all enemies in the current squad needs to be defeated beforde
+		 *                        the next wave is launched
+		 */
 		public StageDescription(EnemyDescription enemyType, EnemyMovement movementType,
 		                        int numberOfEnemies, int time) {
 			this.enemyType = enemyType;
@@ -155,41 +169,88 @@ public enum Level {
 		}
 
 
+		/**
+		 * If you want to show that the game is now over, use this constructor
+		 *
+		 * @param gameOver true if the game is over
+		 */
 		public StageDescription(boolean gameOver) {
 			this.gameOver = gameOver;
 		}
 
+		/**
+		 * If you want the game to take a pause during a specified time without spawning enemies, use this constructor
+		 *
+		 * @param rest true if the game should rest
+		 * @param time the amount of the the rest should take, in seconds
+		 */
 		public StageDescription(boolean rest, int time) {
 			this.rest = rest;
 			this.time = time;
 		}
 
+		/**
+		 * Return the enemydescription
+		 *
+		 * @return
+		 */
 		public EnemyDescription getEnemyType() {
 			return this.enemyType;
 		}
 
+		/**
+		 * An EnenemyMovement object which specifies the movement pattern of the enemie
+		 *
+		 * @return An EnemyMovement Object
+		 */
 		public EnemyMovement getMovementType() {
 			return this.movementType;
 		}
 
+		/**
+		 * The number of enemies whish should be spawned during this stage
+		 *
+		 * @return
+		 */
 		public int getNumberOfEnemies() {
 			return this.numberOfEnemies;
 		}
 
+		/**
+		 * True if the game is over
+		 *
+		 * @return true if the game is over, otherwise false
+		 */
 		public boolean isGameOver() {
 			return this.gameOver;
 		}
 
+		/**
+		 * True if the game should take a rest without spawning any enemies
+		 *
+		 * @return true if rest, othervise false
+		 */
 		public boolean rest() {
 			return this.rest;
 		}
 
+		/**
+		 * Retunr the time it shoudl take for the next enemy sqaud to appear, in seconds
+		 *
+		 * @return
+		 */
 		public int time() {
 			return this.time;
 		}
 
 	}
 
+	/**
+	 * Returns the level based on the input number, 1 returns level 1 etc.
+	 *
+	 * @param level the number of the level
+	 * @return The level with that specified number
+	 */
 	public static Level getLevel(int level) {
 		if (level == 1) {
 			return LEVEL1;
@@ -206,10 +267,22 @@ public enum Level {
 		}
 	}
 
+	/**
+	 * Get a specific stage in the level
+	 *
+	 * @param index
+	 * @return A Stagedescription
+	 */
+
 	public StageDescription getStage(int index) {
 		return stages[index];
 	}
 
+	/**
+	 * Returns the amount of stages which the level contains
+	 *
+	 * @return
+	 */
 	public int getLevelLenght() {
 		return stages.length;
 	}

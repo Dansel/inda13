@@ -126,6 +126,17 @@ public enum EnemyMovement {
 	private float dX;
 
 
+	/**
+	 * Create a movement pattern for an enemy
+	 *
+	 * @param startCoordinates The spawn point for the enemy
+	 * @param startDirection   The start direction for the enemy
+	 * @param coordinates      An array of coordinates which the enemy will visit
+	 * @param dY               In the case of several enemies using the same movement pattern at the same time
+	 *                         this should specify how mush space they should share vertically
+	 * @param dX               In the case of several enemies using the same movement pattern at the same time
+	 *                         this should specify how mush space they should share horizontally
+	 */
 	private EnemyMovement(Vector2 startCoordinates, Vector2 startDirection,
 	                      Vector2[] coordinates, float dY, float dX) {
 		this.startCoordinate = startCoordinates;
@@ -136,22 +147,47 @@ public enum EnemyMovement {
 
 	}
 
-	public Vector2[] getCoordinates() {
-		return this.coordinates;
-	}
-
+	/**
+	 * Get the start coordinates
+	 *
+	 * @return A Vector2
+	 */
 	public Vector2 getStartCoordinate() {
 		return this.startCoordinate;
 	}
 
+	/**
+	 * Get the start direction
+	 *
+	 * @return A Vector2
+	 */
 	public Vector2 getStartDirection() {
 		return this.startDirection;
 	}
 
+	/**
+	 * The array of coordinates
+	 *
+	 * @return A Vector2 array
+	 */
+	public Vector2[] getCoordinates() {
+		return this.coordinates;
+	}
+
+	/**
+	 * Get the vertically shared space
+	 *
+	 * @return a float
+	 */
 	public float getdY() {
 		return this.dY;
 	}
 
+	/**
+	 * Get the horizontally shared spaced
+	 *
+	 * @return a float
+	 */
 	public float getdX() {
 		return this.dX;
 	}

@@ -17,6 +17,14 @@ public class Bullet extends SpaceObject {
 	protected BulletDescription description;
 	protected long startTime;
 
+	/**
+	 * Create a bullet
+	 *
+	 * @param xPos        The start x coordinate
+	 * @param yPos        The start y coordinate
+	 * @param degree      The degree which the bullet should be fired in, 90 for straigth, 180 to the right, 270 for down etc.
+	 * @param description A BulletDescription object which specifies all characteristics of the bullet
+	 */
 	public Bullet(float xPos, float yPos, float degree, BulletDescription description) {
 		super(xPos, yPos);
 		this.description = description;
@@ -29,12 +37,18 @@ public class Bullet extends SpaceObject {
 		startTime = System.currentTimeMillis();
 	}
 
+	/**
+	 * Initialize all unitilized fields
+	 */
 	@Override
 	public void init() {
 		setScale(description.getScale());
 		spriteSetUp(description.getFilename());
 	}
 
+	/**
+	 * Update the bullet
+	 */
 	@Override
 	public void update() {
 		if (isHealthy) {
@@ -55,6 +69,9 @@ public class Bullet extends SpaceObject {
 		}
 	}
 
+	/**
+	 * Start flashing if the bullet is damaged and will soon be removed
+	 */
 	@Override
 	protected void hurt() {
 		if (disposeIndex > 50) {
@@ -71,6 +88,9 @@ public class Bullet extends SpaceObject {
 		}
 	}
 
+	/**
+	 * Dispose of the bullet if it escapes the games boundaries
+	 */
 	@Override
 	public void wrap() {
 		if ((xCenter - sWidth / 2 + 100 < 0) || (xCenter + sWidth / 2 - 100 > WIDTH)
@@ -80,14 +100,27 @@ public class Bullet extends SpaceObject {
 		}
 	}
 
+	/**
+	 * Get the damage which the bullet causes
+	 * @return
+	 */
 	public float getDamage() {
 		return description.getDamage();
 	}
 
+	/**
+	 * Check if the bullet is indesctrible and doesn't get destroyed after it killed something
+	 * @return True if the bullet doesn't get destroyed on impact, false if it does
+	 */
 	public boolean isIndestructable() {
 		return description.isIndestructable();
 	}
 
+	/**
+	 * Check if the bullet collides with other bullets
+	 * @param bullets An arrayList of bullets
+	 * @return true if the colide, false if the don't
+	 */
 	@Override
 	public boolean checkForCollision(ArrayList<Bullet> bullets) {
 		return false;
