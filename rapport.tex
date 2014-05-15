@@ -61,9 +61,12 @@ Vi siktar på att skapa en Galaga-klon i Java. Det ska alltså vara en top-down 
 Spelet fungerar så att man kontrollerar ett rymdskepp som ska skjuta ned utomjordingar som kommer från fönstrets övre kant och försöker röra sig nedåt. Målet är att förstöra dem innan de försvinner ut skärmen. Se http://en.wikipedia.org/wiki/Galaga
 
 \section{Programbeskrivning B}
-Programmet är utformat som ett klassiskt arkadspel som i huvudsak ska efterlikna det klassiska spelet Galaga med top-down view där man styr ett rymdskepp och ska skjuta ner fiendeskepp som kommer ner ifrån toppen av skärmen och som försöker 
+Programmet är utformat som ett klassiskt arkadspel som i huvudsak ska efterlikna det klassiska spelet Galaga med top-down view där man styr ett rymdskepp och ska skjuta ner fiendeskepp som kommer ner ifrån toppen av skärmen och försöker döda en. Vi har implementerat spelet med hjälp av programbiblioteket libGDX som har hjälpt oss med renderingen och inputhanteringen.
 
-\section{Användarbeskrivning}
+\section{Programbeskrivning C}
+Programmet blev ungefär som vi inledningsvis föreställde oss, att kalla det galaga-klon är dock kanske inte helt korrekt längre då vi har implementerat många saker i spelet som inte direkt är associerat med de ursprungliga galaga-spelen. Spelet innehåller dock de grundläggande aspekterna med rymdskepp och fiender och är fortfarande i samma stil som de klassiska arkadspelen som den försökt efterlikna.
+
+\section{Användarbeskrivning A}
 Vi tänker oss att personer som är sugna på att spela klassiska retrospel utan att köpa en arkadmaskin kan vara en potentiell målgrupp. Annars ingen, tyvärr.
 
 \section{Användarscenarie}
@@ -76,12 +79,20 @@ Based on a true story.
 \subsection{Scenarie 2}
 Pappa Per är på väg hem från en lång och slitsam dag på jobbet. På vägen hem ser han reklamen för Game On 2.0 på Tekniska Museet. Han kommer och tänka på alla fantastiska kvällar med sina vänner i arkadhallen när han var liten. Han tänker på Galaga och hur kul det var att spela. När han väl kommer hem så bingar han fram en lista på Galagakloner och den som ligger högst upp och har bäst omdömen är ju givetvis Javaga. Per laddar ned spelet och börjar tidsresan till barndomen. Och vilken resa det är! Sicken resa, Mycket fräck! Han känner sina mossiga gamla fädigheter komma tillbaks och upplever sann eufori. Fantastiskt.
 
-\section{Testplan}
+\section{Användarbeskrivning B}
+Vi föreställer oss att potentiella användare av vårt program skulle kunna vara vilken människa som helst som söker att slösa bort någon minut på att spel ett enkelt men underhållande spel i klassisk arkadspels-anda
+
+\section{Testplan A}
 Vi planerar att muta folk till att spela spelet och ge oss bra feedback. Vi planerar att göra detta vid minst två tillfällen, kanske mer om det finns tid. En viss mängd automatiserade tester kan förekomma.
 
 Testanvändaren förväntas spela spelet tills ögonen blöder och därefter berätta för oss hur fantisktiskt det var. 
 
-\section{Programdesign}
+\section{Testplan B}
+
+\section{Testplan C}
+Användartesterna gav oss den feedbacken vi behövde för att vi skulle kunna notera vissa luckor i vår design, dels var avsaknaden av en nivåräknare ganska besvärlig då det gjorde det svårt att få en uppfattning om man gjorde framsteg eller inte. Dessutom fanns det en avsaknad av en en poängräknare vilket många noterade var ett måste för ett spel i klassisk arkadspels-anda. Några testare tyckte även att den första nivån var lite för svår för ovana spelare vilket vi sedan tog i åtanke när vi sedan omdesignade banorna.
+
+\section{Programdesign A}
 Tanken är att dela upp programmet i flera klasser. Primärt så tänker vi oss att vi har dessa klasser:
 \begin{multicols}{2}
 \begin{itemize}
@@ -123,8 +134,4 @@ Klassiska problem såsom animation sköter det bibliotek (libGDX) vi använder.
 \end{itemize}
 
 Planen är att använda GitHub för att samarbeta på koden. Vi tänker oss att vi delar lika på arbetsuppgifterna och arbetar tillsammans. Då projektet är relativt litet så blir det enklare så då vi båda har koll på all kod och vi slipper läsa ikapp.
-\pagebreak
-
-\section{Programkod}
-\lstinputlisting[language=Java]{src/SpaceObject/Player.java}
 \end{document}
