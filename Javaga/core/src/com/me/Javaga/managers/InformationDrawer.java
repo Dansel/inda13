@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class InformationDrawer {
 
-	private static final String FILENAME = "ship.png";
+	private static final String FILENAME = "player3.png";
 	private static Sprite sprite;
 	private static BitmapFont font;
 	private static float spriteWidth;

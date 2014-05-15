@@ -5,59 +5,49 @@ package com.me.Javaga.gamestate.levels;
  * Created by Lukas on 2014-05-12.
  */
 public enum EnemyDescription {
-	BIG_SNILSSON(
-			"snilsson.png", // filename
-			0.5f, // scale
-			1f, // hitbox scale
+	STANDARD_ENEMY(
+			"evil1.png", // filename
+			1f, // scale
+			0.9f, // hitbox scale
 			2f, // speed
 			60, // accyracy
 			BulletDescription.BULLETS, // bullet type
 			1, // health
 			false // is boss
 	),
-	SNILSSON(
-			"snilsson.png",
-			0.3f,
+	BOMB_ENEMY(
+			"evil1.png",
 			1f,
+			0.9f,
 			0.5f,
 			0,
 			BulletDescription.BIG_BULLETS,
 			1,
 			false
 	),
-	UFO(
-			"ufo.png",
-			2f,
-			1f,
+	HEAVY_ENEMY(
+			"evil6.png",
+			1.2f,
+			0.9f,
 			0.5f,
 			60,
-			BulletDescription.BULLETS,
+			BulletDescription.MISSILES,
 			1,
 			false
 	),
-	UFO2(
-			"ufo2.png",
+	FAST_ENEMY(
+			"evil6.png",
 			1f,
-			1f,
+			0.9f,
 			5f,
 			0,
 			BulletDescription.FAST_BULLETS,
 			1,
 			false
 	),
-	SHIP_BOSS(
-			"ufo.png",
-			5f,
-			0.9f,
-			3f,
-			0,
-			BulletDescription.HUGE_MISSILES,
-			20,
-			true
-	),
-	SHIP_BOSS2(
+	BOSS1(
 			"Boss2.png",
-			0.8f,
+			1f,
 			0.9f,
 			3f,
 			0,
@@ -65,7 +55,7 @@ public enum EnemyDescription {
 			20,
 			true
 	),
-	SHIP_BOSS3(
+	BOSS2(
 			"Boss3.png",
 			0.8f,
 			0.6f,
@@ -75,7 +65,7 @@ public enum EnemyDescription {
 			30,
 			true
 	),
-	SHIP_BOSS4(
+	BOSS3(
 			"Boss4.png",
 			1f,
 			1f,
@@ -85,34 +75,64 @@ public enum EnemyDescription {
 			40,
 			true
 	),
-	SHIP_BOSS5(
+	BOSS4(
 			"Boss5.png",
 			1.5f,
 			0.6f,
-			0.2f,
+			0.5f,
 			0,
 			BulletDescription.MOTION_MISSILES,
 			40,
 			true
 	),
-	SHIELD_UFO(
+	BOSS5(
+			"snilsson.png",
+			1.5f,
+			1f,
+			0.5f,
+			0,
+			BulletDescription.MOTION_MISSILES,
+			50,
+			true
+	),
+	STANDARD_SHIELD(
+			"shield.png",
+			0.8f,
+			0.8f,
+			2f, // speed
+			60, // accyracy
+			BulletDescription.ENERGY_BLAST, // bullet type
+			2, // health
+			false // is boss
+	),
+	HEAVY_SHIELD(
 			"shield.png",
 			0.8f,
 			0.8f,
 			0.5f,
 			0,
 			BulletDescription.ENERGY_BLAST,
-			10,
+			5,
 			false
 	),
-	SHIELD5(
+	BOMB_SHIELD(
 			"shield.png",
-			3f,
 			0.8f,
-			0.2f,
+			0.8f,
+			0.5f,
 			0,
 			BulletDescription.ENERGY_BLAST,
-			50,
+			5,
+			false
+	),
+	BOSS_SHIELD(
+			"shield.png",
+			3.5f,
+			0.8f,
+			0.5f,
+			0,
+			BulletDescription.ENERGY_BLAST,
+			80,
 			true
 	);
 

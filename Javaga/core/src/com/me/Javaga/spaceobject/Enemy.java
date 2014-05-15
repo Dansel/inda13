@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.me.Javaga.gamestate.levels.BulletDescription;
 import com.me.Javaga.gamestate.levels.EnemyDescription;
 import com.me.Javaga.managers.GameStateManager;
 import com.me.Javaga.managers.InformationDrawer;
@@ -55,6 +56,7 @@ public class Enemy extends SpaceObject {
 
 		hitbox.setWidth(sWidth * description.getHitBoxScale()).
 				setHeight(sHeight * description.getHitBoxScale());
+		sprite.rotate(180);
 		sound = Gdx.audio.newSound(Gdx.files.internal("lazer.mp3"));
 		shootLimit = description.getBulletType().getShootLimit();
 		goals = new ArrayList<Vector2>();
@@ -163,13 +165,8 @@ public class Enemy extends SpaceObject {
 					: random.nextFloat() * -1 * description.getAccuracy(); // Makes their aim awful,
 			//// probably should do it some other this
 
-			Bullet bullet;
-			if (description.getBulletType().isMotionSeeker()) {
-				bullet = new MotionSeeker(xCenter, yCenter - sHeight / 2, 90, description.getBulletType(), player);
-			} else {
-				bullet = new Bullet(xCenter, yCenter - sHeight / 2, degree + miss, description.getBulletType());
-			}
-
+			Bullet bullet = BulletDescription.spawnBullet(xCenter, yCenter - sHeight / 2,
+					degree + miss, description.getBulletType(), player);
 			enemyBullets.add(bullet);
 
 			sound.play(GameStateManager.getEffectVolume()); // play lazer

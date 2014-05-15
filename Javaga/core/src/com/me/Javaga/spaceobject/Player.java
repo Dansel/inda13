@@ -17,7 +17,7 @@ import java.util.Iterator;
  */
 public class Player extends SpaceObject {
 
-	private static final String FILENAME = "ship.png";
+	private static final String FILENAME = "player3.png";
 	private static long time;
 	//private float rotation;
 	//private float scale;
@@ -25,6 +25,7 @@ public class Player extends SpaceObject {
 	private Sound sound;
 	private BulletDescription bulletType;
 	private long shootLimit;
+	private static final int MAXHEALTH = 5;
 
 	//Call the super-class's constructor
 	public Player(float xPos, float yPos, ArrayList<Bullet> bullets) {
@@ -37,15 +38,16 @@ public class Player extends SpaceObject {
 
 	@Override
 	public void init() {
-		health = 3;
+		health = MAXHEALTH;
 		bulletType = BulletDescription.FAST_BULLETS;
 		shootLimit = bulletType.getShootLimit();
 		//Set scalefactor
-		setScale(0.4f);
+		setScale(1f);
 		spriteSetUp(FILENAME);
 		hitbox.setHeight(sHeight * 0.3f).setWidth(sWidth * 0.3f).setCenter(xCenter, yCenter);
 		//Create the sprite with some texture
 		sound = Gdx.audio.newSound(Gdx.files.internal("lazer.mp3"));
+		InformationDrawer.setRemainingLife(health - 1);
 	}
 
 	/**
@@ -152,7 +154,7 @@ public class Player extends SpaceObject {
 	 * Reset the players health
 	 */
 	public void resetHealth() {
-		this.health = 3;
+		this.health = MAXHEALTH;
 	}
 
 	@Override
