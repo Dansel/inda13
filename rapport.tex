@@ -1,0 +1,123 @@
+\documentclass[a4paper,11pt]{article}
+%\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{courier}
+\usepackage{listings,color}
+\usepackage{multicol}
+\usepackage[swedish]{babel}
+\usepackage{graphicx}
+
+\definecolor{verbgray}{gray}{.9}
+\definecolor{shadecolor}{rgb}{.9,.9,.9}
+\definecolor{lightpurple}{rgb}{0.8,0.8,1}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+    language=Java,                % the language of the code
+    basicstyle=\footnotesize,           % the size of the fonts that are used for the code
+    numbers=left,                   % where to put the line-numbers
+    numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+    stepnumber=1,                   % the step between two line-numbers. If it's 1, each line 
+                                  		% will be numbered
+    numbersep=5pt,                  % how far the line-numbers are from the code
+    backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+    showspaces=false,               % show spaces adding particular underscores
+    showstringspaces=false,         % underline spaces within strings
+    showtabs=false,                 % show tabs within strings adding particular underscores
+    frame=false,                   % adds a frame around the code
+    rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+    tabsize=4,                      % sets default tabsize to 2 spaces
+    captionpos=t,                   % sets the caption-position to bottom
+    breaklines=true,                % sets automatic line breaking
+    breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+    title=\lstname,                   % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+    escapeinside={\%*}{*)},            % if you want to add a comment within your code
+    morekeywords={*,...}               % if you want to add more keywords to the set
+}
+
+\lstnewenvironment{code}{%
+\lstset{
+	%backgroundcolor = \color{verbgray},
+    %frame = single,
+    %framerule = 0pt,
+    language = Java,
+    %basicstyle = \ttfamily,
+    breaklines = true,
+    columns = fullflexible}}{}
+
+\title{inda13 - Projekt \\
+		Javaga}
+\author{Gustav Dänsel \\ Lukas Lundmark }
+\date{\today}
+\begin{document}
+\maketitle
+\section{Programbeskrivning}
+Vi siktar på att skapa en Galaga-klon i Java. Det ska alltså vara en top-down 2D arkadspel. Vi planerar att använda oss av libGDX-biblioteket. \\
+
+Spelet fungerar så att man kontrollerar ett rymdskepp som ska skjuta ned utomjordingar som kommer från fönstrets övre kant och försöker röra sig nedåt. Målet är att förstöra dem innan de försvinner ut skärmen. Se http://en.wikipedia.org/wiki/Galaga
+
+\section{Användarbeskrivning}
+Vi tänker oss att personer som är sugna på att spela klassiska retrospel utan att köpa en arkadmaskin kan vara en potentiell målgrupp. Annars ingen, tyvärr.
+
+\section{Användarscenarie}
+\subsection{Scenarie 1}
+Sent på kvällen, dagen innan tentamen för SF1626, pluggångesten liger tungt över Kalle. Han känner att han behöver ta en paus från att inte plugga och göra något annat och får ett tips om den supercoola Galagaklonen Javaga. Han laddar ned spelet från thepiratebay och börjar prokrastinera hårt. Han stry sin rymdhjälte med piltangenterna och skriker avfyra! med mellanslag. Vilken upplevelse det är! Han har aldrig varit med om något liknande! Kalle sitter uppe och spelar hela natten och missar tyvärr tentan, mycket sorgligt. \\
+
+\noindent
+Based on a true story.
+
+\subsection{Scenarie 2}
+Pappa Per är på väg hem från en lång och slitsam dag på jobbet. På vägen hem ser han reklamen för Game On 2.0 på Tekniska Museet. Han kommer och tänka på alla fantastiska kvällar med sina vänner i arkadhallen när han var liten. Han tänker på Galaga och hur kul det var att spela. När han väl kommer hem så bingar han fram en lista på Galagakloner och den som ligger högst upp och har bäst omdömen är ju givetvis Javaga. Per laddar ned spelet och börjar tidsresan till barndomen. Och vilken resa det är! Sicken resa, Mycket fräck! Han känner sina mossiga gamla fädigheter komma tillbaks och upplever sann eufori. Fantastiskt.
+
+\section{Testplan}
+Vi planerar att muta folk till att spela spelet och ge oss bra feedback. Vi planerar att göra detta vid minst två tillfällen, kanske mer om det finns tid. En viss mängd automatiserade tester kan förekomma.
+
+Testanvändaren förväntas spela spelet tills ögonen blöder och därefter berätta för oss hur fantisktiskt det var. 
+
+\section{Programdesign}
+Tanken är att dela upp programmet i flera klasser. Primärt så tänker vi oss att vi har dessa klasser:
+\begin{multicols}{2}
+\begin{itemize}
+\item Input
+\item Render
+\item Game-Logic
+\item Units
+\item File I/O
+\end{itemize}
+
+\subsection{Input}
+Här finns metoder för att läsa indata från kontroller såsom tangentbord och mus, samt skicka vidare dessa till relevanta klasser.
+
+\subsection{Render}
+Här görs det tunga jobbet att rita bilden som ska visas på skärmen.
+
+\subsection{Game-Logic}
+I denna klass sköts all logik - såsom hur enheter ska förflytta sig, om skott träffar eller inte och liknande saker.
+
+\subsection{Units}
+Units innehåller beskrivningar och parametrar för alla olika typer av "skepp" som finns i spelet.
+
+\subsection{File I/O}
+För att läsa och skriva till hårddisk, för t.ex. inställningsfiler.
+\end{multicols}
+
+\section{Tekniska frågor}
+Den största tekniska frågan ligger i hur vi implementerar biblioteket. I det problemer finns det även fler mindre problem, såsom vilken typ av input vi ska använda o.s.v. 
+
+Klassiska problem såsom animation sköter det bibliotek (libGDX) vi använder.
+
+\section{arbetsplan}
+\subsection{Tidsplan}
+\begin{itemize}
+\item Läsa och sätta sig in i biblioteket och dess dokumentiation - 2/5
+\item Första fungerande prototyp - 9/5
+\item Testning under helgen 9/5 till 12/5
+\item Finslipning mer test till 16/5
+\end{itemize}
+
+Planen är att använda GitHub för att samarbeta på koden. Vi tänker oss att vi delar lika på arbetsuppgifterna och arbetar tillsammans. Då projektet är relativt litet så blir det enklare så då vi båda har koll på all kod och vi slipper läsa ikapp.
+\end{document}
