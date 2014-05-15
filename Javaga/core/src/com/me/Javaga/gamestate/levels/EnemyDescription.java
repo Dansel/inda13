@@ -77,6 +77,16 @@ public enum EnemyDescription {
 	),
 	SHIP_BOSS4(
 			"Boss4.png",
+			1f,
+			1f,
+			0.5f,
+			0,
+			BulletDescription.MOTION_MISSILES,
+			40,
+			true
+	),
+	SHIP_BOSS5(
+			"Boss5.png",
 			1.5f,
 			0.6f,
 			0.2f,
@@ -87,17 +97,17 @@ public enum EnemyDescription {
 	),
 	SHIELD_UFO(
 			"shield.png",
-			0.2f,
+			0.8f,
 			0.8f,
 			0.5f,
 			0,
 			BulletDescription.ENERGY_BLAST,
-			20,
+			10,
 			false
 	),
-	SHIELD4(
+	SHIELD5(
 			"shield.png",
-			0.8f,
+			3f,
 			0.8f,
 			0.2f,
 			0,

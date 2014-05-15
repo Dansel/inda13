@@ -19,6 +19,8 @@ public class InformationDrawer {
 	private static float remainingLife;
 	private static int currentLevel;
 	private static long points;
+	private static long time;
+	private static boolean showInfo;
 
 	static {
 		remainingLife = 3;
@@ -35,7 +37,12 @@ public class InformationDrawer {
 	 * Update the information drawer
 	 */
 	public static void update() {
-
+		if (showInfo) {
+			if (System.currentTimeMillis() - time > 10000) {
+				showInfo = false;
+			}
+		}
+		handleInput();
 	}
 
 	/**
@@ -52,8 +59,16 @@ public class InformationDrawer {
 			sprite.draw(batch);
 			x += spriteWidth;
 		}
-		font.draw(batch, "Points: " + Long.toString(points), 0, 100);
-		font.draw(batch, "Current Level: " + Integer.toString(currentLevel), 0, 90);
+
+		font.draw(batch, "Points: " + Long.toString(points), 0, 120);
+		font.draw(batch, "Current Level: " + Integer.toString(currentLevel), 0, 100);
+
+		if (showInfo) {
+			font.draw(batch, "Use the arrow keys to navigate", Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 3 + 40);
+			font.draw(batch, "   Use the space key to fire  ", Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 3 + 20);
+			font.draw(batch, "      Try to survive!!!       ", Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 3);
+
+		}
 	}
 
 	/**
@@ -90,6 +105,22 @@ public class InformationDrawer {
 		points = 0;
 		currentLevel = 1;
 		remainingLife = 2;
+	}
+
+	public static void showInfo() {
+		showInfo = true;
+		time = System.currentTimeMillis();
+	}
+
+	public static void handleInput() {
+		if (showInfo) {
+			if (GameKeys.isPressed(GameKeys.ENTER) || GameKeys.isPressed(GameKeys.H)) {
+				showInfo = false;
+			}
+		} else if (GameKeys.isPressed(GameKeys.H)) {
+			showInfo = true;
+			time = System.currentTimeMillis();
+		}
 	}
 
 

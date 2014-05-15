@@ -17,7 +17,8 @@ public class GameKeys {
 	public static final int ESCAPE = 5;
 	public static final int SPACE = 6;
 	public static final int SHIFT = 7;
-	private static final int NUM_KEYS = 8;
+	public static final int H = 8;
+	private static final int NUM_KEYS = 9;
 	public static int xMouse;
 	public static int yMouse;
 	public static boolean mousePressed;

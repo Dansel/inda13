@@ -117,6 +117,59 @@ public enum EnemyMovement {
 
 			0,
 			Gdx.graphics.getWidth() / 2
+	),
+	MOVEMENT8(
+			new Vector2(-100, Gdx.graphics.getHeight() + 100),
+
+			new Vector2(0, 0),
+
+			new Vector2[]{
+					new Vector2(0, Gdx.graphics.getHeight()),
+					new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2),
+					new Vector2(Gdx.graphics.getWidth(), 0),
+					new Vector2(Gdx.graphics.getWidth() + 100, -100)
+			},
+
+			Gdx.graphics.getHeight() / 2,
+			Gdx.graphics.getWidth() / 2
+	),
+	MOVEMENT9(
+			new Vector2(Gdx.graphics.getWidth() + 100, Gdx.graphics.getHeight() + 100),
+
+			new Vector2(0, 0),
+
+			new Vector2[]{
+					new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()),
+					new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2),
+					new Vector2(0, 0),
+					new Vector2(-100, -100)
+			},
+
+			Gdx.graphics.getHeight() / 2,
+			-Gdx.graphics.getWidth() / 2
+	),
+	MOVEMENT10(
+			new Vector2(-100, Gdx.graphics.getHeight() - 10),
+
+			new Vector2(0, 0),
+
+			new Vector2[]{
+					new Vector2(Gdx.graphics.getWidth() - 10, Gdx.graphics.getHeight() - 10),
+					new Vector2(10, Gdx.graphics.getHeight() - 10),
+					new Vector2(Gdx.graphics.getWidth() - 10, Gdx.graphics.getHeight() - 10),
+					new Vector2(10, Gdx.graphics.getHeight() - 10),
+					new Vector2(Gdx.graphics.getWidth() - 10, Gdx.graphics.getHeight() - 10),
+					new Vector2(10, Gdx.graphics.getHeight() - 10),
+					new Vector2(Gdx.graphics.getWidth() - 10, Gdx.graphics.getHeight() - 10),
+					new Vector2(10, Gdx.graphics.getHeight() - 10),
+					new Vector2(Gdx.graphics.getWidth() - 10, Gdx.graphics.getHeight() - 10),
+					new Vector2(10, Gdx.graphics.getHeight() - 10),
+					new Vector2(Gdx.graphics.getWidth() - 10, Gdx.graphics.getHeight() - 10),
+					new Vector2(-100, Gdx.graphics.getHeight() - 10),
+			},
+
+			Gdx.graphics.getHeight() / 2,
+			0
 	);
 
 

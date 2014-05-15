@@ -35,6 +35,7 @@ public class PlayState extends GameState {
 		player = new Player(Gdx.graphics.getWidth() / 2, 30, bullets);
 		spawner = new EnemySpawner(enemyBullets, enemies, player, gameStateManager);
 		InformationDrawer.reset();
+		InformationDrawer.showInfo();
 	}
 
 	@Override
@@ -95,6 +96,7 @@ public class PlayState extends GameState {
 		if (player.checkHealthy()) {
 			player.checkForCollision(enemyBullets);
 		}
+		InformationDrawer.update();
 	}
 
 	@Override

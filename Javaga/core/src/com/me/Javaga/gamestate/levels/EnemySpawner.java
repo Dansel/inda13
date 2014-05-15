@@ -35,8 +35,9 @@ public class EnemySpawner {
 	public EnemySpawner(
 			ArrayList<Bullet> enemyBullets, ArrayList<Enemy> enemies, Player player,
 			GameStateManager gameStateManager) {
-		this.currentLevel = Level.LEVEL1;
+		this.currentLevel = Level.LEVEL4;
 		this.stageIndex = -1;
+		this.levelIndex = 3;
 		this.enemyBullets = enemyBullets;
 		this.enemies = enemies;
 		this.player = player;
@@ -137,7 +138,6 @@ public class EnemySpawner {
 			return new Level.StageDescription(true); // tells the game the level is won
 		}
 		stageIndex++;
-		System.out.println("Stage: " + stageIndex + " Level: " + levelIndex);
 		return currentLevel.getStage(stageIndex);
 	}
 

@@ -19,12 +19,12 @@ public enum BulletDescription {
 	BIG_BULLETS(
 			"bullet.png",
 			4f,
-			0.5f,
+			1f,
 			3000,
-			5000,
+			7000,
 			1,
 			false,
-			false
+			true
 	),
 	SMALL_BULLETS(
 			"bullet.png",
