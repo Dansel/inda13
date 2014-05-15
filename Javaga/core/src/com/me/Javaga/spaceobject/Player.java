@@ -2,12 +2,13 @@ package com.me.Javaga.spaceobject;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.gamestate.levels.BulletDescription;
 import com.me.Javaga.managers.GameKeys;
 import com.me.Javaga.managers.GameStateManager;
+import com.me.Javaga.managers.InformationDrawer;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Class for the Players unit. Contains parameters for position as well as the sprite used to draw to canvas.
@@ -22,10 +23,8 @@ public class Player extends SpaceObject {
 	//private float scale;
 	private ArrayList<Bullet> bullets;
 	private Sound sound;
-	private int bulletType;
+	private BulletDescription bulletType;
 	private long shootLimit;
-
-
 
 	//Call the super-class's constructor
 	public Player(float xPos, float yPos, ArrayList<Bullet> bullets) {
@@ -38,8 +37,9 @@ public class Player extends SpaceObject {
 
 	@Override
 	public void init() {
-		bulletType = 1;
-		shootLimit = BulletDescription.getType(bulletType).getTime();
+		health = 3;
+		bulletType = BulletDescription.FAST_BULLETS;
+		shootLimit = bulletType.getShootLimit();
 		//Set scalefactor
 		setScale(0.4f);
 		spriteSetUp(FILENAME);
@@ -53,6 +53,10 @@ public class Player extends SpaceObject {
 	 */
 	@Override
 	public void update() {
+		if (!isHealthy) {
+			hurt(); // start flashing if the player is hurt
+		}
+
 		if (GameKeys.isDown(GameKeys.UP)) {
 			yPos += 10;
 		}
@@ -81,27 +85,27 @@ public class Player extends SpaceObject {
 		sprite.setY(yPos);
 		//Update hitbox
 		hitbox.setCenter(xCenter, yCenter);
+		InformationDrawer.setRemainingLife(health - 1);
 	}
 
 	/**
-	 * Draws the players sprite to the canvas at designated xPos and yPos.
+	 * Check for collisions
 	 *
-	 * @param batch SpriteBatch
+	 * @param enemyBullets An arraylist of enemybullets
+	 * @return true if the player is hit
 	 */
 	@Override
-	public void draw(SpriteBatch batch) {
-		sprite.draw(batch);
-	}
-
-	@Override
-	public boolean checkHealthy() {
-		return isHealthy;
-	}
-
-	@Override
 	public boolean checkForCollision(ArrayList<Bullet> enemyBullets) {
-		for (Bullet bullet : enemyBullets) {
+		Iterator<Bullet> iterator = enemyBullets.iterator();
+		while (iterator.hasNext()) {
+			Bullet bullet = iterator.next();
 			if (overlap(bullet)) {
+				health--;
+				isHealthy = false;
+				if (!bullet.isIndestructable() || health > 0) {
+					bullet.dispose();
+					iterator.remove();
+				}
 				return true;
 			}
 		}
@@ -135,17 +139,20 @@ public class Player extends SpaceObject {
 		//manually find the center of the sprite and from that number derive the new edges (the visible edges).
 	}
 
+	/**
+	 * Fire a bullet straight forward
+	 */
 	private void fire() {
 		sound.play(GameStateManager.getEffectVolume()); // play lazer
-		bullets.add(new Bullet(xCenter, yCenter, 90, 3));
+		bullets.add(new Bullet(xCenter, yCenter + sWidth / 2, 90, bulletType));
 	}
 
-	public float getX() {
-		return xCenter;
-	}
 
-	public float getY() {
-		return yCenter;
+	/**
+	 * Reset the players health
+	 */
+	public void resetHealth() {
+		this.health = 3;
 	}
 
 	@Override

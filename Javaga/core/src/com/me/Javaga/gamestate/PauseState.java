@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.Javaga.managers.*;
 
 /**
+ * This class shows the pause screen in the game
  * Created by Dansel on 2014-04-30.
  */
 public class PauseState extends GameState {

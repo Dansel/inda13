@@ -1,6 +1,7 @@
 package com.me.Javaga.managers;
 
 /**
+ * Handle the users input
  * Created by Dansel on 2014-04-30.
  */
 

@@ -33,18 +33,38 @@ public class GameStateManager {
 		MusicManager.startNewSong(MusicManager.WELCOMESONG);
 	}
 
+	/**
+	 * return the volume of the musicplayer
+	 *
+	 * @return a float between 0-1, 0 is lowest and 1 highest
+	 */
 	public static float getMusicVolume() {
 		return musicVolume;
 	}
 
+	/**
+	 * Set the music volume of the game
+	 *
+	 * @param volume a float between 0-1, 0 is lowest and 1 highest
+	 */
 	public static void setMusicVolume(float volume) {
 		musicVolume = volume;
 	}
 
+	/**
+	 * Get the effect volume of the game
+	 *
+	 * @return a float between 0-1, 0 is lowest and 1 highest
+	 */
 	public static float getEffectVolume() {
 		return effectVolume;
 	}
 
+	/**
+	 * Get the effect volume of the game
+	 *
+	 * @param volume a float between 0-1, 0 is lowest and 1 highest
+	 */
 	public static void setEffectVolume(float volume) {
 		effectVolume = volume;
 	}
@@ -53,6 +73,7 @@ public class GameStateManager {
 	 * Sets the gamestate.
 	 *
 	 * @param state int number correlating a specific state. 0 = menu, 1= play, 2=pause, 3 = welcome screen
+	 * @param reset true if the gamestate which you are to set as current to should be reset and disposed of before you set it
 	 */
 	public void setState(int state, boolean reset) {
 		if (state == MENU) {
@@ -103,6 +124,11 @@ public class GameStateManager {
 	}
 
 
+	/**
+	 * Dispose the current state and all the things within it
+	 *
+	 * @param state the state constant
+	 */
 	public void dispose(int state) {
 		if (state == MENU) {
 			menu.dispose();

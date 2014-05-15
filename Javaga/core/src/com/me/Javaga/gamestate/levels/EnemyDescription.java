@@ -1,82 +1,215 @@
 package com.me.Javaga.gamestate.levels;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
-
-import java.util.ArrayList;
-
 /**
+ * This enum contains a description of all enemy classes
  * Created by Lukas on 2014-05-12.
  */
 public enum EnemyDescription {
-	Type1(
-			"snilsson.png",
-			0.5f,
-			3,
-			15,
-			1
+	BIG_SNILSSON(
+			"snilsson.png", // filename
+			0.5f, // scale
+			1f, // hitbox scale
+			2f, // speed
+			60, // accyracy
+			BulletDescription.BULLETS, // bullet type
+			1, // health
+			false // is boss
 	),
-	Type2(
+	SNILSSON(
 			"snilsson.png",
 			0.3f,
-			0.1f,
+			1f,
+			0.5f,
 			0,
-			2
+			BulletDescription.BIG_BULLETS,
+			1,
+			false
 	),
-	Type3(
+	UFO(
 			"ufo.png",
 			2f,
+			1f,
 			0.5f,
 			60,
-			3
+			BulletDescription.BULLETS,
+			1,
+			false
+	),
+	UFO2(
+			"ufo2.png",
+			1f,
+			1f,
+			5f,
+			0,
+			BulletDescription.FAST_BULLETS,
+			1,
+			false
+	),
+	SHIP_BOSS(
+			"ufo.png",
+			5f,
+			0.9f,
+			3f,
+			0,
+			BulletDescription.HUGE_MISSILES,
+			20,
+			true
+	),
+	SHIP_BOSS2(
+			"Boss2.png",
+			0.8f,
+			0.9f,
+			3f,
+			0,
+			BulletDescription.FAST_BULLETS,
+			20,
+			true
+	),
+	SHIP_BOSS3(
+			"Boss3.png",
+			0.8f,
+			0.6f,
+			0.5f,
+			0,
+			BulletDescription.MOTION_MISSILES,
+			30,
+			true
+	),
+	SHIP_BOSS4(
+			"Boss4.png",
+			1.5f,
+			0.6f,
+			0.2f,
+			0,
+			BulletDescription.MOTION_MISSILES,
+			40,
+			true
+	),
+	SHIELD_UFO(
+			"shield.png",
+			0.2f,
+			0.8f,
+			0.5f,
+			0,
+			BulletDescription.ENERGY_BLAST,
+			20,
+			false
+	),
+	SHIELD4(
+			"shield.png",
+			0.8f,
+			0.8f,
+			0.2f,
+			0,
+			BulletDescription.ENERGY_BLAST,
+			50,
+			true
 	);
 
-
 	private String filename;
-	private float speed;
 	private float scale;
+	private float hitBoxScale;
+	private float speed;
 	private float accuracy;
-	private int bulletType;
+	private BulletDescription bulletType;
+	private int health;
+	private boolean isBoss;
 
-	private EnemyDescription(String filename, float scale,
-	                         float speed, float accuracy, int bulletType) {
+	/**
+	 * Create a description of an enemy type
+	 *
+	 * @param filename    The file name of the sprite for the enemy
+	 * @param scale       A float specifying the scale of the sprite
+	 * @param hitBoxScale A float specifying how the hitbox should be scaled(compared to the scaled sprite
+	 * @param speed       The speed if the enemy
+	 * @param accuracy    How accurate the enemys aiming should be, 0 is perfect and 360 is the worst
+	 * @param bulletType  A bullet type
+	 * @param health      How much healt the enemy should have
+	 * @param isBoss      A boolean stating if the enemy is a boss or a normal enemy
+	 */
+	private EnemyDescription(String filename, float scale, float hitBoxScale,
+	                         float speed, float accuracy, BulletDescription bulletType, int health, boolean isBoss) {
 		this.filename = filename;
 		this.scale = scale;
+		this.hitBoxScale = hitBoxScale;
 		this.speed = speed;
 		this.accuracy = accuracy;
 		this.bulletType = bulletType;
+		this.health = health;
+		this.isBoss = isBoss;
 	}
 
+	/**
+	 * Get the file name of sprite file
+	 *
+	 * @return String filename
+	 */
 	public String getFilename() {
 		return this.filename;
 	}
 
+	/**
+	 * Get the scale of the enemy
+	 *
+	 * @return float scale
+	 */
 	public float getScale() {
 		return this.scale;
 	}
 
+
+	/**
+	 * Get the scale of the hitbox
+	 *
+	 * @return float hitbox scale
+	 */
+	public float getHitBoxScale() {
+		return this.hitBoxScale;
+	}
+
+	/**
+	 * Get the speed
+	 *
+	 * @return float speed
+	 */
 	public float getSpeed() {
 		return this.speed;
 	}
 
 
+	/**
+	 * Get the enemey accuracy
+	 *
+	 * @return float accuracy, 0 is perfect and 360 is horrible
+	 */
 	public float getAccuracy() {
 		return this.accuracy;
 	}
 
-	public int getBulletType() {
+	/**
+	 * Get the health this enemy type have
+	 *
+	 * @return int health
+	 */
+	public int getHealth() {
+		return this.health;
+	}
+
+	/**
+	 * The type of bullet this enemy type has, is specified in the BulletDescription enum
+	 *
+	 * @return A BulletDescription
+	 */
+	public BulletDescription getBulletType() {
 		return this.bulletType;
 	}
 
-	public static EnemyDescription getType(int type) {
-		if (type == 1) {
-			return Type1;
-		} else if (type == 2) {
-			return Type2;
-		} else if (type == 3) {
-			return Type3;
-		} else {
-			return Type1;
-		}
+	/**
+	 * States if the enemy is a boss or not
+	 *
+	 * @return True if the enemy type is a boss, otherwise false
+	 */
+	public boolean isBoss() {
+		return this.isBoss;
 	}
 }

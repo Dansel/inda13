@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
+ * This class contains the buttons which a menu uses
  * Created by Lukas on 2014-05-06.
  */
 public class ButtonContainer {
@@ -17,14 +18,22 @@ public class ButtonContainer {
 		buttons = new ArrayList<Button>();
 	}
 
+	/**
+	 * Add a button to the container, the order which the buttons are added will
+	 * affect how the will highligt when you iterate over them with the arrow buttons.
+	 * The buttons which is highest on the screen should be added first etc
+	 *
+	 * @param button The button which should be added to the container
+	 */
 	public void addButton(Button button) {
 		buttons.add(button);
 	}
 
+	/**
+	 * Handle the user input
+	 */
 	public void handleInput() {
-		Iterator<Button> iterator = buttons.iterator();
-		while (iterator.hasNext()) {
-			Button button = iterator.next();
+		for (Button button : buttons) {
 			if (button.isHovering()) {
 				if (currentButton != null) {
 					currentButton.setSelected(false);
@@ -81,6 +90,9 @@ public class ButtonContainer {
 		}
 	}
 
+	/**
+	 *
+	 */
 	public void dispose() {
 		Iterator<Button> buttonIterator = buttons.iterator();
 		while (buttonIterator.hasNext()) {

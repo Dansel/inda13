@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 
 /**
  * Contains the state of keys which are pressed (or not pressed)
+ * and the position of the mouse and its state
  * Created by Dansel on 2014-04-30.
  */
 public class GameKeys {
@@ -89,7 +90,7 @@ public class GameKeys {
 	}
 
 	/**
-	 * Return if the mouse left "button" is held down
+	 * Return true if the mouse left "button" is held down
 	 *
 	 * @return true if the mouse is held down
 	 */
@@ -98,7 +99,7 @@ public class GameKeys {
 	}
 
 	/**
-	 * Return if the the mouse left"button" was pressed"
+	 * Return true if the the mouse left"button" was pressed"
 	 *
 	 * @return true if the mouse was pressed
 	 */

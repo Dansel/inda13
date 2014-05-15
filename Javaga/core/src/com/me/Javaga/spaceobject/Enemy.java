@@ -2,10 +2,11 @@ package com.me.Javaga.spaceobject;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;;
 import com.me.Javaga.gamestate.levels.EnemyDescription;
 import com.me.Javaga.managers.GameStateManager;
+import com.me.Javaga.managers.InformationDrawer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,27 +17,28 @@ import java.util.Random;
  * Created by Dansel on 2014-05-02.
  */
 public class Enemy extends SpaceObject {
-	private ArrayList<Bullet> enemyBullets;
-	ArrayList<Vector2> goals;
-	private Vector2 direction;
-	private Vector2 currentGoal;
-	private Sound sound;
-	private Player player;
-	private long time;
-	private float shootLimit;
-	private int goalIndex;
-	private Random random;
-	private boolean outsideBourder;
-	private EnemyDescription description;
+	protected ArrayList<Bullet> enemyBullets;
+	protected ArrayList<Vector2> goals;
+	protected Vector2 direction;
+	protected Vector2 currentGoal;
+	protected Sound sound;
+	protected Player player;
+	protected long time;
+	protected float shootLimit;
+	protected int goalIndex;
+	protected Random random;
+	protected boolean outsideBourder;
+	protected EnemyDescription description;
+	protected Rectangle directionBox;
 
-	public Enemy(float xPos, float yPos, int type,
+	public Enemy(float xPos, float yPos, EnemyDescription description,
 	             ArrayList<Bullet> enemyBullets, Player player) {
 		super(xPos, yPos);
 
 		HEIGHT = Gdx.graphics.getHeight();
 		WIDTH = Gdx.graphics.getWidth();
-
-		description = EnemyDescription.getType(type);
+		this.description = description;
+		health = description.getHealth();
 		this.enemyBullets = enemyBullets;
 		this.player = player;
 		this.time = System.currentTimeMillis();
@@ -48,44 +50,64 @@ public class Enemy extends SpaceObject {
 		random = new Random();
 		setScale(description.getScale());
 		spriteSetUp(description.getFilename());
+
+		hitbox.setWidth(sWidth * description.getHitBoxScale()).
+				setHeight(sHeight * description.getHitBoxScale());
 		sound = Gdx.audio.newSound(Gdx.files.internal("lazer.mp3"));
-		shootLimit = 1000;
+		shootLimit = description.getBulletType().getShootLimit();
 		goals = new ArrayList<Vector2>();
-		setDirection(20f, 270);
+		directionBox = new Rectangle();
+		directionBox.setWidth(4).setHeight(4).setCenter(xCenter, yCenter);
 		wrap();
 	}
 
 	@Override
 	public void update() {
-		xPos += direction.x;
-		yPos += direction.y;
-		//System.out.println("y: " + yPos);
-		//System.out.println("x: " + xPos);
+		if (isHealthy) {
+			xPos += direction.x;
+			yPos += direction.y;
+			//System.out.println("y: " + yPos);
+			//System.out.println("x: " + xPos);
 
-		sprite.setX(xPos);
-		sprite.setY(yPos);
-		xCenter = xPos + sprite.getWidth() / 2;
-		yCenter = yPos + sprite.getHeight() / 2;
-		wrap();
-		hitbox.setCenter(xCenter, yCenter);
-		if (currentGoal != null && hitbox.contains(currentGoal.x, currentGoal.y)) {
-			direction.set(0, 0);
-			updateGoal();
+			sprite.setX(xPos);
+			sprite.setY(yPos);
+			xCenter = xPos + sprite.getWidth() / 2;
+			yCenter = yPos + sprite.getHeight() / 2;
+			wrap();
+			hitbox.setCenter(xCenter, yCenter);
+			directionBox.setCenter(xCenter, yCenter);
+			if (currentGoal != null && directionBox.contains(currentGoal.x, currentGoal.y)) {
+				direction.set(0, 0);
+				updateGoal();
+			} else {
+				updateDirection();
+			}
+			if (health <= 0) {
+				isHealthy = false;
+			}
+			fire();
 		} else {
-			updateDirection();
+			hurt();
 		}
-		fire();
 	}
 
 	@Override
-	public void draw(SpriteBatch batch) {
-		sprite.draw(batch);
+	protected void hurt() {
+		if (disposeIndex > 50) {
+			isDisposable = true;
+		} else {
+			disposeIndex++;
+			if (disposeIndex % 10 == 0) {
+				draw = (draw) ? false : true;
+			}
+		}
 	}
 
 	@Override
-	//TODO
-	// Need to decide how we should dispose us of our enemies
-	// when they leave the field
+
+	/**
+	 * Check if the enemy is outside the game or not
+	 */
 	public void wrap() {
 		if (xCenter > WIDTH || xCenter < 0 || yCenter > HEIGHT || yCenter < 0) {
 			outsideBourder = true;
@@ -94,18 +116,24 @@ public class Enemy extends SpaceObject {
 		}
 	}
 
-	@Override
-	public boolean checkHealthy() {
-		return isHealthy;
-	}
-
+	/**
+	 * Check if any bullet hits the enemy and deals the appropriate damage
+	 *
+	 * @param bullets An arraylist of bullets
+	 * @return true if there was a collision
+	 */
 	@Override
 	public boolean checkForCollision(ArrayList<Bullet> bullets) {
 		Iterator<Bullet> iterator = bullets.iterator();
 		while (iterator.hasNext()) {
 			Bullet bullet = iterator.next();
 			if (overlap(bullet)) {
-				if (!bullet.isIndestructable()) {
+				health -= bullet.getDamage();
+				if (health <= 0) {
+					InformationDrawer.updatePoints(10);
+					isHealthy = false;
+				}
+				if (!bullet.isIndestructable() || isHealthy) {
 					bullet.dispose();
 					iterator.remove();
 				}
@@ -123,16 +151,24 @@ public class Enemy extends SpaceObject {
 			return;
 		}
 		float dX = xCenter - player.getX(); // Aim for the player
-		float dY = yCenter - player.getY(); // Aim for the player
+		float dY = (yCenter - sWidth / 2) - player.getY(); // Aim for the player
 
-		if (yCenter - player.getY() >= 0) { // Dont shoot if the player is behind you
+		if ((yCenter - sWidth / 2) - player.getY() >= 0) { // Dont shoot if the player is behind you
 
 			double radian = Math.atan(dX / dY);
 			float degree = (float) (270 - Math.toDegrees(radian));
 			float miss = (random.nextBoolean()) ? random.nextFloat() * description.getAccuracy()
 					: random.nextFloat() * -1 * description.getAccuracy(); // Makes their aim awful,
 			//// probably should do it some other this
-			enemyBullets.add(new Bullet(xCenter, yCenter - sHeight / 2, degree + miss, description.getBulletType()));
+
+			Bullet bullet;
+			if (description.getBulletType().isMotionSeeker()) {
+				bullet = new MotionSeeker(xCenter, yCenter - sHeight / 2, 90, description.getBulletType(), player);
+			} else {
+				bullet = new Bullet(xCenter, yCenter - sHeight / 2, degree + miss, description.getBulletType());
+			}
+
+			enemyBullets.add(bullet);
 
 			sound.play(GameStateManager.getEffectVolume()); // play lazer
 			time = System.currentTimeMillis(); // reset time
@@ -143,14 +179,20 @@ public class Enemy extends SpaceObject {
 	/**
 	 * Push the enemey object in a certain direction
 	 *
-	 * @param speed
-	 * @param degree
+	 * @param speed  The speed of the direction, or the length of the direction vector
+	 * @param degree The degree of the direction
 	 */
 	public void setDirection(float speed, float degree) {
 		direction = new Vector2((float) Math.cos(Math.toRadians(degree) * speed),
 				(float) Math.sin(Math.toRadians(degree)) * speed);
 	}
 
+	/**
+	 * Add a new goal to the enemy's list of goals
+	 *
+	 * @param x x coordinate of the goal
+	 * @param y y coordinate of the goal
+	 */
 	public void addNewGoal(float x, float y) {
 		goals.add(new Vector2(x, y));
 	}
@@ -158,8 +200,8 @@ public class Enemy extends SpaceObject {
 	/**
 	 * Remove the current goal and add new one
 	 *
-	 * @param x
-	 * @param y
+	 * @param x x coordinate of the goal
+	 * @param y y coordinate of the goal
 	 */
 	public void setCurrentGoal(float x, float y) {
 		goals.remove(goalIndex);
@@ -171,11 +213,13 @@ public class Enemy extends SpaceObject {
 	/**
 	 * Update the direction for the enemy object
 	 */
-	private void updateDirection() {
+	protected void updateDirection() {
 		if (currentGoal != null) {
 			Vector2 newDirection = new Vector2(currentGoal.x - xCenter, currentGoal.y - yCenter);
-			direction.add(newDirection.nor().scl(0.5f));
+			direction.add(newDirection.nor().scl(description.getSpeed()));
+			//direction.nor().scl(description.getSpeed());
 			direction.nor().scl(description.getSpeed());
+
 		} else {
 			if (!goals.isEmpty()) {
 				currentGoal = goals.get(0);
@@ -183,7 +227,10 @@ public class Enemy extends SpaceObject {
 		}
 	}
 
-	private void updateGoal() {
+	/**
+	 * Update the current goal
+	 */
+	protected void updateGoal() {
 		if (goalIndex + 1 < goals.size()) {
 			goalIndex++;
 			currentGoal = goals.get(goalIndex);
@@ -192,6 +239,9 @@ public class Enemy extends SpaceObject {
 		}
 	}
 
+	/**
+	 * Dispose all components in the object, no other methods can be called after this
+	 */
 	@Override
 	public void dispose() {
 		super.dispose();
