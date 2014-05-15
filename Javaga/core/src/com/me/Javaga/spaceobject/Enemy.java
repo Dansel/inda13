@@ -3,7 +3,7 @@ package com.me.Javaga.spaceobject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;;
+import com.badlogic.gdx.math.Vector2;
 import com.me.Javaga.gamestate.levels.EnemyDescription;
 import com.me.Javaga.managers.GameStateManager;
 import com.me.Javaga.managers.InformationDrawer;
@@ -11,6 +11,8 @@ import com.me.Javaga.managers.InformationDrawer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
+
+;
 
 /**
  * Create object of this class to spawn enemies.
@@ -27,7 +29,7 @@ public class Enemy extends SpaceObject {
 	protected float shootLimit;
 	protected int goalIndex;
 	protected Random random;
-	protected boolean outsideBourder;
+	protected boolean outsideBorder;
 	protected EnemyDescription description;
 	protected Rectangle directionBox;
 
@@ -110,9 +112,9 @@ public class Enemy extends SpaceObject {
 	 */
 	public void wrap() {
 		if (xCenter > WIDTH || xCenter < 0 || yCenter > HEIGHT || yCenter < 0) {
-			outsideBourder = true;
+			outsideBorder = true;
 		} else {
-			outsideBourder = false;
+			outsideBorder = false;
 		}
 	}
 
@@ -147,7 +149,7 @@ public class Enemy extends SpaceObject {
 	 * Fire a shoot
 	 */
 	public void fire() {
-		if (System.currentTimeMillis() - time < shootLimit || outsideBourder) {
+		if (System.currentTimeMillis() - time < shootLimit || outsideBorder) {
 			return;
 		}
 		float dX = xCenter - player.getX(); // Aim for the player
