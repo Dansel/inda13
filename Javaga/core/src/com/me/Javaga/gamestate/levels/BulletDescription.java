@@ -199,7 +199,7 @@ public enum BulletDescription {
 	 * @param degree      The degree in which to bullet should go
 	 * @param description The bulletDescription which specifies the bullet attributes
 	 * @param player      The current player
-	 * @return
+	 * @return A bullet
 	 */
 	public static Bullet spawnBullet(float xPos, float yPos,
 	                                 float degree,
