@@ -38,7 +38,7 @@ public class Boss extends Enemy {
 	 */
 	@Override
 	public void fire() {
-		if (System.currentTimeMillis() - time < shootLimit || outsideBourder) {
+		if (System.currentTimeMillis() - time < shootLimit || outsideBorder) {
 			return;
 		}
 		float dX = xCenter - player.getX(); // Aim for the player
